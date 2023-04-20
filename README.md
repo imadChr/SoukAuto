@@ -24,7 +24,7 @@ Usage :
 
 To use the website, open a web browser and go to the following URL:
 
-http://localhost/SoukAuto/Home/Pages/index.php
+http://localhost/SoukAuto/index.php
 
 This will take you to the homepage of the website where you can browse the available car listings.
 To post a car for sale, click on the "Sell" button and fill out the form.
