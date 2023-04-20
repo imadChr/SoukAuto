@@ -156,6 +156,7 @@ a,
 img {
      max-width: 100%;
      height: auto;
+
 }
 
  :focus {
@@ -453,8 +454,10 @@ header .container-fluid
      padding-left: 40px;
 }
 
+
 .text_img figure {
-     margin: 0;
+     object-position: top;
+     margin:0;
 }
 
 .text_img figure img {
@@ -661,7 +664,9 @@ header .container-fluid
 
      color: #ED6C15;
 }
-
+.work:hover img {
+     opacity: 0.7;
+   }
 .work figure {
      margin: 0;
 }
