@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
-$dbname = 'se_project';
-
-$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname); ?>
+require_once 'utility/db_connection.php'; ?>
 
 <head>
   <!-- basic -->
@@ -64,16 +59,16 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname); ?>
                     <a class="nav-link" href="index.html">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/Pages/post.php">Sell</a>
+                    <a class="nav-link" href="Pages\postform.php">Sell</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="">Rent</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="SoukAuto\Home\Pages\login.html">Login</a>
+                    <a class="nav-link" href="Pages\login.html">Login</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/Pages/signup.html">Sign up</a>
+                    <a class="nav-link" href="Pages/signup.html">Sign up</a>
                   </li>
                 </ul>
               </div>
@@ -146,7 +141,7 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname); ?>
         <div class="col-md-10 offset-md-1">
           <div class="row">
             <?php
-            $sql = "SELECT title, price, image_url FROM car_selling_posts";
+            $sql = "SELECT id, title, price, image_url FROM car_selling_posts";
             $result = mysqli_query($conn, $sql);
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
@@ -156,7 +151,9 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname); ?>
                     <figure><img src="<?php echo $row['image_url']; ?>" alt="#" /></figure>
                   </div>
                   <div class="work_text">
-                    <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
+                    <a href="Pages/post.php?id=<?php echo $row['id']; ?>">
+                      <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
+                    </a>
                   </div>
                 </div>
             <?php

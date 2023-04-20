@@ -242,7 +242,9 @@ button {
 
 
 /**-- heading section --**/
-
+body {
+     font-family: "Nasalization", sans-serif;
+   }
 
 /*---------------------------- preloader area ----------------------------*/
 
