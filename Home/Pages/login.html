@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./login.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@600;700&display=swap"
+    />
+  </head>
+  <body>
+    %form.form{:autocomplete=>"off"} .control %h1 Sign In
+    .control.block-cube.block-input %input{:name => "username", :type=>"text",
+    :placeholder=>"Username", }/ .bg-top .bg-inner .bg-right .bg-inner .bg
+    .bg-inner .control.block-cube.block-input %input{:name => "password",
+    :type=>"password", :placeholder=>"Password"}/ .bg-top .bg-inner .bg-right
+    .bg-inner .bg .bg-inner
+    %button.btn.block-cube.block-cube-hover{:type=>"button"} .bg-top .bg-inner
+    .bg-right .bg-inner .bg .bg-inner -# .bg2 .text Log In
+  </body>
+</html>
+
+<form method="POST" action="user_login.php">
+  <label class="e-mail5" for="email">Email Address:</label
+  ><input type="email" name="email" id="email" required />
+  <label class="e-mail5">Password</label
+  ><input type="password" name="password" id="password" required />
+  <input class="log-in" type="submit" value="Login" />
+</form>
