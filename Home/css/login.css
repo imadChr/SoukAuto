@@ -1,171 +1,198 @@
-.nab-bar-inner {
-  position: absolute;
+
+header 
+{
+  position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--color-gainsboro);
-  width: 1440px;
-  height: 157px;
-}
-.auto1 {
-  color: var(--color-chocolate);
-}
-.logging-in,
-.soukauto1 {
-  position: absolute;
-  top: 36px;
-  left: 183px;
-  font-weight: 600;
-}
-.logging-in {
-  top: 58px;
-  left: 1091px;
-  font-size: var(--font-size-32xl);
-  font-weight: 500;
-  color: var(--color-black);
-}
-.nab-bar-child1,
-.nab-bar1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1440px;
-}
-.nab-bar-child1 {
-  border-bottom: 9px solid var(--color-darkslategray-100);
-  box-sizing: border-box;
-  height: 159px;
-}
-.nab-bar1 {
-  height: 157px;
-  font-size: var(--font-size-54xl);
-  color: var(--color-steelblue);
-  font-family: var(--font-outfit);
-}
-.log-in-now {
-  position: absolute;
-  top: 387px;
-  left: 98px;
-  font-size: 36px;
-  font-weight: 600;
-}
-.instance-child2 {
-  position: absolute;
-  height: 100%;
   width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border-radius: var(--br-3xs);
-  max-width: 100%;
-  overflow: hidden;
-  max-height: 100%;
-}
-.e-mail5 {
-  position: absolute;
-  height: 46.67%;
-  width: 92.62%;
-  top: 26.67%;
-  left: 3.6%;
-  font-weight: 600;
-  display: block;
-}
-.vector-parent2 {
-  position: absolute;
-  top: 498px;
-  left: 95px;
-  border-radius: var(--br-3xs);
-  width: 583px;
-  height: 75px;
-  color: var(--color-darkslategray-200);
-}
-.icon {
-  position: absolute;
-  top: 157px;
-  left: 269px;
-  width: 1171px;
-  height: 863px;
-  object-fit: cover;
-}
-.group-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: var(--br-6xl);
-  background-color: var(--color-chocolate);
-  width: 253.71px;
-  height: 74px;
-}
-
-.log-in {
-  position: relative;
-  top: 200px;
-  left: 74px;
-  font-weight: 600;
-  width: 137.43px;
-  height: 49.84px;
-  border: none;
-  display: inline;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-
-.rectangle-group {
-  position: absolute;
-  top: 745px;
-  left: 424px;
-  width: 253.71px;
-  height: 74px;
-  font-size: 32px;
-  color: var(--color-white);
-}
-.welcome-to-soukauto {
-  margin: 0;
-}
-.your-platform-for {
-  margin: 0;
-  color: var(--color-steelblue);
-}
-.welcome-to-soukauto-container {
-  position: absolute;
-  top: 218px;
-  left: 95px;
-  font-size: var(--font-size-21xl);
-  color: var(--color-darkorange);
-}
-.vector-parent3 {
-  position: absolute;
-  top: 609px;
-  left: 95px;
-  border-radius: var(--br-3xs);
-  width: 583px;
-  height: 75px;
-  color: var(--color-darkslategray-200);
-}
-.create-account1,
-.if-you-dont {
-  position: absolute;
-  top: 930px;
-  left: 98px;
-  font-weight: 600;
-}
-.create-account1 {
-  left: 496px;
-}
-.login {
-  position: relative;
-  width: 100%;
-  background-color: var(--color-white);
-  height: 1024px;
-  overflow: hidden;
-  text-align: left;
-  font-size: var(--font-size-5xl);
-  color: var(--color-darkslategray-100);
-  font-family: var(--font-open-sans);
+  height: 66px;
+  background-color:#D9D9D9 ;
+  z-index: 1;
   
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-  /* Styles for screens between 768px and 1024px */
+
+.logo
+{
+  position: absolute;
+  left: 20px;
+  display: inline-block;
+}
+.Souk ,.Auto
+{
+  position: absolute;
+  font-size: 31px;
+  top: -16px;
+  font-weight: bold;
+}
+.Souk 
+{
+  
+  
+  left: 3px;
+  color: #205375;
 }
 
+.Auto
+{ 
+ 
+  left: 73px;
+  color: #ED6C15;
+
+}
+
+.Loggin
+{
+  position: absolute;
+  right: 50px;
+  top: -16px;
+  font-size: 30px;
+  color: #102B3C  ;
+  font-weight: bold;
+}
+
+header::after {
+  content: "";
+  display: block;
+  height: 5px;
+  width: 100%;
+  background-color: #102B3C;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* Section */
+
+  section
+  { 
+    /* background: url(../images/Login.png) no-repeat ;
+    background-size: cover;  */
+    position: absolute; 
+    width: 100%;
+    
+    left: 0%;
+    top: 66px;
+  }
+
+
+  form
+  {
+    position: absolute;
+    top: 320px;
+  }
+
+  h1,h2,h3
+  {
+  
+    position: relative;
+    left: 5%;
+  }
+
+  h1
+  {      
+      top: 20px;
+      color: #ED6C15;
+          
+  }
+
+  h2
+  {  
+    /* top: 20px; */
+     color: #205375;
+     margin-bottom: 50px;
+  } 
+
+  h3
+  {  
+     color: #102B3C;
+     font-size: 23px;
+  } 
+
+  /* The form */
+  .info
+  {
+    position: relative;
+    top: -300px;
+    left: 5%;
+    display: inline-block;
+  }
+
+  .info div
+  {
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+
+.info div:hover {
+
+  transform: scale(1.05);
+}
+
+  .info input:not(.log)
+  {
+    width: 340px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #EFEFEF;
+    border: none;
+    padding: 5px 15px;
+  }
+
+  input::placeholder {
+
+    font-size: 15px;
+    color: #999;
+  }
+
+  input:focus {
+    
+    outline: none;
+  }
+
+  input:hover {
+    
+    cursor: pointer;
+  }
+
+  /* Login button */
+  .log
+  { 
+    position: relative;
+    left: 286px;
+    background-color: #ED6C15;
+    width: 84.71px;
+    height: 41px;
+    border: none;
+    border-radius: 10px;
+  }
+
+  input[type="submit"] {
+    color: white;
+  }
+/* end Login button */
+  section p
+
+  {
+    position: relative;
+    top: 202px;
+    left: 5%;
+    color: #102B3C;
+    font-size: 18px;
+    font-weight: bold;
+
+  }
+section a
+{
+  text-decoration: none;
+  position: relative;
+  top: 164px;
+  left: 331px;
+  color: #102B3C;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+section a:hover{
+  color: #ED6C15;
+}
