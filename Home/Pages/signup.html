@@ -19,40 +19,33 @@
       <h1>Please create your account</h1>
 
       <div class="info">
-        <form action="">
+        <form method="POST" action="../utility/user_signup.php">
           <div>
-            <input type="text" name="" id="" placeholder="Name" required />
+            <label for="firstname">First Name:</label>
+            <input type="text" name="firstname" id="firstname" required />
           </div>
           <div>
-            <input type="email" placeholder="E-mail" required />
+            <label for="lastname">Last Name:</label>
+            <input type="text" name="lastname" id="lastname" required />
           </div>
           <div>
-            <input
-              type="password"
-              name=""
-              id=""
-              placeholder="Password"
-              required
-            />
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required />
           </div>
           <div>
-            <input type="text" placeholder="Wilaya" required />
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required />
           </div>
           <div>
-            <input
-              type="text"
-              name=""
-              id=""
-              placeholder="Phone number"
-              required
-            />
+            <label for="PhoneNumber">Phone Number:</label>
+            <input type="tel" name="PhoneNumber" id="PhoneNumber" required />
           </div>
           <p>
-            By clicking "create account" i agree to SoukAuto TOS & Privacy
+            By clicking "Create account" i agree to SoukAuto TOS & Privacy
             Policy.
           </p>
           <div>
-            <input type="submit" class="sign" value="Create account" />
+            <input type="submit" class="sign" value="Signup" />
           </div>
         </form>
       </div>
