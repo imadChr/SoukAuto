@@ -1,5 +1,7 @@
 SoukAuto
 
+This Project is at Sprint 1 progression only.
+
 This is a school project for the Software Engineering course. The project is a car selling website called "SoukAuto" that allows users to post their cars for sale and browse the available listings. The website was built using HTML, CSS, JavaScript, and PHP.
 
 Getting Started
@@ -38,5 +40,5 @@ Yousfi Chaker - Design and Front-end developer
 GRINE Abdessamed Bassel - Front-end contributor
 
 Acknowledgments :
-The project was completed as part of the Software Engineering course at The National School Of Artificial Intelligence.
+The Sprint 1 was completed as part of the Software Engineering course at The National School Of Artificial Intelligence.
 Special thanks to Mr.BOUCHRIKA and Mme.CHETTAH for providing guidance and support throughout the project.
