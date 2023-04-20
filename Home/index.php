@@ -64,16 +64,16 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname); ?>
                     <a class="nav-link" href="index.html">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="post.php">Sell</a>
+                    <a class="nav-link" href="/Pages/post.php">Sell</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="">Rent</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="SoukAuto\Home\Pages\login.html">Login</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="signup.html">Sign up</a>
+                    <a class="nav-link" href="/Pages/signup.html">Sign up</a>
                   </li>
                 </ul>
               </div>

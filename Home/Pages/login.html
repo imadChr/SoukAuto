@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-    <link rel="stylesheet" href="./global.css" />
-    <link rel="stylesheet" href="./login.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/login.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600&display=swap"
@@ -15,21 +15,34 @@
     />
   </head>
   <body>
-    %form.form{:autocomplete=>"off"} .control %h1 Sign In
-    .control.block-cube.block-input %input{:name => "username", :type=>"text",
-    :placeholder=>"Username", }/ .bg-top .bg-inner .bg-right .bg-inner .bg
-    .bg-inner .control.block-cube.block-input %input{:name => "password",
-    :type=>"password", :placeholder=>"Password"}/ .bg-top .bg-inner .bg-right
-    .bg-inner .bg .bg-inner
-    %button.btn.block-cube.block-cube-hover{:type=>"button"} .bg-top .bg-inner
-    .bg-right .bg-inner .bg .bg-inner -# .bg2 .text Log In
+    <div class="login">
+      <div class="nab-bar1">
+        <div class="nab-bar-inner"></div>
+        <div class="soukauto1">
+          <span>Souk</span><span class="auto1">Auto</span>
+        </div>
+        <div class="logging-in">Logging in...</div>
+        <div class="nab-bar-child1"></div>
+      </div>
+      <div class="log-in-now">Log in now to discover more</div>
+      <div class="vector-parent2">
+        <form method="POST" action="user_login.php">
+          <label class="e-mail5" for="email">Email Address:</label
+          ><input type="email" name="email" id="email" required />
+          <label class="e-mail5">Password</label
+          ><input type="password" name="password" id="password" required />
+          <input class="log-in" type="submit" value="Login" />
+        </form>
+      </div>
+      <b class="welcome-to-soukauto-container"
+        ><p class="welcome-to-soukauto">Welcome To SoukAuto!</p>
+        <p class="your-platform-for">
+          Your platform for buying & selling (renting) cars in Algeria.
+        </p></b
+      >
+      <div class="vector-parent3"></div>
+      <div class="if-you-dont">If you don’t have an account?</div>
+      <div class="create-account1">Create account</div>
+    </div>
   </body>
 </html>
-
-<form method="POST" action="user_login.php">
-  <label class="e-mail5" for="email">Email Address:</label
-  ><input type="email" name="email" id="email" required />
-  <label class="e-mail5">Password</label
-  ><input type="password" name="password" id="password" required />
-  <input class="log-in" type="submit" value="Login" />
-</form>
