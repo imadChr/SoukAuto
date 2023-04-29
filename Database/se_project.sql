@@ -18,14 +18,14 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `se_project`
+-- Database: `testimport`
 --
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `car_selling_posts`
---
+
 
 CREATE TABLE `car_selling_posts` (
   `id` int(11) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `car_selling_posts` (
 
 --
 -- Dumping data for table `car_selling_posts`
---
+
 
 INSERT INTO `car_selling_posts` (`id`, `title`, `description`, `price`, `image_url`, `created_at`, `user_id`) VALUES
 (9, 'BMW 325i (E30) Wagon', 'A desirable classic BMW sports wagon from BMW', 200000, 'images/uploads/Background.png', '2023-04-20 04:16:15', 1),
@@ -49,7 +49,7 @@ INSERT INTO `car_selling_posts` (`id`, `title`, `description`, `price`, `image_u
 
 --
 -- Table structure for table `users`
---
+
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `users` (
 
 --
 -- Dumping data for table `users`
---
+
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `created_at`, `PhoneNumber`) VALUES
 
@@ -73,14 +73,14 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `create
 
 --
 -- Indexes for table `car_selling_posts`
---
+
 ALTER TABLE `car_selling_posts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `users`
---
+
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
@@ -92,13 +92,13 @@ ALTER TABLE `users`
 
 --
 -- AUTO_INCREMENT for table `car_selling_posts`
---
+
 ALTER TABLE `car_selling_posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users`
---
+
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
@@ -108,7 +108,7 @@ ALTER TABLE `users`
 
 --
 -- Constraints for table `car_selling_posts`
---
+
 ALTER TABLE `car_selling_posts`
   ADD CONSTRAINT `car_selling_posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
