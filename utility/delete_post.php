@@ -9,7 +9,7 @@ if (isset($_SESSION["user_id"])) {
     if (deletePost($conn, $user_id, $post_id)) {
         $_SESSION["message"] = "Post deleted successfully";
         header("Location: ../index.php");
-        exit;
+        exit();
     } else {
         echo "Error: " . mysqli_error($conn);
         header("Location: ../index.php");
