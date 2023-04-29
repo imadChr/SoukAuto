@@ -1,5 +1,5 @@
 body {
-  font-family: "Nasalization", sans-serif;
+  font-family: 'Nasalization', sans-serif;
 }
 
 /* Header */
@@ -166,4 +166,76 @@ section a {
 
 section a:hover{
   color: #ED6C15;
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+
+  /* Header */
+  header {
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .logo {
+    margin-bottom: 20px;
+  }
+
+  .logo img {
+    height: 30px;
+  }
+
+  .Souk,
+  .Auto {
+    font-size: 25px;
+  }
+
+  .Loggin {
+    font-size: 25px;
+  }
+
+  /* Section */
+  section {
+    height: auto;
+    padding: 50px 0;
+  }
+
+  h1 {
+    font-size: 35px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 25px;
+    margin-bottom: 30px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  .info input:not(.log) {
+    width: 100%;
+    max-width: 400px;
+  }
+ 
+
+  .log {
+    width: auto;
+    padding: 10px 20px;
+  }
+
+  section p {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  section a {
+    font-size: 16px;
+  }
+
 }
