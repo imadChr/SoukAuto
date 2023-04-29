@@ -1,4 +1,5 @@
-<?php $dbhost = 'localhost';
+<?php
+$dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
 $dbname = 'se_project';
