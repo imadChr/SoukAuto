@@ -159,6 +159,9 @@ img {
 
 }
 
+
+
+
  :focus {
      outline: 0;
 }
@@ -403,6 +406,11 @@ header .container-fluid
 
 }
 
+.welcome {
+     position: relative;
+     top : 20px;
+     left: 180px;
+}
 
 /** banner section **/
 
@@ -667,7 +675,7 @@ header .container-fluid
      color: #ED6C15;
 }
 .work:hover img {
-     opacity: 0.7;
+     opacity: 0.5;
    }
 .work figure {
      margin: 0;
