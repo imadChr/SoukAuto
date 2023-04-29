@@ -38,13 +38,13 @@ $result = $stmt->get_result();
 if ($result->num_rows == 0) {
     die('Post not found');
 }
-
 // Get post data
 $post = $result->fetch_assoc();
 
 // Close statement and database connection
 $stmt->close();
 $conn->close();
+$user_id = $post['user_id'];
 
 // Output post data
 ?>
@@ -56,10 +56,19 @@ $conn->close();
 </head>
 
 <body>
+
+
     <h1><?php echo $post['title']; ?></h1>
     <p><?php echo $post['description']; ?></p>
     <p>Price: <?php echo $post['price']; ?>$</p>
+    <p>user: <?php echo $post['user_id']; ?></p>
     <img src="../<?php echo $post['image_url']; ?>" alt="<?php echo $post['title']; ?>">
+    <?php
+    if ($_SESSION["user_id"] == $user_id) {
+        echo "<button type='button' id='button-addon2' onclick=\"location.href='../utility/delete_post.php?action=&post_id=" . $post["id"] . "'\">Delete Post</button>";
+    } ?>
+    <button type="button" id="button-addon2" onclick="location.href='../index.php'">Back</button>
+
 </body>
 
 </html>
