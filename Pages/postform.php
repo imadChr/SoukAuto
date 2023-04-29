@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    // Redirect the user to the login page
+    header('Location: ../pages/login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +31,7 @@
         <!-- header inner -->
         <div class="header">
             <div class="logo">
-                <a href="">
+                <a href="../index.php">
                     <p class="Souk">Souk</p>
                     <p class="Auto">Auto</p>
                 </a>
@@ -37,6 +45,11 @@
         <img src="../images/mazda.png" />
     </div>
     <div class="content">
+        <?php if (isset($_SESSION['message'])) {
+            echo '<h5 style="color:red;">' . $_SESSION['message'] . '</h5>';
+            unset($_SESSION['message']);
+        } ?>
+
         <form class="form" method="POST" action="..\utility\create_post.php" enctype="multipart/form-data">
             <legend class="formtitle">Post your AD!</legend>
             <label for="img" class="img">Upload Photos</label>
@@ -108,3 +121,5 @@
         </form>
     </div>
 </body>
+
+</html>
