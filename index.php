@@ -1,7 +1,9 @@
+<?php
+session_start();
+require_once 'utility/db_connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
-<?php
-require_once 'utility/db_connection.php'; ?>
 
 <head>
   <!-- basic -->
@@ -40,11 +42,18 @@ require_once 'utility/db_connection.php'; ?>
             <div class="full">
               <div class="center-desk">
                 <div class="logo">
-                  <a href="index.html">
+                  <a href="index.php">
                     <p class="Souk">Souk</p>
                     <p class="Auto">Auto</p>
                   </a>
                 </div>
+                <?php
+                if (isset($_SESSION['user_id'])) {
+                  echo '
+                <div class="welcome">
+                  <h3>Welcome, ' . $_SESSION['firstname'] . ' !</h3> ;
+                </div>';
+                } ?>
               </div>
             </div>
           </div>
@@ -56,7 +65,7 @@ require_once 'utility/db_connection.php'; ?>
               <div class="collapse navbar-collapse" id="navbarsExample04">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="Pages\postform.php">Sell</a>
@@ -64,12 +73,20 @@ require_once 'utility/db_connection.php'; ?>
                   <li class="nav-item">
                     <a class="nav-link" href="">Rent</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="Pages\login.html">Login</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="Pages/signup.html">Sign up</a>
-                  </li>
+                  <?php
+                  if (isset($_SESSION['user_id'])) {
+                    echo '<li class="nav-item">
+                            <a class="nav-link" href="utility\logout.php">Logout</a>
+                          </li><br>';
+                  } else {
+                    echo '<li class="nav-item">
+                            <a class="nav-link" href="Pages\login.php">Login</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="Pages/signup.php">Sign up</a>
+                          </li>';
+                          }
+                  ?>
                 </ul>
               </div>
             </nav>
@@ -95,6 +112,11 @@ require_once 'utility/db_connection.php'; ?>
               <div class="row">
                 <div class="col-md-6">
                   <div class="text-bg">
+                    <?php
+                    if (isset($_SESSION['message'])) {
+                      echo '<h5 style="color:red;">' . $_SESSION['message'] . '</h5>';
+                      unset($_SESSION['message']);
+                    } ?>
                     <h1>Welcome to SoukAuto</h1>
                     <span>"You need Auto! there is SoukAuto!"</span>
                     <p>
