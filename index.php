@@ -44,7 +44,7 @@ require_once 'utility/db_connection.php';
                 <div class="logo">
                   <a href="index.php">
                     <p class="Souk">Souk</p>
-                    <p class="Auto">Auto</p>
+                    <p class="Auto">Autoooooooo</p>
                   </a>
                 </div>
                 <?php
