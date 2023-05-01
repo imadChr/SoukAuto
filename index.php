@@ -6,9 +6,6 @@ require_once 'utility/db_connection.php';
 <html lang="en">
 
 <head>
-
-
-
   <!-- basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
