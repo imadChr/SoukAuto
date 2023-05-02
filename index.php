@@ -85,7 +85,7 @@ require_once 'utility/db_connection.php';
                           <li class="nav-item">
                             <a class="nav-link" href="Pages/signup.php">Sign up</a>
                           </li>';
-                          }
+                  }
                   ?>
                 </ul>
               </div>
@@ -189,7 +189,7 @@ require_once 'utility/db_connection.php';
         </div>
       </div>
 
-      <a class="read_more" href="#">See More</a>
+      <a class="read_more" href="Pages/all_posts.php">See More</a>
     </div>
   </div>
   </div>
