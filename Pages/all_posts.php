@@ -1,9 +1,15 @@
 <?php
-session_start();
 require_once '../utility/db_connection.php';
+<<<<<<< Updated upstream
 
 // set the number of posts per page
 $posts_per_page = 8;
+=======
+require_once '../utility/functions.php';
+
+// set the number of posts per page
+$posts_per_page = 9;
+>>>>>>> Stashed changes
 
 // get the current page number from query string
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -41,6 +47,10 @@ $total_pages = ceil($total_posts / $posts_per_page);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <!-- Iconbox -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+<<<<<<< Updated upstream
+=======
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+>>>>>>> Stashed changes
     <!-- style css -->
     <link rel="stylesheet" href="../css/all_posts.css">
 </head>
@@ -50,7 +60,11 @@ $total_pages = ceil($total_posts / $posts_per_page);
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
+<<<<<<< Updated upstream
             <img><a class="navbar-brand" href="#!">[logo]</a>
+=======
+            <img><a class="navbar-brand" href="../index.php">[logo]</a>
+>>>>>>> Stashed changes
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -88,7 +102,11 @@ $total_pages = ceil($total_posts / $posts_per_page);
         </div>
     </header>
     <!--shopping part-->
+<<<<<<< Updated upstream
     <div class="container">
+=======
+    <div class="container cards_landscape_wrap-2">
+>>>>>>> Stashed changes
         <div class="row">
             <!--product-->
             <?php
@@ -114,6 +132,7 @@ $total_pages = ceil($total_posts / $posts_per_page);
                 }
             }
             ?>
+<<<<<<< Updated upstream
 
             <!-- Pagination -->
             <div class="d-flex justify-content-center my-4">
@@ -133,12 +152,79 @@ $total_pages = ceil($total_posts / $posts_per_page);
             </div>
 
             <!-- End of container -->
+=======
+            <!--prod 5-->
+            <div class="col-md-6 col-lg-3">
+                <div class="card mb-4">
+                    <!-- RENT/SELL badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">SALE</div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="../images/mazda.png" alt="Card image cap">
+                    <!--card body-->
+                    <div class="card-body">
+                        <!-- Product details-->
+                        <h5 class="card-title">[year] [car name]</h5>
+                        <p class="card-text">[car description]</p>
+                        <p class="card-text"><small class="text-muted">[date of post] , [wilaya] </small></p>
+>>>>>>> Stashed changes
 
             <!-- Bootstrap JS -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-nmW8uO7vmJ2fB6C9j6U3bIggEoGJ4oAXKj0p0zJL+RRbiRj75h42M9XSDP+oOksM" crossorigin="anonymous"></script>
 
         </div>
     </div>
+<<<<<<< Updated upstream
+=======
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+        <?php
+        // Only display pagination if there is more than 1 page
+        if ($total_pages > 1) {
+            echo "<ul class='pagination'>";
+
+            // Previous page link
+            $prev_page = $current_page - 1;
+            $prev_disabled = ($current_page == 1) ? 'disabled' : '';
+            echo "<li class='page-item $prev_disabled'><a class='page-link' href='all_posts.php?page=$prev_page' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
+
+            // Display page links
+            if ($total_pages <= 7) {
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    echo generatePaginationLink($i, $current_page);
+                }
+            } else {
+                $start = max(1, $current_page - 2);
+                $end = min($total_pages, $start + 4);
+                if ($start > 1) {
+                    echo generatePaginationLink(1, $current_page);
+                    if ($start > 2) {
+                        echo "<li class='page-item disabled'><span class='page-link'>...</span></li>";
+                    }
+                }
+                for ($i = $start; $i <= $end; $i++) {
+                    echo generatePaginationLink($i, $current_page);
+                }
+                if ($end < $total_pages) {
+                    if ($end < $total_pages - 1) {
+                        echo "<li class='page-item disabled'><span class='page-link'>...</span></li>";
+                    }
+                    echo generatePaginationLink($total_pages, $current_page);
+                }
+            }
+
+            // Next page link
+            $next_page = $current_page + 1;
+            $next_disabled = ($current_page == $total_pages) ? 'disabled' : '';
+            echo "<li class='page-item $next_disabled'><a class='page-link' href='all_posts.php?page=$next_page' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
+
+            echo "</ul>";
+        }
+        ?>
+    </nav>
+
+    <!-- Bootstrap JavaScript files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+>>>>>>> Stashed changes
 </body>
 
 </html>
