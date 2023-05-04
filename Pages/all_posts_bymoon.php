@@ -3,7 +3,7 @@ session_start();
 require_once '../utility/db_connection.php';
 
 // set the number of posts per page
-$posts_per_page = 8;
+$posts_per_page = 9;
 
 // get the current page number from query string
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
