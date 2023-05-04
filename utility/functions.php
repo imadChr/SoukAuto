@@ -239,3 +239,8 @@ function display_errors($errors)
         echo '<div class="alert alert-danger">' . $error . '</div>';
     }
 }
+
+function generatePaginationLink($page, $current_page) {
+    $class = ($page == $current_page) ? 'active' : '';
+    return "<li class='page-item $class'><a class='page-link' href='all_posts.php?page=$page'>$page</a></li>";
+}
