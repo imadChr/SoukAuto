@@ -17,6 +17,8 @@
         rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" 
         crossorigin="anonymous">  
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">  
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" 
+        rel="stylesheet">
         <!-- Iconbox -->
         <link
         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -49,7 +51,7 @@
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
-                            Cart
+                            favorites
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
                     </form>
@@ -65,6 +67,216 @@
                 </div>
             </div>
         </header>
+        <!--Filter nav-->
+        <div class="pt-4 pb-4">
+            <div class="container pjAcFormFilter cms-e-section" >
+                <form action="all_posts.html" data-id="frmCRLSearch" method="get" accept-charset="utf-8">
+                        <input type="hidden" name="listing_search" value="1">
+                                    <input id="pjAcSearchCarType" type="hidden" name="car_type" value="new">
+                                        <input type="hidden" id="pjAcSearchYearFrom" name="year_from">
+                        <input type="hidden" id="pjAcSearchYearTo" name="year_to">
+                                        <input type="hidden" id="pjAcSearchMileageFrom" name="mileage_from">
+                        <input type="hidden" id="pjAcSearchMileageTo" name="mileage_to">
+                                        <input type="hidden" data-id="pjAcSearchPriceFrom" name="price_from">
+                        <input type="hidden" data-id="pjAcSearchPriceTo" name="price_to">
+                                        <input type="hidden" id="pjAcSearchPowerFrom" name="power_from">
+                        <input type="hidden" id="pjAcSearchPowerTo" name="power_to">
+                                        <input type="hidden" id="pjAcSearchEngineFrom" name="engine_from">
+                        <input type="hidden" id="pjAcSearchEngineTo" name="engine_to">
+                                    <div class="row">
+                                            <div class="col-xl-3 col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select name="car_type" class="form-select">
+                                        <option value="">All</option>
+                                        <option value="new">New vehicle</option>
+                                        <option value="used">Used vehicle</option>
+                                    </select>
+            
+                                    <label><span class="wc-editable" data-pk="front_label_used_new" data-type="text">Used/New</span>:</label>
+                                </div>
+                            </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <select name="feature_type_id" class="form-select">
+                                                <option value="">--All --</option>
+                                                <option value="7">Cabrio/Roadster</option><option value="3">Estate Car</option><option value="1">Limousine</option><option value="5">Off-road</option><option value="9">Other</option><option value="2">Small Car</option><option value="8">Sports car/Coupe</option><option value="4">Van/Minibus</option><option value="6">Vehicle/Pickup Truck</option>									</select>
+        
+                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_type" data-type="text">Vehicle Type</span>:</label>
+                                        </div>
+                                    </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select class="form-select pjAcSearchMake" name="make_id">
+                                        <option value="">-- All --</option>
+                                        <option value="8">Aston Mart</option><option value="9">Audi</option><option value="18">Bentley</option><option value="23">BMW</option><option value="29">Cadillac</option><option value="37">Chevrolet</option><option value="39">Citroen</option><option value="40">Dacia</option><option value="48">Dodge</option><option value="53">Ferrari</option><option value="55">Ford</option><option value="63">GMC</option><option value="74">Hyundai</option><option value="82">Jaguar</option><option value="91">Land Rover</option><option value="93">Lexus</option><option value="105">Mazda</option><option value="108">Mercedes-Benz</option><option value="119">Nissan</option><option value="129">Peugeot</option><option value="143">Renault</option><option value="152">Seat</option><option value="160">Subaru</option><option value="167">Toyota</option><option value="178">Volvo</option><option value="179">VW</option>							</select>
+            
+                                    <label><span class="wc-editable" data-pk="front_label_make" data-type="text">Make</span>:</label>
+                                </div>
+                            </div>
+                                                <div class="col-xl-3 col-md-6">
+                                <div class="form-floating mb-3 pjAcSearchModel">
+                                    <select class="form-select">
+                                        <option value="">-- All --</option>
+                                    </select>
+            
+                                    <label><span class="wc-editable" data-pk="front_label_model" data-type="text">Model</span>:</label>
+                                </div>
+                            </div>
+                                        </div>
+        
+                    <div class="row">
+                                            <div class="col-range col-50">
+                                <div class="d-flex justify-content-between">
+                                    <small><span class="wc-editable" data-pk="front_label_price" data-type="text">Price</span>:</small>
+        
+                                    <small data-id="pjAcPriceLabel" data-currency="USD"></small>
+                                </div>
+            
+                                <div class="range mb-3">
+                                    <div data-id="pjAcPriceSlider"></div>
+            
+                                    <div class="d-flex justify-content-between">
+                                        <small>$ 2,000</small>
+                                        
+                                        <small>$ 239,000</small>
+                                    </div>
+                                </div>
+                            </div>
+                                                <div class="col-range col-50">
+                                <div class="d-flex justify-content-between">
+                                    <small><span class="wc-editable" data-pk="front_label_first_registration" data-type="text">First registration</span>:</small>
+        
+                                    <small id="pjAcRegistrationLabel"></small>
+                                </div>
+        
+                                <div class="range mb-3">
+                                    <div id="pjAcRegistrationSlider"></div>
+            
+                                    <div class="d-flex justify-content-between">
+                                        <small>1995</small>
+                                        <small>2024</small>
+                                    </div>
+                                </div>
+                            </div>
+                                                <div class="col-range col-50">
+                                <div class="d-flex justify-content-between">
+                                    <small><span class="wc-editable" data-pk="front_label_mileage" data-type="text">Mileage</span>:</small>
+        
+                                    <small id="pjAcMileageLabel" data-mileage="km"></small>
+                                </div>
+            
+                                <div class="range mb-3">
+                                    <div id="pjAcMileageSlider"></div>
+            
+                                    <div class="d-flex justify-content-between">
+                                        <small>0 km</small>
+                                        <small>200000 km</small>
+                                    </div>
+                                </div>
+                            </div>
+                                                <div class="col-range col-50">
+                                <div class="d-flex justify-content-between">
+                                    <small><span class="wc-editable" data-pk="front_label_engine" data-type="text">Engine size</span>:</small>
+        
+                                    <small id="pjAcEngineLabel" data-engine="cc"></small>
+                                </div>
+            
+                                <div class="range mb-3">
+                                    <div id="pjAcEngineSlider"></div>
+            
+                                    <div class="d-flex justify-content-between">
+                                        <small>1000 cc</small>
+                                        <small>6200 cc</small>
+                                    </div>
+                                </div>
+                            </div>
+                                                <div class="col-range col-50">
+                                <div class="d-flex justify-content-between">
+                                    <small><span class="wc-editable" data-pk="front_label_power" data-type="text">Power</span>:</small>
+        
+                                    <small id="pjAcPowerLabel" data-power="hp"></small>
+                                </div>
+        
+                                <div class="range mb-3">
+                                    <div id="pjAcPowerSlider"></div>
+            
+                                    <div class="d-flex justify-content-between">
+                                        <small>80 hp</small>
+                                        <small>670 hp</small>
+                                    </div>
+                                </div>
+                            </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" name="feature_fuel_id">
+                                                <option value="">--All --</option>
+                                                <option value="10">Diesel</option><option value="14">Electric</option><option value="15">Ethanol</option><option value="12">Gas</option><option value="13">Hybrid</option><option value="16">Hydrogenium</option><option value="17">Other</option><option value="11">Petrol</option>									</select>
+        
+                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_fuel" data-type="text">Fuel</span>:</label>
+                                        </div>
+                                    </div>
+                                                                <div class="col-xl-3 col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" name="feature_gearbox_id">
+                                                <option value="">--All --</option>
+                                                <option value="19">Automatic</option><option value="18">Manual</option><option value="20">Semi-automatic</option>									</select>
+        
+                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_gearbox" data-type="text">Gearbox</span>:</label>
+                                        </div>
+                                    </div>
+                                                                <div class="col-xl-3 col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" name="feature_doors_id">
+                                                <option value="">--All --</option>
+                                                <option value="29">2/3</option><option value="30">4/5</option><option value="31">Other</option>									</select>
+        
+                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_doors" data-type="text">Doors</span>:</label>
+                                        </div>
+                                    </div>
+                                                                <div class="col-xl-3 col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <select name="feature_seats_id" class="form-select">
+                                                <option value="">--All --</option>
+                                                <option value="21">2</option><option value="22">2+1</option><option value="23">3</option><option value="24">4</option><option value="25">4+1</option><option value="26">5</option><option value="27">5+1</option><option value="28">More</option>									</select>
+        
+                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_seats" data-type="text">Number of seats</span>:</label>
+                                        </div>
+                                    </div>
+                                                                <div class="col-xl-3 col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <select name="feature_colors_id" class="form-select">
+                                                <option value="">--All --</option>
+                                                <option value="37">Beige</option><option value="38">Black</option><option value="39">Blue</option><option value="40">Brown</option><option value="41">Gold</option><option value="42">Green</option><option value="43">Grey</option><option value="44">Orange</option><option value="45">Purple</option><option value="46">Red</option><option value="47">Silver</option><option value="48">White</option><option value="49">Yellow</option>									</select>
+        
+                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_colors" data-type="text">Color</span>:</label>
+                                        </div>
+                                    </div>
+                                                                <div class="col-xl-3 col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <select name="feature_class_id" class="form-select">
+                                                <option value="">--All --</option>
+                                                <option value="32">EURO1</option><option value="33">EURO2</option><option value="34">EURO3</option><option value="35">EURO4</option><option value="36">EURO5</option>									</select>
+        
+                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_class" data-type="text">Emission Class</span>:</label>
+                                        </div>
+                                    </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="listing_refid" class="form-control" placeholder="Reference ID:">
+            
+                                    <label><span class="wc-editable" data-pk="front_label_refid" data-type="text">Reference ID</span>:</label>
+                                </div>
+                            </div>
+                            
+                                            <div class="col-xl-3 col-lg-6 col-md-12">
+                                                        <button class="btn btn-primary w-100 hvr-float" type="submit"><span class="wc-editable" data-pk="front_button_search" data-type="text">Search</span></button>
+                            </div>
+                                    </div>
+                    
+                    
+                </form>
+            </div>
+        </div>
         <!--shopping part-->
         <div class="container cards_landscape_wrap-2 pb-5">
             <div class="row">
@@ -190,10 +402,27 @@
         </div>
         <!-- Bootstrap JavaScript files -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
         <script>
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             })
-        </script>    
+            $(document).ready(function(){
+                $(function() {
+                    $('input[name="daterange"]').daterangepicker({
+                    "startDate": "1970",
+                    opens: 'center',
+                    locale: {
+                        format: 'YYYY'
+                    }
+                    });
+                });
+            });
+
+            
+        </script> 
+           
     </body>
 </html>

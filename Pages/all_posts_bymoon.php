@@ -1,6 +1,6 @@
 <?php
+session_start();
 require_once '../utility/db_connection.php';
-require_once '../utility/functions.php';
 
 // set the number of posts per page
 $posts_per_page = 9;
@@ -38,13 +38,9 @@ $total_pages = ceil($total_posts / $posts_per_page);
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" 
-        rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" 
-        crossorigin="anonymous">    
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <!-- Iconbox -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <!-- style css -->
     <link rel="stylesheet" href="../css/all_posts.css">
 </head>
@@ -54,10 +50,12 @@ $total_pages = ceil($total_posts / $posts_per_page);
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-                <img src="../images/logo.png" class="logo"><a class="navbar-brand" href="../index.php"></a>
+            <img><a class="navbar-brand" href="#!">[logo]</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -73,7 +71,7 @@ $total_pages = ceil($total_posts / $posts_per_page);
                 <form class="d-flex">
                     <button class="btn btn-outline-dark" type="submit">
                         <i class="bi-cart-fill me-1"></i>
-                        favorites
+                        Favorites
                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                     </button>
                 </form>
@@ -85,36 +83,12 @@ $total_pages = ceil($total_posts / $posts_per_page);
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Shop For Your Dream Car</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With <img src="../images/icon.ico" style="height:37px; margin-top: -6px;"></p>
+                <p class="lead fw-normal text-white-50 mb-0">With SoukAuto</p>
             </div>
         </div>
     </header>
-    <!--filter-->
-    <div class="input-group input-daterange btn-sm">
-  <select class="form-control" id="yearFrom">
-    <option value="">From year</option>
-    <!-- Add options for year range here -->
-    <?php
-    $currentYear = date('Y');
-    for ($i = $currentYear; $i >= 1900; $i--) {
-      echo "<option value='$i'>$i</option>";
-    }
-    ?>
-  </select>
-  <div class="input-group-addon">to</div>
-  <select class="form-control" id="yearTo">
-    <option value="">To year</option>
-    <!-- Add options for year range here -->
-    <?php
-    $currentYear = date('Y');
-    for ($i = $currentYear; $i >= 1900; $i--) {
-      echo "<option value='$i'>$i</option>";
-    }
-    ?>
-  </select>
-</div>
     <!--shopping part-->
-    <div class="container cards_landscape_wrap-2"> //class pb-5 
+    <div class="container">
         <div class="row">
             <!--product-->
             <?php
@@ -140,62 +114,31 @@ $total_pages = ceil($total_posts / $posts_per_page);
                 }
             }
             ?>
-            <!--prod 5-->
-            <div class="col-md-6 col-lg-3">
-                <div class="card mb-4">
-                    <!-- RENT/SELL badge-->
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">SALE</div>
-                    <!-- Product image-->
-                    <img class="card-img-top" src="../images/mazda.png" alt="Card image cap">
-                    <!--card body-->
-                    <div class="card-body">
-                        <!-- Product details-->
-                        <h5 class="card-title">[year] [car name]</h5>
-                        <p class="card-text">[car description]</p>
-                        <p class="card-text"><small class="text-muted">[date of post] , [wilaya] </small></p>
 
-                        <!-- Bootstrap JS -->
-                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-nmW8uO7vmJ2fB6C9j6U3bIggEoGJ4oAXKj0p0zJL+RRbiRj75h42M9XSDP+oOksM" crossorigin="anonymous"></script>
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center my-4">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <?php
+                        for ($i = 1; $i <= $total_pages; $i++) {
+                            if ($i == $current_page) {
+                                echo "<li class='page-item active'><a class='page-link' href='all_posts.php?page=" . $i . "'>" . $i . "</a></li>";
+                            } else {
+                                echo "<li class='page-item'><a class='page-link' href='all_posts.php?page=" . $i . "'>" . $i . "</a></li>";
+                            }
+                        }
+                        ?>
+                    </ul>
+                </nav>
+            </div>
 
-                    </div>
-                </div>
-                <!-- Pagination -->
-                <div class="row mb-5">
-                    <div class="col-md-4"></div> <!-- empty column on the left -->
-                    <div class="col-md-4 text-center"> <!-- center column for pagination -->
-                        <h2 class="heading-section"></h2>
-                        <div class="block-27">
-                            <ul class="pagination justify-content-center">
-                                <li><a href="#">&lt;</a></li>
-                                <?php
-                                // Define variables for the number of total pages and the current page
-                                $total_pages = 5;
-                                $current_page = 1;
+            <!-- End of container -->
 
-                                // Generate the pagination links using a loop
-                                for ($i = 1; $i <= $total_pages; $i++) {
-                                    if ($i == $current_page) {
-                                        echo "<li class='active'><span>" . $i . "</span></li>";
-                                    } else {
-                                        echo "<li><a href='#'>" . $i . "</a></li>";
-                                    }
-                                }
-                                ?>
-                                <li><a href="#">&gt;</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4"></div> <!-- empty column on the right -->
-                </div>
+            <!-- Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-nmW8uO7vmJ2fB6C9j6U3bIggEoGJ4oAXKj0p0zJL+RRbiRj75h42M9XSDP+oOksM" crossorigin="anonymous"></script>
 
-
-                <!-- Bootstrap JavaScript files -->
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-                <script>
-                    $(function () {
-                        $('[data-toggle="tooltip"]').tooltip()
-                    })
-                </script>    
+        </div>
+    </div>
 </body>
 
 </html>
