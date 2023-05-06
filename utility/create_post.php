@@ -1,32 +1,50 @@
 <?php
-session_start();
-require_once 'db_connection.php';
-require_once 'functions.php';
+require_once('functions.php');
 
+// Get the post variables
+$title = $_POST['title'];
+$description = $_POST['description'];
+$price = $_POST['price'];
+$user_id = $_SESSION['user_id'];
+$brand_id = $_POST['brand_id'];
+$model_id = $_POST['model_id'];
+$fuel = $_POST['fuel'];
+$year = $_POST['year'];
+$mileage = $_POST['mileage'];
+$wilaya = $_POST['wilaya'];
+$pictures = $_FILES['pictures'];
 
-if (empty($_POST["name"]) || empty($_POST["description"]) || empty($_POST["price"]) || empty($_FILES["picture"]["name"])) {
-    die("Missing required field(s)");
+// Add the car
+$car_id = add_car($brand_id, $model_id, $fuel, $year, $mileage);
+if (!$car_id) {
+    // Display error message or redirect to an error page
+    die("Error adding car");
 }
 
-$title = htmlspecialchars($_POST["name"]);
-$description = htmlspecialchars($_POST["description"]);
-$price = htmlspecialchars($_POST["price"]);
-$picture = $_FILES["picture"];
-
-if (!is_valid_picture($picture)) {
-    $_SESSION["message"] = "Invalid picture file";
+// Add the post
+$post_id = add_post($title, $description, $price, $user_id, $car_id, $wilaya);
+if (!$post_id) {
+    // Display error message or redirect to an error page
+    die("Error adding post");
 }
 
-$picture_path = move_picture_to_upload_directory($picture);
+// Move the pictures to the upload directory
+$images_path = move_pictures_to_upload_directory($pictures);
+if (!$images_path) {
+    // Display error message or redirect to an error page
+    die("Error moving pictures to upload directory");
+}
 
-if (add_car_selling_post($title, $description, $price, $picture_path, $_SESSION["user_id"])) {
-    $_SESSION['message'] = 'New record created successfully';
-    $_SESSION['message_type'] = 'success';
-    header("Location: ../index.php");
-    exit();
-} else {
+// Insert the images to the database
+if (!insert_images($post_id, $images_path)) {
+    // Display error message or redirect to an error page
+    die("Error inserting images to the database");
     $_SESSION['message'] = 'Error: Unable to create new record';
     $_SESSION['message_type'] = 'error';
     header("Location: ../postform.php");
     exit();
 }
+
+// Redirect to the post page
+header("Location: ../pages/post.php?id=$post_id");
+exit;
