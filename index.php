@@ -64,29 +64,37 @@ require_once 'utility/db_connection.php';
               </button>
               <div class="collapse navbar-collapse" id="navbarsExample04">
                 <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home</a>
-                  </li>
-                  <li class="nav-item">
+              
+                  
+                  
+  <?php
+    if (isset($_SESSION['user_id'])) {
+      echo '<li class="nav-item">
                     <a class="nav-link" href="Pages\postform.php">Sell</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="">Rent</a>
-                  </li>
-                  <?php
-                  if (isset($_SESSION['user_id'])) {
-                    echo '<li class="nav-item">
-                            <a class="nav-link" href="utility\logout.php">Logout</a>
-                          </li><br>';
-                  } else {
-                    echo '<li class="nav-item">
-                            <a class="nav-link" href="Pages\login.php">Login</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="Pages/signup.php">Sign up</a>
-                          </li>';
-                  }
-                  ?>
+                  </li>';
+                  echo '  <li class="nav-item">
+       <a class="nav-link dropdown-toggle" href="#" id="my-account-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $_SESSION['firstname'] . '</a>
+      <ul class="dropdown-menu" aria-labelledby="my-account-menu">
+        <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">My posts</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">My favorites</a></li>
+        <li class="nav-item"><a class="nav-link" href="utility/logout.php">Logout</a></li>
+      </ul>
+      </li>';
+    } else {
+      echo '<li class="nav-item">
+      <a class="nav-link" href="Pages\signup.php">Sign up</a> 
+      </li><br>';
+      echo'<li class="nav-item">
+      <a class="nav-link" href="Pages\login.php">Login</a>
+      </li>';
+    }
+  ?>
+</li>
+                  
                 </ul>
               </div>
             </nav>
@@ -113,10 +121,10 @@ require_once 'utility/db_connection.php';
                 <div class="col-md-6">
                   <div class="text-bg">
                     <?php
-                    if (isset($_SESSION['message'])) {
-                      echo '<h5 style="color:red;">' . $_SESSION['message'] . '</h5>';
-                      unset($_SESSION['message']);
-                    } ?>
+                    if (isset($_SESSION['message'])) { ?>
+                      <h5 style="color:red;"><?php echo $_SESSION['message'] ?></h5>;
+                      <?php  unset($_SESSION['message']);
+                     } ?>
                     <h1>Welcome to SoukAuto</h1>
                     <span>"You need Auto! there is SoukAuto!"</span>
                     <p>
@@ -151,15 +159,15 @@ require_once 'utility/db_connection.php';
       <div class="row">
         <div class="col-md-12">
           <div class="titlepage">
-            <p>Explore more</p>
-            <a href="">
+            <p>Explore</p>
+            <a href="#posts">
               <ion-icon class="arrow1" name="chevron-down-outline"></ion-icon>
               <ion-icon class="arrow2" name="chevron-down-outline"></ion-icon>
             </a>
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="posts">
         <div class="col-md-10 offset-md-1">
           <div class="row">
             <?php
@@ -168,22 +176,21 @@ require_once 'utility/db_connection.php';
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
             ?>
+                  <a href="Pages/post.php?id=<?php echo $row['id']; ?>">
                 <div class="col-md-6 margin_bottom">
                   <div class="work">
                     <figure><img src="<?php echo $row['image_url']; ?>" alt="#" /></figure>
                   </div>
                   <div class="work_text">
-                    <a href="Pages/post.php?id=<?php echo $row['id']; ?>">
                       <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
-                    </a>
+                    </div>
                   </div>
-                </div>
+                </a>
             <?php
               }
             } else {
               echo "0 results";
             }
-            $conn->close();
             ?>
           </div>
         </div>
@@ -198,23 +205,39 @@ require_once 'utility/db_connection.php';
 
   <!--  footer -->
   <footer id="contact">
-    <div class="aboutus" id="abouts">
-      <p>About us</p>
-      <div>
-        <i><ion-icon name="mail"></ion-icon></i>
-        <a href="">Email</a>
-      </div>
-      <div>
+  <div class="socialmedia">
+      <p id="MediaLabel">Social Media</p>
+      <div id="facebook">
         <i><ion-icon name="logo-facebook"></ion-icon></i>
         <a href="">Facebook</a>
       </div>
-      <div>
+      <div id="instagram">
         <i><ion-icon name="logo-instagram"></ion-icon></i>
         <a href="">Instagram</a>
       </div>
-      <div>
+      <div id="linkedin">
         <i><ion-icon name="logo-linkedin"></ion-icon></i>
         <a href="">LinkedIn</a>
+      </div>
+    </div>
+    <div class="contactus">
+    <p id="ContactLabel">Contact Us</p>
+    <div id="email">
+        <i><ion-icon name="mail"></ion-icon></i>
+        <a href="">Email</a>
+      </div>
+      <div id="phone">
+        <i><ion-icon name="call"></ion-icon></i>
+        <a href="">Phone</a>
+      </div>
+    </div>
+    <div class="aboutus">
+    <p id="AboutLabel">About Us</p>
+    <div id="TerCon">
+        <a href="">Terms and Conditions</a>
+      </div>
+      <div id="PrivPol">
+        <a href="">Privacy Policy</a>
       </div>
     </div>
   </footer>

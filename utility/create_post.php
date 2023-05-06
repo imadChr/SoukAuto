@@ -27,6 +27,6 @@ if (add_car_selling_post($title, $description, $price, $picture_path, $_SESSION[
 } else {
     $_SESSION['message'] = 'Error: Unable to create new record';
     $_SESSION['message_type'] = 'error';
-    header("Location: $_SERVER[PHP_SELF] ");
+    header("Location: ../postform.php");
     exit();
 }
