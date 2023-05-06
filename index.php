@@ -163,17 +163,17 @@ require_once 'utility/db_connection.php';
         <div class="col-md-10 offset-md-1">
           <div class="row">
             <?php
-            $sql = "SELECT id, title, price, image_url FROM car_selling_posts";
+            $sql = "SELECT * FROM ( post join car on post.car_id = car.car_id ) join images on images.post_id = post.post_id where image_order = 1 order by post.post_id desc limit 4";
             $result = mysqli_query($conn, $sql);
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
             ?>
                 <div class="col-md-6 margin_bottom">
                   <div class="work">
-                    <figure><img src="<?php echo $row['image_url']; ?>" alt="#" /></figure>
+                    <figure><img src="<?php echo $row['url']; ?>" alt="#" /></figure>
                   </div>
                   <div class="work_text">
-                    <a href="Pages/post.php?id=<?php echo $row['id']; ?>">
+                    <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
                       <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
                     </a>
                   </div>

@@ -2,31 +2,31 @@
 session_start();
 require_once "db_connection.php";
 
-function is_valid_picture($picture)
+function add_car($brand_id, $model_id, $fuel, $year, $mileage)
 {
-    if (!is_uploaded_file($picture["tmp_name"]) || !in_array($picture["type"], ["image/png", "image/jpeg"]) || !isset($picture["tmp_name"])) {
+    global $conn;
+
+    // Validate input data
+    if (!is_numeric($year) || !is_numeric($mileage)) {
         return false;
     }
-    return true;
-}
 
+    $stmt_car = $conn->prepare("INSERT INTO car (brand_id, model_id , fuel, year, mileage ) VALUES (?, ?, ?, ?, ?)");
+    $stmt_car->bind_param("iisii", $brand_id, $model_id, $fuel, $year, $mileage);
 
-function move_picture_to_upload_directory($picture)
-{
-    $target_dir = "../images/uploads/";
-    $dir = "images/uploads/";
-    $target_file = $target_dir . basename($picture["name"]);
-    $target = $dir . basename($picture["name"]);
-    if (!move_uploaded_file($picture["tmp_name"], $target_file)) {
-        error_log("Error uploading file");
+    if (!$stmt_car->execute()) {
+        // Log or display error message
+        error_log("Error inserting new car: " . $stmt_car->error);
+        $_SESSION['message'] = "Error inserting new car";
         return false;
     }
-    return $target;
+
+    $inserted_id = $stmt_car->insert_id;
+    $stmt_car->close();
+    return $inserted_id;
 }
 
-
-
-function add_car_selling_post($title, $description, $price, $picture_path, $user_id)
+function add_post($title, $description, $price, $user_id, $car_id, $wilaya)
 {
     global $conn;
 
@@ -35,20 +35,65 @@ function add_car_selling_post($title, $description, $price, $picture_path, $user
         return false;
     }
 
-    $stmt = $conn->prepare("INSERT INTO car_selling_posts (title, description, price, image_url, user_id) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssdsi", $title, $description, $price, $picture_path, $user_id);
+    $stmt_post = $conn->prepare("INSERT INTO post (user_id, car_id , title, description, price, wilaya ) VALUES (?, ?, ?, ?, ?,?)");
+    $stmt_post->bind_param("iissis", $user_id, $car_id, $title, $description, $price, $wilaya);
 
-    if (!$stmt->execute()) {
+    if (!$stmt_post->execute()) {
         // Log or display error message
-        error_log("Error inserting new car selling post: " . $stmt->error);
+        error_log("Error inserting new car selling post: " . $stmt_post->error);
         $_SESSION['message'] = "Error inserting new car selling post";
         return false;
     }
 
-    $inserted_id = $stmt->insert_id;
-    $stmt->close();
+    $inserted_id = $stmt_post->insert_id;
+    $stmt_post->close();
     return $inserted_id;
 }
+
+
+
+function are_valid_pictures($pictures)
+{
+    if (!is_uploaded_file($pictures["tmp_name"]) || !in_array($pictures["type"], ["image/png", "image/jpeg", "image/jpg"]) || !isset($pictures["tmp_name"])) {
+        return false;
+    }
+    return true;
+}
+
+
+function move_pictures_to_upload_directory($pictures)
+{
+    $target_dir = "../images/uploads/";
+    $dir = "images/uploads/";
+    $images_path = array();
+    foreach ($pictures["tmp_name"] as $index => $tmp_name) {
+        $target_file = $target_dir . basename($pictures["name"][$index]);
+        $target = $dir . basename($pictures["name"][$index]);
+        if (!move_uploaded_file($tmp_name, $target_file)) {
+            error_log("Error uploading file");
+            return false;
+        }
+        $images_path[] = $target;
+    }
+    return $images_path;
+}
+
+function insert_images($post_id, $targets)
+{
+    global $conn;
+    $order = 1;
+    foreach ($targets as $path) {
+        $sql = "INSERT INTO images (post_id, image_order, url) VALUES ('$post_id', '$order', '$path')";
+        if (!mysqli_query($conn, $sql)) {
+            error_log("Error inserting image: " . mysqli_error($conn));
+            return false;
+        }
+        $order++;
+    }
+    return true;
+}
+
+
 
 
 function logout()
@@ -64,14 +109,11 @@ function logout()
 
 function validate_inputs($email, $password)
 {
-
-
     if (empty($email)) {
         $_SESSION['message'] = "Email is required";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['message'] = "Invalid email format";
     }
-
     if (empty($password)) {
         $_SESSION['message'] = "Password is required";
     }
@@ -94,7 +136,7 @@ function login($email, $password)
         $stored_password = $row["password"];
 
         if (password_verify($password, $stored_password)) {
-            $_SESSION["user_id"] = $row["id"];
+            $_SESSION["user_id"] = $row["user_id"];
             $_SESSION["firstname"] = $row["firstname"];
             header("Location: ../index.php");
             exit;
@@ -140,10 +182,6 @@ function insert_new_user($firstname, $lastname, $email, $hashed_password, $numbe
 function check_for_existing_user($email)
 {
     global $conn;
-    // Validate email input
-    if (empty($email)) {
-        throw new InvalidArgumentException("Email cannot be empty");
-    }
 
     $sql = "SELECT * FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
@@ -240,7 +278,45 @@ function display_errors($errors)
     }
 }
 
-function generatePaginationLink($page, $current_page) {
+function generatePaginationLink($page, $current_page)
+{
     $class = ($page == $current_page) ? 'active' : '';
     return "<li class='page-item $class'><a class='page-link' href='all_posts.php?page=$page'>$page</a></li>";
+}
+
+function addFavourite($user_id, $post_id)
+{
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO favourites (user_id, post_id) VALUES (?, ?)");
+    $stmt->bind_param("ii", $user_id, $post_id);
+    $success = $stmt->execute();
+    $stmt->close();
+    return $success;
+}
+
+
+// Function to fetch models based on selected brand
+function get_models()
+{
+    $brand_id = $_POST["brand_id"];
+    // Connect to the database
+    global $conn;
+    // Query the database to get the list of models that belong to the selected brand
+    $sql = "SELECT model_id, model_name from model WHERE brand_id='$brand_id' GROUP BY model_name order by model_name asc";
+    $result = mysqli_query($conn, $sql);
+
+    // Create an HTML string that contains the list of models
+    $models_html = "";
+    while ($row = mysqli_fetch_assoc($result)) {
+        $model_name = $row["model_name"];
+        $model_id = $row["model_id"];
+        $models_html .= "<option value='" . $model_id . "'>" . $model_name . "</option>";
+    }
+    // Return the HTML string as the response
+    echo $models_html;
+}
+
+// Call the appropriate function based on the "action" parameter
+if ($_REQUEST["action"] == "getModels") {
+    get_models();
 }

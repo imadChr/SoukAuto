@@ -22,6 +22,7 @@
     </div>
     <p class="Loggin">Signing up...</p>
   </header>
+
   <section class="main">
     <h1>Please create your account</h1>
     <?php
@@ -55,7 +56,7 @@
           <input type="tel" name="PhoneNumber" id="PhoneNumber" required />
         </div>
         <p>
-          By clicking "Create account" i agree to SoukAuto TOS & Privacy
+          By clicking "Create account" You agree to SoukAuto TOS & Privacy
           Policy.
         </p>
         <div>
