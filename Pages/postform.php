@@ -1,70 +1,58 @@
 <?php
-session_start();
+require_once "../utility/functions.php";
+require_once "../utility/db_connection.php";
 if (!isset($_SESSION['user_id'])) {
     // Redirect the user to the login page
     header('Location: ../pages/login.php');
-    exit;
+    exit();
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- basic -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <!-- site metas -->
-    <title>PostAD</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- style css -->
-    <link rel="stylesheet" href="../css/postform.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../css/postform.css"> -->
+    <title>Post Your AD</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body class="main-layout">
+<body>
     <header>
-        <!-- header inner -->
-        <div class="header">
-            <div class="logo">
-                <a href="../index.php">
-                    <p class="Souk">Souk</p>
-                    <p class="Auto">Auto</p>
-                </a>
-            </div>
-        </div>
-        <div class="Posting">
-            <p class="PostingAd">Posting An AD....!</p>
-        </div>
+        <h1>Post your car</h1>
     </header>
-    <div class="decor">
-        <img src="../images/mazda.png" />
-    </div>
-    <div class="content">
-        <?php if (isset($_SESSION['message'])) {
-            echo '<h5 style="color:red;">' . $_SESSION['message'] . '</h5>';
-            unset($_SESSION['message']);
-        } ?>
 
-        <form class="form" method="POST" action="..\utility\create_post.php" enctype="multipart/form-data">
-            <legend class="formtitle">Post your AD!</legend>
-            <label for="img" class="img">Upload Photos</label>
-            <input type="file" class="img2" accept="image/*" name="picture" multiple required>
-            <label for="name" class="name">Name:</label>
-            <input type="text" class="name2" placeholder="Name of Your Car" name="name" id="name" required>
-            <label for="year" class="year">Year:</label>
-            <input type="number" id="year" min="1950" max="2023" class="year2" placeholder="Year of Your Car" name="year" required>
-            <label for="price" class="price">Price:</label>
-            <input type="number" class="price2" placeholder="Price of Your Car" name="price" id="price" required>
-            <label for="region" class="region">Region:</label>
-            <label for="description" class="desc">Description:</label>
-            <input type="text" class="desc2" placeholder="description of Your Car" name="description" id="description" required>
-            <label for="region" class="region">Region:</label>
-            <select id="region" class="region2" name="region">
+    <?php if (isset($_SESSION['message'])) {
+        echo '<h5 style="color:red;">' . $_SESSION['message'] . '</h5>';
+        unset($_SESSION['message']);
+    } ?>
+
+    <form method="POST" action="..\utility\create_post.php" enctype="multipart/form-data">
+        <section>
+            <label for="brand">Brand:</label>
+            <select id="brand" name="brand_id" required>
+                <option value="">Select a brand</option>
+                <?php
+                // Retrieve the list of brands from the database
+                $sql = "SELECT * FROM brand ORDER BY brand";
+                $result = $conn->query($sql);
+                // Output each brand as an option in the select input
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . $row['brand_id'] . '">' . $row['brand'] . '</option>';
+                }
+                ?>
+            </select>
+
+            <label for="model">Model:</label>
+            <select id="select_model" name="model_id" required>
+                <option value="" disabled>Select a brand first</option>
+            </select>
+
+            <label for="wilaya">Wilaya:</label>
+            <select id="wilaya" name="wilaya">
                 <option value="">Select a wilaya</option>
                 <option value="Adrar">Adrar</option>
                 <option value="Chlef">Chlef</option>
@@ -115,11 +103,127 @@ if (!isset($_SESSION['user_id'])) {
                 <option value="Ghardaïa">Ghardaïa</option>
                 <option value="Relizane">Relizane</option>
             </select>
+            <label for="fuel">Fuel Type:</label>
+            <select name="fuel" id="fuel">
+                <option value="">Select fuel type</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Essence">Essence</option>
+                <option value="GPL">GPL</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Electrique">Electrique</option>
+            </select>
+            <label for="title">Title:</label>
+            <input type="text" name="title" placeholder="Enter title" required>
+            <label for="description">Description:</label>
+            <input type="text" name="description" placeholder="Enter description" required>
+            <label for="year">Year:</label>
+            <input type="number" id="year" min="1950" max="2023" placeholder="Year of Your Car" name="year" required>
+            <label for="price">Price:</label>
+            <input type="number" name="price" placeholder="Enter price">
+            <label for="mileage">Mileage:</label>
+            <input type="number" name="mileage" placeholder="Mileage" required>
+            <label for="picture">Upload pictures:</label>
+            <input type="file" name="pictures[]" id="picture" accept="image/*" multiple required>
 
-            <button type="submit" class="post">Post</button>
 
-        </form>
-    </div>
+        </section>
+        <button type="submit" class="btn">Submit</button>
+    </form>
+    <!-- brand(select),model(select),fuel(select),wilaya(select),title,description,year,price,upload file,mileage -->
+    <style>
+        body {
+            font-family: "nasalization", sans-serif;
+        }
+
+        header {
+            position: fixed;
+            top: 0px;
+            width: 100%;
+            left: 0;
+            height: 60px;
+            background-color: #D9D9D9;
+
+            border-bottom: 15px solid #205375;
+        }
+
+        input::placeholder {
+            font-size: 15px;
+            color: #999;
+        }
+
+        section label {
+            font-size: 20px;
+            font-weight: bold;
+            color: #205375;
+            margin-left: 10px;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 30px;
+            position: relative;
+            top: -15px;
+            left: 8px;
+        }
+
+        section {
+            position: absolute;
+            top: 75px;
+            height: 600px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+
+        section input,
+        section select {
+            width: 23%;
+            background-color: #EFEFEF;
+            height: 45px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: none;
+        }
+
+
+        .btn {
+            width: 250px;
+            height: 40px;
+            position: absolute;
+            border-radius: 12px;
+            top: 600px;
+            left: 39%;
+            background-color: #ED6C15;
+
+        }
+    </style>
 </body>
+<script>
+    // Function to fetch models based on selected brand
+    function getModels(brand_id) {
+        // Make an AJAX request to fetch the models from the database
+        $.ajax({
+            type: "POST",
+            url: "../utility/functions.php?action=getModels",
+            data: {
+                brand_id: brand_id,
+            },
+            success: function(models) {
+                console.log("Response from getModels:", models);
+                // Populate the "Select Model" dropdown menu with the retrieved models
+                $("#select_model").html(models);
+            }
+        });
+    }
+
+    // Call the getModels function when the user selects a brand
+    $("#brand").change(function() {
+        var brand_id = $(this).val();
+        if (brand_id !== "") {
+            getModels(brand_id);
+        }
+    });
+</script>
 
 </html>
