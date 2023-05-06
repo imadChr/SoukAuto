@@ -63,7 +63,7 @@
 
   CREATE TABLE `countries` (
     `CountryID` int(5) NOT NULL,
-    `CountryName` varchar(20) DEFAULT NULL,
+    `CountryName` varchar(20) DEFAULT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
   INSERT INTO `countries` (`CountryID`, `CountryName`) VALUES
@@ -282,8 +282,7 @@
     ADD CONSTRAINT `fk_brand_id_car` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_model_id_car` FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-  ALTER TABLE `countries`
-    ADD CONSTRAINT `country_continent_id_fk` FOREIGN KEY (`Continent`) REFERENCES `continents` (`ContID`);
+
 
   ALTER TABLE `images`
     ADD CONSTRAINT `fk_post_id_image` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`);
