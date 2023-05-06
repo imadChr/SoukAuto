@@ -20,11 +20,21 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" 
         rel="stylesheet">
         <!-- Iconbox -->
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <link
         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
         rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" 
         rel="stylesheet" />
+        <script src="https://use.fontawesome.com/72b693e5a2.js"></script>
+        <!-- date picker -->
+        <script src="
+        https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js
+        "></script>
+        <link href="
+        https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css
+        " rel="stylesheet">
         <!-- style css -->
         <link rel="stylesheet" href="../css/all_posts.css">
     </head>
@@ -37,7 +47,7 @@
                 <img src="../images/logo.png" class="logo"><a class="navbar-brand" href="../index.php"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -47,18 +57,19 @@
                                 <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             favorites
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> <!--add number of cars in favorite-->
                         </button>
                     </form>
                 </div>
             </div>
         </nav>
-        <!-- Header-->
+
+        <!-- Header -->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
@@ -67,313 +78,124 @@
                 </div>
             </div>
         </header>
+
         <!--Filter nav-->
-        <div class="pt-4 pb-4">
-            <div class="container pjAcFormFilter cms-e-section" >
-                <form action="all_posts.html" data-id="frmCRLSearch" method="get" accept-charset="utf-8">
-                        <input type="hidden" name="listing_search" value="1">
-                                    <input id="pjAcSearchCarType" type="hidden" name="car_type" value="new">
-                                        <input type="hidden" id="pjAcSearchYearFrom" name="year_from">
-                        <input type="hidden" id="pjAcSearchYearTo" name="year_to">
-                                        <input type="hidden" id="pjAcSearchMileageFrom" name="mileage_from">
-                        <input type="hidden" id="pjAcSearchMileageTo" name="mileage_to">
-                                        <input type="hidden" data-id="pjAcSearchPriceFrom" name="price_from">
-                        <input type="hidden" data-id="pjAcSearchPriceTo" name="price_to">
-                                        <input type="hidden" id="pjAcSearchPowerFrom" name="power_from">
-                        <input type="hidden" id="pjAcSearchPowerTo" name="power_to">
-                                        <input type="hidden" id="pjAcSearchEngineFrom" name="engine_from">
-                        <input type="hidden" id="pjAcSearchEngineTo" name="engine_to">
-                                    <div class="row">
-                                            <div class="col-xl-3 col-md-6">
-                                <div class="form-floating mb-3">
-                                    <select name="car_type" class="form-select">
-                                        <option value="">All</option>
-                                        <option value="new">New vehicle</option>
-                                        <option value="used">Used vehicle</option>
-                                    </select>
-            
-                                    <label><span class="wc-editable" data-pk="front_label_used_new" data-type="text">Used/New</span>:</label>
-                                </div>
-                            </div>
-                                                        <div class="col-xl-3 col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <select name="feature_type_id" class="form-select">
-                                                <option value="">--All --</option>
-                                                <option value="7">Cabrio/Roadster</option><option value="3">Estate Car</option><option value="1">Limousine</option><option value="5">Off-road</option><option value="9">Other</option><option value="2">Small Car</option><option value="8">Sports car/Coupe</option><option value="4">Van/Minibus</option><option value="6">Vehicle/Pickup Truck</option>									</select>
-        
-                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_type" data-type="text">Vehicle Type</span>:</label>
-                                        </div>
-                                    </div>
-                                                        <div class="col-xl-3 col-md-6">
-                                <div class="form-floating mb-3">
-                                    <select class="form-select pjAcSearchMake" name="make_id">
-                                        <option value="">-- All --</option>
-                                        <option value="8">Aston Mart</option><option value="9">Audi</option><option value="18">Bentley</option><option value="23">BMW</option><option value="29">Cadillac</option><option value="37">Chevrolet</option><option value="39">Citroen</option><option value="40">Dacia</option><option value="48">Dodge</option><option value="53">Ferrari</option><option value="55">Ford</option><option value="63">GMC</option><option value="74">Hyundai</option><option value="82">Jaguar</option><option value="91">Land Rover</option><option value="93">Lexus</option><option value="105">Mazda</option><option value="108">Mercedes-Benz</option><option value="119">Nissan</option><option value="129">Peugeot</option><option value="143">Renault</option><option value="152">Seat</option><option value="160">Subaru</option><option value="167">Toyota</option><option value="178">Volvo</option><option value="179">VW</option>							</select>
-            
-                                    <label><span class="wc-editable" data-pk="front_label_make" data-type="text">Make</span>:</label>
-                                </div>
-                            </div>
-                                                <div class="col-xl-3 col-md-6">
-                                <div class="form-floating mb-3 pjAcSearchModel">
-                                    <select class="form-select">
-                                        <option value="">-- All --</option>
-                                    </select>
-            
-                                    <label><span class="wc-editable" data-pk="front_label_model" data-type="text">Model</span>:</label>
-                                </div>
-                            </div>
-                                        </div>
-        
+        <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+
+                <!-- Filter Toggle Button -->
+                <div class="d-flex justify-content my-3 ml-3">
+                  <button type="button" class="btn btn-outline-primary toggle-filter-btn">
+                    <ion-icon name="funnel-outline"></ion-icon>
+                  </button>
+                </div>
+
+                <!-- Filter Form -->
+                <form class="filter-form d-none">
                     <div class="row">
-                                            <div class="col-range col-50">
-                                <div class="d-flex justify-content-between">
-                                    <small><span class="wc-editable" data-pk="front_label_price" data-type="text">Price</span>:</small>
-        
-                                    <small data-id="pjAcPriceLabel" data-currency="USD"></small>
-                                </div>
-            
-                                <div class="range mb-3">
-                                    <div data-id="pjAcPriceSlider"></div>
-            
-                                    <div class="d-flex justify-content-between">
-                                        <small>$ 2,000</small>
-                                        
-                                        <small>$ 239,000</small>
-                                    </div>
-                                </div>
+                        <div class="col-md-4 mb-3">
+                            <!-- Brand -->
+                            <label for="brand">Brand:</label>
+                            <select class="form-control" id="brand">
+                                <option>Toyota</option>
+                                <option>Honda</option>
+                                <option>Nissan</option>
+                                <option>Hyundai</option>
+                                <option>Kia</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <!-- Wilaya -->
+                            <label for="wilaya">Wilaya:</label>
+                            <select class="form-control" id="wilaya">
+                                <option>Algiers</option>
+                                <option>Oran</option>
+                                <option>Constantine</option>
+                                <option>Batna</option>
+                                <option>Setif</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <!-- Country -->
+                            <label for="country">Country:</label>
+                            <select class="form-control" id="country">
+                                <option>Japan</option>
+                                <option>Korea</option>
+                                <option>Germany</option>
+                                <option>USA</option>
+                                <option>France</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Price range -->
+                        <div class="col-md-4 mb-3">
+                            <label for="price ">Price:</label>
+                            <input type="range" class="form-range" id="price" step="100000"  min="1000000" max="10000000">
+                            <div class="price-range-values"></div>
+                            <div class="d-flex justify-content-between">
+                                <span>1,000,000</span>
+                                <span>10,000,000</span>
                             </div>
-                                                <div class="col-range col-50">
-                                <div class="d-flex justify-content-between">
-                                    <small><span class="wc-editable" data-pk="front_label_first_registration" data-type="text">First registration</span>:</small>
-        
-                                    <small id="pjAcRegistrationLabel"></small>
-                                </div>
-        
-                                <div class="range mb-3">
-                                    <div id="pjAcRegistrationSlider"></div>
-            
-                                    <div class="d-flex justify-content-between">
-                                        <small>1995</small>
-                                        <small>2024</small>
-                                    </div>
-                                </div>
+                            <input type="range" class="form-range" id="price2" step="100000"  min="1000000" max="10000000">
+                        </div>
+                        <!-- Mileage Range -->
+                        <div class="col-md-4 mb-3">
+                            <label for="mileage">Mileage:</label>
+                            <input type="range" class="form-range" id="mileage" step="5000" min="0" max="500000">
+                            <div class="d-flex justify-content-between">
+                                <span>0</span>
+                                <span>500,000</span>
                             </div>
-                                                <div class="col-range col-50">
-                                <div class="d-flex justify-content-between">
-                                    <small><span class="wc-editable" data-pk="front_label_mileage" data-type="text">Mileage</span>:</small>
-        
-                                    <small id="pjAcMileageLabel" data-mileage="km"></small>
-                                </div>
-            
-                                <div class="range mb-3">
-                                    <div id="pjAcMileageSlider"></div>
-            
-                                    <div class="d-flex justify-content-between">
-                                        <small>0 km</small>
-                                        <small>200000 km</small>
-                                    </div>
-                                </div>
-                            </div>
-                                                <div class="col-range col-50">
-                                <div class="d-flex justify-content-between">
-                                    <small><span class="wc-editable" data-pk="front_label_engine" data-type="text">Engine size</span>:</small>
-        
-                                    <small id="pjAcEngineLabel" data-engine="cc"></small>
-                                </div>
-            
-                                <div class="range mb-3">
-                                    <div id="pjAcEngineSlider"></div>
-            
-                                    <div class="d-flex justify-content-between">
-                                        <small>1000 cc</small>
-                                        <small>6200 cc</small>
-                                    </div>
-                                </div>
-                            </div>
-                                                <div class="col-range col-50">
-                                <div class="d-flex justify-content-between">
-                                    <small><span class="wc-editable" data-pk="front_label_power" data-type="text">Power</span>:</small>
-        
-                                    <small id="pjAcPowerLabel" data-power="hp"></small>
-                                </div>
-        
-                                <div class="range mb-3">
-                                    <div id="pjAcPowerSlider"></div>
-            
-                                    <div class="d-flex justify-content-between">
-                                        <small>80 hp</small>
-                                        <small>670 hp</small>
-                                    </div>
-                                </div>
-                            </div>
-                                                        <div class="col-xl-3 col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <select class="form-select" name="feature_fuel_id">
-                                                <option value="">--All --</option>
-                                                <option value="10">Diesel</option><option value="14">Electric</option><option value="15">Ethanol</option><option value="12">Gas</option><option value="13">Hybrid</option><option value="16">Hydrogenium</option><option value="17">Other</option><option value="11">Petrol</option>									</select>
-        
-                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_fuel" data-type="text">Fuel</span>:</label>
-                                        </div>
-                                    </div>
-                                                                <div class="col-xl-3 col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <select class="form-select" name="feature_gearbox_id">
-                                                <option value="">--All --</option>
-                                                <option value="19">Automatic</option><option value="18">Manual</option><option value="20">Semi-automatic</option>									</select>
-        
-                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_gearbox" data-type="text">Gearbox</span>:</label>
-                                        </div>
-                                    </div>
-                                                                <div class="col-xl-3 col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <select class="form-select" name="feature_doors_id">
-                                                <option value="">--All --</option>
-                                                <option value="29">2/3</option><option value="30">4/5</option><option value="31">Other</option>									</select>
-        
-                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_doors" data-type="text">Doors</span>:</label>
-                                        </div>
-                                    </div>
-                                                                <div class="col-xl-3 col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <select name="feature_seats_id" class="form-select">
-                                                <option value="">--All --</option>
-                                                <option value="21">2</option><option value="22">2+1</option><option value="23">3</option><option value="24">4</option><option value="25">4+1</option><option value="26">5</option><option value="27">5+1</option><option value="28">More</option>									</select>
-        
-                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_seats" data-type="text">Number of seats</span>:</label>
-                                        </div>
-                                    </div>
-                                                                <div class="col-xl-3 col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <select name="feature_colors_id" class="form-select">
-                                                <option value="">--All --</option>
-                                                <option value="37">Beige</option><option value="38">Black</option><option value="39">Blue</option><option value="40">Brown</option><option value="41">Gold</option><option value="42">Green</option><option value="43">Grey</option><option value="44">Orange</option><option value="45">Purple</option><option value="46">Red</option><option value="47">Silver</option><option value="48">White</option><option value="49">Yellow</option>									</select>
-        
-                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_colors" data-type="text">Color</span>:</label>
-                                        </div>
-                                    </div>
-                                                                <div class="col-xl-3 col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <select name="feature_class_id" class="form-select">
-                                                <option value="">--All --</option>
-                                                <option value="32">EURO1</option><option value="33">EURO2</option><option value="34">EURO3</option><option value="35">EURO4</option><option value="36">EURO5</option>									</select>
-        
-                                            <label><span class="wc-editable" data-pk="plugin_cardealer_feature_types_ARRAY_class" data-type="text">Emission Class</span>:</label>
-                                        </div>
-                                    </div>
-                                                        <div class="col-xl-3 col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="text" name="listing_refid" class="form-control" placeholder="Reference ID:">
-            
-                                    <label><span class="wc-editable" data-pk="front_label_refid" data-type="text">Reference ID</span>:</label>
-                                </div>
-                            </div>
-                            
-                                            <div class="col-xl-3 col-lg-6 col-md-12">
-                                                        <button class="btn btn-primary w-100 hvr-float" type="submit"><span class="wc-editable" data-pk="front_button_search" data-type="text">Search</span></button>
-                            </div>
-                                    </div>
-                    
-                    
+                            <input type="range" class="form-range" id="mileage2" step="5000" min="0" max="500000">
+                        </div>
+                        <!-- year Range -->
+                        <div class="col-md-4 mb-3">
+                            <label for="year">Year:</label>
+                            <input type="text" class="form-control datepicker-year" class="year" name="year" placeholder="From" min="1970" max="2023">
+                            <br>
+                            <input type="text" class="form-control datepicker-year" class="year" name="year" placeholder="To" min="1970" max="2023">
+                        </div>
+                    </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                  </div>
                 </form>
+              </div>
             </div>
-        </div>
+          </div>
+
         <!--shopping part-->
         <div class="container cards_landscape_wrap-2 pb-5">
             <div class="row">
                 <!--prod 1-->
                 <div class="col-md-6 col-lg-3">
-                    <div class="card mb-4"> 
-                        <!-- RENT/SELL badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">RENT</div>
-                        <!-- Product image-->
-                        <img class="card-img-top " src="../images/car.png" alt="Card image cap">
-                        <!--card body-->
-                        <div class="card-body">
-                            <!-- Product details-->
-                            <h5 class="card-title">[year] [car name]</h5>
-                            <p class="card-text">[car description]</p>
-                            <p class="card-text"><small class="text-muted">[date of post] , [wilaya] </small></p>
-                            <!--icons-->
-                            <div class="icons d-flex justify-content-between align-items-center">
-                                <div class="circle-icon bg-danger rounded-circle d-flex align-items-center justify-content-center" title="Add to favorites" data-toggle="tooltip" data-placement="right">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <div class="circle-icon bg-info rounded-circle d-flex align-items-center justify-content-center" title="Show details" data-toggle="tooltip" data-placement="right">
-                                    <i class="bi bi-info-circle"></i>
-                                </div>
-                                <div class="circle-icon bg-success rounded-circle d-flex align-items-center justify-content-center" title="Contact" data-toggle="tooltip" data-placement="right">
-                                    <i class="bi bi-telephone"></i>
-                                </div>                                
+                    <div class="container">
+                        <div class="card mb-4"> 
+                            <!-- RENT/SELL badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">RENT</div>
+                            <!-- Product image-->
+                            <img class="card-img-top " src="../images/car.png" alt="Card image cap">
+                            <!--card body-->
+                            <div class="card-body">
+                                <!-- Product details-->
+                                <h5 class="card-title">[year] [car name]</h5>
+                                <p class="card-text">[car description]</p>
+                                <p class="card-text"><small class="text-muted">[date of post] , [wilaya] </small></p>
+                                <!--icons-->
+                                <button class="e-button btn-sm expand-btn" role="button">
+                                    <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Add To Favorites</span> 
+                                </button>
+                                  
+                                <button class="e-button btn-sm expand-btn" role="button">
+                                    <span class="e-button-text"><ion-icon name="person-outline"></ion-icon> Contact Seller</span> 
+                                </button>
+                                  
+                                <button class="e-button btn-sm expand-btn" role="button">
+                                    <span class="e-button-text"><ion-icon name="add-outline"></ion-icon> Show more</span> 
+                                </button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--prod 2-->
-                <div class="col-md-6 col-lg-3 ">
-                    <div class="card mb-4">
-                        <!-- RENT/SELL badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">RENT</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="../images/mazda.png" alt="Card image cap">
-                        <!--card body-->
-                        <div class="card-body">
-                            <!-- Product details-->
-                            <h5 class="card-title">[year] [car name]</h5>
-                            <p class="card-text">[car description]</p>
-                            <p class="card-text"><small class="text-muted">[date of post] , [wilaya] </small></p>
-
-                        </div>
-                    </div>
-                </div>
-                <!--prod 3-->
-                <div class="col-md-6 col-lg-3">
-                    <div class="card mb-4">
-                        <!-- RENT/SELL badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">SALE</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="../images/mazda.png" alt="Card image cap">
-                        <!--card body-->
-                        <div class="card-body">
-                            <!-- Product details-->
-                            <h5 class="card-title">[year] [car name]</h5>
-                            <p class="card-text">[car description]</p>
-                            <p class="card-text"><small class="text-muted">[date of post] , [wilaya] </small></p>
-
-                        </div>
-                    </div>
-                </div>
-                <!--prod 4-->
-                <div class="col-md-6 col-lg-3">
-                    <div class="card mb-4">
-                        <!-- RENT/SELL badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">RENT</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="../images/car.png" alt="Card image cap">
-                        <!--card body-->
-                        <div class="card-body">
-                            <!-- Product details-->
-                            <h5 class="card-title">[year] [car name]</h5>
-                            <p class="card-text">[car description]</p>
-                            <p class="card-text"><small class="text-muted">[date of post] , [wilaya] </small></p>
-
-                        </div>
-                    </div>
-                </div>
-                <!--prod 5-->
-                <div class="col-md-6 col-lg-3">
-                    <div class="card mb-4">
-                        <!-- RENT/SELL badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">SALE</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="../images/mazda.png" alt="Card image cap">
-                        <!--card body-->
-                        <div class="card-body">
-                            <!-- Product details-->
-                            <h5 class="card-title">[year] [car name]</h5>
-                            <p class="card-text">[car description]</p>
-                            <p class="card-text"><small class="text-muted">[date of post] , [wilaya] </small></p>
-
                         </div>
                     </div>
                 </div>
@@ -409,20 +231,44 @@
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             })
-            $(document).ready(function(){
-                $(function() {
-                    $('input[name="daterange"]').daterangepicker({
-                    "startDate": "1970",
-                    opens: 'center',
-                    locale: {
-                        format: 'YYYY'
-                    }
-                    });
-                });
+
+
+            //item in favorite list (change later)
+            const button = document.querySelector('.e-button');
+            let isFavorite = false;
+
+            button.addEventListener('click', () => {
+            const icon = button.querySelector('ion-icon');
+            isFavorite = !isFavorite;
+            if (isFavorite) {
+                icon.setAttribute('name', 'heart-dislike-outline');
+            } else {
+                icon.setAttribute('name', 'heart-outline');
+            }
             });
 
+            //togle filter button
+            $(document).ready(function(){
+                $(".toggle-filter-btn").click(function(){
+                $(".filter-form").toggleClass("d-none");
+                });
+            });
             
-        </script> 
-           
+            //date picker
+            $(function() {
+            $('.datepicker-year').datepicker({
+                format: 'yyyy',
+                viewMode: 'years',
+                minViewMode: 'years',
+                startDate: '1970',
+                endDate: '2023'
+            });
+            
+            $('#year').on('changeDate', function() {
+                const year = $(this).datepicker('getDate').getFullYear();
+                console.log(year);
+            });
+            });
+        </script>     
     </body>
 </html>
