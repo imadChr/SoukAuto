@@ -39,6 +39,10 @@ if (!$images_path) {
 if (!insert_images($post_id, $images_path)) {
     // Display error message or redirect to an error page
     die("Error inserting images to the database");
+    $_SESSION['message'] = 'Error: Unable to create new record';
+    $_SESSION['message_type'] = 'error';
+    header("Location: ../postform.php");
+    exit();
 }
 
 // Redirect to the post page
