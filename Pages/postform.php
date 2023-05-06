@@ -22,7 +22,8 @@ if (!isset($_SESSION['user_id'])) {
 
 <body>
     <header>
-        <h1>Post your car</h1>
+        <h1 class="post">Post your car</h1>
+        <h1 class="logo">Souk auto</h1>
     </header>
 
     <?php if (isset($_SESSION['message'])) {
@@ -32,99 +33,116 @@ if (!isset($_SESSION['user_id'])) {
 
     <form method="POST" action="..\utility\create_post.php" enctype="multipart/form-data">
         <section>
-            <label for="brand">Brand:</label>
-            <select id="brand" name="brand_id" required>
-                <option value="">Select a brand</option>
-                <?php
-                // Retrieve the list of brands from the database
-                $sql = "SELECT * FROM brand ORDER BY brand";
-                $result = $conn->query($sql);
-                // Output each brand as an option in the select input
-                while ($row = $result->fetch_assoc()) {
-                    echo '<option value="' . $row['brand_id'] . '">' . $row['brand'] . '</option>';
-                }
-                ?>
-            </select>
-
+            <div>
+                <label for="brand">Brand:</label>
+                <select id="brand" name="brand_id" required>
+                    <option value="">Select a brand</option>
+                    <?php
+                    // Retrieve the list of brands from the database
+                    $sql = "SELECT * FROM brand ORDER BY brand";
+                    $result = $conn->query($sql);
+                    // Output each brand as an option in the select input
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<option value="' . $row['brand_id'] . '">' . $row['brand'] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <div>
             <label for="model">Model:</label>
-            <select id="select_model" name="model_id" required>
-                <option value="" disabled>Select a brand first</option>
-            </select>
-
-            <label for="wilaya">Wilaya:</label>
-            <select id="wilaya" name="wilaya">
-                <option value="">Select a wilaya</option>
-                <option value="Adrar">Adrar</option>
-                <option value="Chlef">Chlef</option>
-                <option value="Laghouat">Laghouat</option>
-                <option value="Oum El Bouaghi">Oum El Bouaghi</option>
-                <option value="Batna">Batna</option>
-                <option value="Béjaïa">Béjaïa</option>
-                <option value="Biskra">Biskra</option>
-                <option value="Béchar">Béchar</option>
-                <option value="Blida">Blida</option>
-                <option value="Bouira">Bouira</option>
-                <option value="Tamanrasset">Tamanrasset</option>
-                <option value="Tébessa">Tébessa</option>
-                <option value="Tlemcen">Tlemcen</option>
-                <option value="Tiaret">Tiaret</option>
-                <option value="Tizi Ouzou">Tizi Ouzou</option>
-                <option value="Algiers">Algiers</option>
-                <option value="Djelfa">Djelfa</option>
-                <option value="Jijel">Jijel</option>
-                <option value="Sétif">Sétif</option>
-                <option value="Saïda">Saïda</option>
-                <option value="Skikda">Skikda</option>
-                <option value="Sidi Bel Abbès">Sidi Bel Abbès</option>
-                <option value="Annaba">Annaba</option>
-                <option value="Guelma">Guelma</option>
-                <option value="Constantine">Constantine</option>
-                <option value="Médéa">Médéa</option>
-                <option value="Mostaganem">Mostaganem</option>
-                <option value="M'Sila">M'Sila</option>
-                <option value="Mascara">Mascara</option>
-                <option value="Ouargla">Ouargla</option>
-                <option value="Oran">Oran</option>
-                <option value="El Bayadh">El Bayadh</option>
-                <option value="Illizi">Illizi</option>
-                <option value="Bordj Bou Arreridj">Bordj Bou Arreridj</option>
-                <option value="Boumerdès">Boumerdès</option>
-                <option value="El Tarf">El Tarf</option>
-                <option value="Tindouf">Tindouf</option>
-                <option value="Tissemsilt">Tissemsilt</option>
-                <option value="El Oued">El Oued</option>
-                <option value="Khenchela">Khenchela</option>
-                <option value="Souk Ahras">Souk Ahras</option>
-                <option value="Tipaza">Tipaza</option>
-                <option value="Mila">Mila</option>
-                <option value="Aïn Defla">Aïn Defla</option>
-                <option value="Naâma">Naâma</option>
-                <option value="Aïn Témouchent">Aïn Témouchent</option>
-                <option value="Ghardaïa">Ghardaïa</option>
-                <option value="Relizane">Relizane</option>
-            </select>
-            <label for="fuel">Fuel Type:</label>
-            <select name="fuel" id="fuel">
-                <option value="">Select fuel type</option>
-                <option value="Diesel">Diesel</option>
-                <option value="Essence">Essence</option>
-                <option value="GPL">GPL</option>
-                <option value="Hybrid">Hybrid</option>
-                <option value="Electrique">Electrique</option>
-            </select>
-            <label for="title">Title:</label>
-            <input type="text" name="title" placeholder="Enter title" required>
-            <label for="description">Description:</label>
-            <input type="text" name="description" placeholder="Enter description" required>
-            <label for="year">Year:</label>
-            <input type="number" id="year" min="1950" max="2023" placeholder="Year of Your Car" name="year" required>
-            <label for="price">Price:</label>
-            <input type="number" name="price" placeholder="Enter price">
-            <label for="mileage">Mileage:</label>
-            <input type="number" name="mileage" placeholder="Mileage" required>
-            <label for="picture">Upload pictures:</label>
-            <input type="file" name="pictures[]" id="picture" accept="image/*" multiple required>
-
+                <select id="select_model" name="model_id" required>
+                    <option value="" disabled>Select a brand first</option>
+                </select>
+            </div>
+            <div>
+                <label for="wilaya">Wilaya:</label>
+                <select id="wilaya" name="wilaya">
+                    <option value="">Select a wilaya</option>
+                    <option value="Adrar">Adrar</option>
+                    <option value="Chlef">Chlef</option>
+                    <option value="Laghouat">Laghouat</option>
+                    <option value="Oum El Bouaghi">Oum El Bouaghi</option>
+                    <option value="Batna">Batna</option>
+                    <option value="Béjaïa">Béjaïa</option>
+                    <option value="Biskra">Biskra</option>
+                    <option value="Béchar">Béchar</option>
+                    <option value="Blida">Blida</option>
+                    <option value="Bouira">Bouira</option>
+                    <option value="Tamanrasset">Tamanrasset</option>
+                    <option value="Tébessa">Tébessa</option>
+                    <option value="Tlemcen">Tlemcen</option>
+                    <option value="Tiaret">Tiaret</option>
+                    <option value="Tizi Ouzou">Tizi Ouzou</option>
+                    <option value="Algiers">Algiers</option>
+                    <option value="Djelfa">Djelfa</option>
+                    <option value="Jijel">Jijel</option>
+                    <option value="Sétif">Sétif</option>
+                    <option value="Saïda">Saïda</option>
+                    <option value="Skikda">Skikda</option>
+                    <option value="Sidi Bel Abbès">Sidi Bel Abbès</option>
+                    <option value="Annaba">Annaba</option>
+                    <option value="Guelma">Guelma</option>
+                    <option value="Constantine">Constantine</option>
+                    <option value="Médéa">Médéa</option>
+                    <option value="Mostaganem">Mostaganem</option>
+                    <option value="M'Sila">M'Sila</option>
+                    <option value="Mascara">Mascara</option>
+                    <option value="Ouargla">Ouargla</option>
+                    <option value="Oran">Oran</option>
+                    <option value="El Bayadh">El Bayadh</option>
+                    <option value="Illizi">Illizi</option>
+                    <option value="Bordj Bou Arreridj">Bordj Bou Arreridj</option>
+                    <option value="Boumerdès">Boumerdès</option>
+                    <option value="El Tarf">El Tarf</option>
+                    <option value="Tindouf">Tindouf</option>
+                    <option value="Tissemsilt">Tissemsilt</option>
+                    <option value="El Oued">El Oued</option>
+                    <option value="Khenchela">Khenchela</option>
+                    <option value="Souk Ahras">Souk Ahras</option>
+                    <option value="Tipaza">Tipaza</option>
+                    <option value="Mila">Mila</option>
+                    <option value="Aïn Defla">Aïn Defla</option>
+                    <option value="Naâma">Naâma</option>
+                    <option value="Aïn Témouchent">Aïn Témouchent</option>
+                    <option value="Ghardaïa">Ghardaïa</option>
+                    <option value="Relizane">Relizane</option>
+                </select>
+            </div>
+            <div>
+                <label for="fuel">Fuel Type:</label>
+                <select name="fuel" id="fuel">
+                    <option value="">Select fuel type</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Essence">Essence</option>
+                    <option value="GPL">GPL</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Electrique">Electrique</option>
+                </select>
+            </div>
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" name="title" placeholder="Enter title" required>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <input type="text" name="description" placeholder="Enter description" required>
+            </div>
+            <div>
+                <label for="year">Year:</label>
+                <input type="number" id="year" min="1950" max="2023" placeholder="Year of Your Car" name="year" required>
+            </div>
+            <div>
+                <label for="price">Price:</label>
+                <input type="number" name="price" placeholder="Enter price">
+            </div>
+            <div>
+                <label for="mileage">Mileage:</label>
+                <input type="number" name="mileage" placeholder="Mileage" required>
+            </div>
+                <div>
+                    <label for="picture">Upload pictures:</label>
+                    <input type="file" name="pictures[]" id="picture" accept="image/*" multiple required>
+                </div>
 
         </section>
         <button type="submit" class="btn">Submit</button>
@@ -159,42 +177,73 @@ if (!isset($_SESSION['user_id'])) {
             text-align: left;
         }
 
-        h1 {
+        .post {
             font-size: 30px;
-            position: relative;
+            position: absolute;
             top: -15px;
-            left: 8px;
+            right: 2%;
+        }
+
+        .logo {
+            font-size: 30px;
+            position: absolute;
+            top: -15px;
+            left: 1.9%;
         }
 
         section {
             position: absolute;
-            top: 75px;
+            top: 85px;
             height: 600px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-evenly;
             width: 100%;
         }
+        
 
-        section input,
-        section select {
-            width: 23%;
-            background-color: #EFEFEF;
+        section div
+        {
+            position: relative;
+            width: 40%;
+            
             height: 45px;
             border-radius: 12px;
+           
+            border: none;
+        }
+       
+        section div label{
+            position: absolute;
+            left:18%;
+           top: -5px;
+        }
+        section input,section select
+        {
+            width: 50%;
+            background-color: #EFEFEF;
+            height: 45px;
+            position: absolute;
+            right:30%;
             margin-top: 20px;
             border: none;
         }
-
 
         .btn {
             width: 250px;
             height: 40px;
             position: absolute;
             border-radius: 12px;
-            top: 600px;
-            left: 39%;
+            top: 625px;
+            left: 40%;
             background-color: #ED6C15;
+            border:none;
+
+        }
+
+        .btn:hover
+        {
+            background-color:#205375;
 
         }
     </style>
