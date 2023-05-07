@@ -425,3 +425,100 @@ input:focus {
     left: 800px;
     top: 100px;
 }
+        body {
+            font-family: "nasalization", sans-serif;
+        }
+
+        header {
+            position: fixed;
+            z-index: 99;
+            top: 0px;
+            width: 100%;
+            left: 0;
+            height: 60px;
+            background-color: #D9D9D9;
+
+            border-bottom: 15px solid #205375;
+        }
+
+        input::placeholder {
+            font-size: 15px;
+            color: #999;
+        }
+
+        section label {
+            font-size: 20px;
+            font-weight: bold;
+            color: #205375;
+            margin-left: 10px;
+            text-align: left;
+        }
+
+        .post {
+            font-size: 30px;
+            position: absolute;
+            top: -15px;
+            right: 2%;
+        }
+
+        .logo {
+            font-size: 30px;
+            position: absolute;
+            top: -15px;
+            left: 1.9%;
+        }
+
+        section {
+            position: absolute;
+            top: 85px;
+            height: 600px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+
+
+        section div {
+            position: relative;
+            width: 40%;
+
+            height: 45px;
+            border-radius: 12px;
+
+            border: none;
+        }
+
+        section div label {
+            position: absolute;
+            left: 18%;
+            top: -5px;
+        }
+
+        section input,
+        section select {
+            width: 50%;
+            background-color: #EFEFEF;
+            height: 45px;
+            position: absolute;
+            right: 30%;
+            margin-top: 20px;
+            border: none;
+        }
+
+        .btn {
+            width: 250px;
+            height: 40px;
+            position: absolute;
+            border-radius: 12px;
+            top: 625px;
+            left: 40%;
+            background-color: #ED6C15;
+            border: none;
+
+        }
+
+        .btn:hover {
+            background-color: #205375;
+
+        }

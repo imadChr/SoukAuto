@@ -47,13 +47,6 @@ require_once 'utility/db_connection.php';
                     <p class="Auto">Auto</p>
                   </a>
                 </div>
-                <?php
-                if (isset($_SESSION['user_id'])) {
-                  echo '
-                <div class="welcome">
-                  <h3>Welcome, ' . $_SESSION['firstname'] . ' !</h3> ;
-                </div>';
-                } ?>
               </div>
             </div>
           </div>
@@ -64,18 +57,18 @@ require_once 'utility/db_connection.php';
               </button>
               <div class="collapse navbar-collapse" id="navbarsExample04">
                 <ul class="navbar-nav mr-auto">
-              
-                  
-                  
-  <?php
-    if (isset($_SESSION['user_id'])) {
-      echo '<li class="nav-item">
+
+
+
+                  <?php
+                  if (isset($_SESSION['user_id'])) {
+                    echo '<li class="nav-item">
                     <a class="nav-link" href="Pages\postform.php">Sell</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="">Rent</a>
                   </li>';
-                  echo '  <li class="nav-item">
+                    echo '  <li class="nav-item">
        <a class="nav-link dropdown-toggle" href="#" id="my-account-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $_SESSION['firstname'] . '</a>
       <ul class="dropdown-menu" aria-labelledby="my-account-menu">
         <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
@@ -84,17 +77,17 @@ require_once 'utility/db_connection.php';
         <li class="nav-item"><a class="nav-link" href="utility/logout.php">Logout</a></li>
       </ul>
       </li>';
-    } else {
-      echo '<li class="nav-item">
+                  } else {
+                    echo '<li class="nav-item">
       <a class="nav-link" href="Pages\signup.php">Sign up</a> 
       </li><br>';
-      echo'<li class="nav-item">
+                    echo '<li class="nav-item">
       <a class="nav-link" href="Pages\login.php">Login</a>
       </li>';
-    }
-  ?>
-</li>
-                  
+                  }
+                  ?>
+                  </li>
+
                 </ul>
               </div>
             </nav>
@@ -123,8 +116,8 @@ require_once 'utility/db_connection.php';
                     <?php
                     if (isset($_SESSION['message'])) { ?>
                       <h5 style="color:red;"><?php echo $_SESSION['message'] ?></h5>;
-                      <?php  unset($_SESSION['message']);
-                     } ?>
+                    <?php unset($_SESSION['message']);
+                    } ?>
                     <h1>Welcome to SoukAuto</h1>
                     <span>"You need Auto! there is SoukAuto!"</span>
                     <p>
@@ -176,18 +169,16 @@ require_once 'utility/db_connection.php';
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
             ?>
-                  <a href="Pages/post.php?id=<?php echo $row['id']; ?>">
                 <div class="col-md-6 margin_bottom">
-                  <div class="work">
-                    <figure><img src="<?php echo $row['url']; ?>" alt="#" /></figure>
-                  </div>
-                  <div class="work_text">
-                    <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
-
+                  <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
+                    <div class="work">
+                      <figure><img src="<?php echo $row['url']; ?>" height="200" width="400" alt="#" /></figure>
+                    </div>
+                    <div class="work_text">
                       <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
             <?php
               }
             } else {
@@ -207,7 +198,7 @@ require_once 'utility/db_connection.php';
 
   <!--  footer -->
   <footer id="contact">
-  <div class="socialmedia">
+    <div class="socialmedia">
       <p id="MediaLabel">Social Media</p>
       <div id="facebook">
         <i><ion-icon name="logo-facebook"></ion-icon></i>
@@ -223,8 +214,8 @@ require_once 'utility/db_connection.php';
       </div>
     </div>
     <div class="contactus">
-    <p id="ContactLabel">Contact Us</p>
-    <div id="email">
+      <p id="ContactLabel">Contact Us</p>
+      <div id="email">
         <i><ion-icon name="mail"></ion-icon></i>
         <a href="">Email</a>
       </div>
@@ -234,8 +225,8 @@ require_once 'utility/db_connection.php';
       </div>
     </div>
     <div class="aboutus">
-    <p id="AboutLabel">About Us</p>
-    <div id="TerCon">
+      <p id="AboutLabel">About Us</p>
+      <div id="TerCon">
         <a href="">Terms and Conditions</a>
       </div>
       <div id="PrivPol">

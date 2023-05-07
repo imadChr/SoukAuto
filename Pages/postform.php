@@ -18,6 +18,7 @@ if (!isset($_SESSION['user_id'])) {
     <title>Post Your AD</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../css/postform.css">
 </head>
 
 <body>
@@ -49,7 +50,7 @@ if (!isset($_SESSION['user_id'])) {
                 </select>
             </div>
             <div>
-            <label for="model">Model:</label>
+                <label for="model">Model:</label>
                 <select id="select_model" name="model_id" required>
                     <option value="" disabled>Select a brand first</option>
                 </select>
@@ -139,114 +140,16 @@ if (!isset($_SESSION['user_id'])) {
                 <label for="mileage">Mileage:</label>
                 <input type="number" name="mileage" placeholder="Mileage" required>
             </div>
-                <div>
-                    <label for="picture">Upload pictures:</label>
-                    <input type="file" name="pictures[]" id="picture" accept="image/*" multiple required>
-                </div>
+            <div>
+                <label for="picture">Upload pictures:</label>
+                <input type="file" name="pictures[]" id="picture" accept="image/*" multiple required>
+            </div>
 
         </section>
         <button type="submit" class="btn">Submit</button>
     </form>
     <!-- brand(select),model(select),fuel(select),wilaya(select),title,description,year,price,upload file,mileage -->
-    <style>
-        body {
-            font-family: "nasalization", sans-serif;
-        }
 
-        header {
-            position: fixed;
-            top: 0px;
-            width: 100%;
-            left: 0;
-            height: 60px;
-            background-color: #D9D9D9;
-
-            border-bottom: 15px solid #205375;
-        }
-
-        input::placeholder {
-            font-size: 15px;
-            color: #999;
-        }
-
-        section label {
-            font-size: 20px;
-            font-weight: bold;
-            color: #205375;
-            margin-left: 10px;
-            text-align: left;
-        }
-
-        .post {
-            font-size: 30px;
-            position: absolute;
-            top: -15px;
-            right: 2%;
-        }
-
-        .logo {
-            font-size: 30px;
-            position: absolute;
-            top: -15px;
-            left: 1.9%;
-        }
-
-        section {
-            position: absolute;
-            top: 85px;
-            height: 600px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-            width: 100%;
-        }
-        
-
-        section div
-        {
-            position: relative;
-            width: 40%;
-            
-            height: 45px;
-            border-radius: 12px;
-           
-            border: none;
-        }
-       
-        section div label{
-            position: absolute;
-            left:18%;
-           top: -5px;
-        }
-        section input,section select
-        {
-            width: 50%;
-            background-color: #EFEFEF;
-            height: 45px;
-            position: absolute;
-            right:30%;
-            margin-top: 20px;
-            border: none;
-        }
-
-        .btn {
-            width: 250px;
-            height: 40px;
-            position: absolute;
-            border-radius: 12px;
-            top: 625px;
-            left: 40%;
-            background-color: #ED6C15;
-            border:none;
-
-        }
-
-        .btn:hover
-        {
-            background-color:#205375;
-
-        }
-    </style>
 </body>
 <script>
     // Function to fetch models based on selected brand
