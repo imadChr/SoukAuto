@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "db_connection.php";
-
+$user_id = $_SESSION['user_id'];
 function add_car($brand_id, $model_id, $fuel, $year, $mileage)
 {
     global $conn;
@@ -319,4 +319,30 @@ function get_models()
 // Call the appropriate function based on the "action" parameter
 if ($_REQUEST["action"] == "getModels") {
     get_models();
+}
+if ($_REQUEST["action"] == "addtofavorites") {
+    addToFavorites($_POST["post_id"]);
+}
+
+function addToFavorites($post_id)
+{
+    $user_id = $_SESSION['user_id'];
+    global $conn;
+    // check if the post is already in the user's favorites
+    $sql = "SELECT * FROM favorites WHERE post_id = $post_id AND user_id = $user_id";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) == 0) {
+        // add the post to the user's favorites
+        $sql = "INSERT INTO favorites (post_id, user_id) VALUES ($post_id, $user_id)";
+        mysqli_query($conn, $sql);
+
+        echo 'added';
+    } else {
+        // remove the post from the user's favorites
+        $sql = "DELETE FROM favorites WHERE post_id = $post_id AND user_id = $user_id";
+        mysqli_query($conn, $sql);
+
+        echo 'removed';
+    }
 }

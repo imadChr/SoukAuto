@@ -657,7 +657,7 @@ header .container-fluid {
     color: #ED6C15;
 }
 
-.work:hover img {
+.work figure:hover {
     opacity: 0.5;
 }
 
@@ -666,7 +666,8 @@ header .container-fluid {
 }
 
 .work figure img {
-    width: 100%;
+    width: 400px;
+    height: 200px;
 }
 
 .work_text {
