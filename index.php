@@ -72,21 +72,25 @@ require_once 'utility/db_connection.php';
        <a class="nav-link dropdown-toggle" href="#" id="my-account-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $_SESSION['firstname'] . '</a>
       <ul class="dropdown-menu" aria-labelledby="my-account-menu">
         <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
+        <li class="nav-item">
         <form method="post" action="Pages/all_posts.php">
         <input type="hidden" name="action" value="myposts">
-        <button type="submit">
-        <li class="nav-item">My posts</li>
+        <button type="submit" class="nav-link">
+        My posts
         </button>
         </form>
+        </li>
+        <li class="nav-item">
         <form method="post" action="Pages/all_posts.php">
         <input type="hidden" name="action" value="favorites">
-        <button type="submit">
-        <li class="nav-item">My Favorites</li>
+        <button type="submit" class="nav-link">
+        My Favorites
         </button>
         </form>  
+        </li>
         <li class="nav-item"><a class="nav-link" href="utility/logout.php">Logout</a></li>
       </ul>
-      </li>';
+      ';
                   } else {
                     echo '<li class="nav-item">
       <a class="nav-link" href="Pages\signup.php">Sign up</a> 
@@ -148,22 +152,29 @@ require_once 'utility/db_connection.php';
         </div>
       </div>
     </div>
+
+
+
   </section>
+  <form method="post" action="pages/all_posts.php" class="search">
+    <input type="hidden" name="action" value="search">
+    <input type="text" name="keyword" placeholder="Search..." class="search-filter">
+    <ion-icon name="search-sharp" class="search-logo"></ion-icon>
+  </form>
   <!-- end banner -->
   <!-- search form -->
-  <form action="" class="search">
-    <ion-icon name="search-sharp" class="search-logo"></ion-icon>
-    <input type="text" class="search-filter" placeholder="Search" />
-  </form>
+
   <!-- end search form -->
   <!-- wedo  section -->
+
+
   <div class="wedo">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="titlepage">
-            <p>Explore</p>
             <a href="#posts">
+              <p>Explore</p>
               <ion-icon class="arrow1" name="chevron-down-outline"></ion-icon>
               <ion-icon class="arrow2" name="chevron-down-outline"></ion-icon>
             </a>

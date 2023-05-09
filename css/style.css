@@ -597,25 +597,32 @@ header .container-fluid {
     padding: 15px 60px;
 }
 
-.search-filter {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 20px;
-}
-
 .search-logo {
     font-size: 20px;
     color: white;
+
 }
 
+.search-filter
+{
+    background-color: transparent;
+    outline: none;
+    border: 0px;
+
+}
+
+.searchbar 
+{
+    position: absolute;
+}
 
 /** wedo  section **/
 
 .wedo {
     padding-top: 70px;
     position: relative;
-    top: -250px;
+    top: -50px;
+    
 }
 
 
