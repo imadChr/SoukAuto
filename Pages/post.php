@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../utility/db_connection.php');
 
 if (!isset($_GET['id'])) {
@@ -25,13 +26,16 @@ $post = $result->fetch_assoc();
 <html lang="en" dir="ltr">
 
 <head>
+
   <meta charset="utf-8">
   <title>CAR POST</title>
   <link rel="stylesheet" href="../css/post.css">
 </head>
 
 <body>
-  <img src="Nav-Bar.png" alt="Replace with header">
+  <?php include "header.php"; ?>
+  <br><br>
+
   <div class="car-container">
     <div class="car-post">
       <h1 class="car-title"><?php echo $post['title']; ?></h1>
@@ -72,7 +76,8 @@ $post = $result->fetch_assoc();
 
     </div>
   </div>
-  <img src="footer.png" alt="Replace with footer">
+  <br><br>
+  <?php include "footer.php"; ?>
 </body>
 
 </html>

@@ -18,6 +18,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else 
     if (strcmp($_POST["action"], "myposts") == 0) {
         $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 and post.user_id = $user_id ORDER BY date LIMIT $offset, $posts_per_page";
+    } else 
+    if (strcmp($_POST["action"], "search") == 0) {
+        $keyword = "%" . $_POST["keyword"] . "%";
+        $sql = " SELECT p.*, c.*, i.*
+FROM post p 
+inner JOIN car c ON p.car_id = c.car_id 
+inner JOIN images i ON i.post_id = p.post_id 
+inner JOIN brand b ON b.brand_id = c.brand_id 
+inner JOIN model m ON m.model_id = c.model_id 
+WHERE i.image_order = 1 
+AND (p.title LIKE '%{$keyword}%' OR p.description LIKE '%{$keyword}%' OR b.brand LIKE '%{$keyword}%' OR m.model_name LIKE '%{$keyword}%')
+ORDER BY p.date 
+LIMIT $offset, $posts_per_page";
     } else exit;
 } else {
     $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 ORDER BY date LIMIT $offset, $posts_per_page";
@@ -118,12 +131,15 @@ $total_pages = ceil($total_posts / $posts_per_page);
 
                 <!-- Search Bar -->
                 <div class="bg-white p-3 rounded ml-auto">
-                    <div class="input-group">
-                        <input type="search" placeholder="Search" aria-describedby="button-addon1" class="form-control border-0 bg-light">
-                        <div class="input-group-append">
-                            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><ion-icon name="search-outline"></ion-icon></button>
+                    <form method="post" action="">
+                        <input type="hidden" name="action" value="search">
+                        <div class="input-group">
+                            <input type="text" name="keyword" placeholder="Search" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                            <div class="input-group-append">
+                                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><ion-icon name="search-outline"></ion-icon></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!-- Filter Form -->
