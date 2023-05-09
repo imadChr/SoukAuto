@@ -1,10 +1,10 @@
 <?php
-session_start();
 require_once '../utility/db_connection.php';
 require_once '../utility/functions.php';
+$user_id = $_SESSION['user_id'];
 
 // set the number of posts per page
-$posts_per_page = 2;
+$posts_per_page = 9;
 
 // get the current page number from query string
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -12,33 +12,26 @@ $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 // calculate the offset for the posts query
 $offset = ($current_page - 1) * $posts_per_page;
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (strcmp($_POST["action"], "favorite") == 0) {
+        $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id inner join favorites on favorites.post_id = post.post_id  where image_order = 1 and favorites.user_id = $user_id ORDER BY date LIMIT $offset, $posts_per_page";
+    } else 
+    if (strcmp($_POST["action"], "myposts") == 0) {
+        $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 and post.user_id = $user_id ORDER BY date LIMIT $offset, $posts_per_page";
+    } else exit;
+} else {
+    $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 ORDER BY date LIMIT $offset, $posts_per_page";
+}
 // query the database to get the posts for the current page
-$sql = "SELECT * FROM ( post join car on post.car_id = car.car_id ) left join images on images.post_id = post.post_id where image_order = 1 ORDER BY date LIMIT $offset, $posts_per_page";
 $result = mysqli_query($conn, $sql);
 
 // get the total number of posts
 $total_posts = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM post"));
+$total_favorites = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM favorites WHERE user_id = " . $_SESSION['user_id']));
 
 // calculate the total number of pages
 $total_pages = ceil($total_posts / $posts_per_page);
-// handle the user's selection to add or remove a favorite item
-if (isset($_POST['favorite'])) {
-    $post_id = $_POST['post_id'];
-    $user_id = $_SESSION['user_id'];
 
-    $sql = "SELECT * FROM favorites WHERE post_id = $post_id AND user_id = $user_id";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) == 0) {
-        // add the item to the favorites table
-        $sql = "INSERT INTO favorites (post_id, user_id) VALUES ($post_id, $user_id)";
-        mysqli_query($conn, $sql);
-    } else {
-        // remove the item from the favorites table
-        $sql = "DELETE FROM favorites WHERE post_id = $post_id AND user_id = $user_id";
-        mysqli_query($conn, $sql);
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -61,15 +54,10 @@ if (isset($_POST['favorite'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <!-- Iconbox -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/72b693e5a2.js"></script>
     <!-- date picker -->
-    <script src="
-        https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js
-        "></script>
     <link href="
         https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css
         " rel="stylesheet">
@@ -82,16 +70,27 @@ if (isset($_POST['favorite'])) {
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <img src="../images/logo.png" class="logo"><a class="navbar-brand" href="../index.php"></a>
+            <a class="navbar-brand" href="../index.php">
+                <img src="../images/logo.png" class="logo">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-auto">
+                <form class="d-flex ms-auto" method="post" action="">
+                    <input type="hidden" name="action" value="favorite">
                     <button class="btn btn-outline-dark" type="submit">
                         <i class="bi-cart-fill me-1"></i>
-                        favorites
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> <!--add number of cars in favorite-->
+                        Favorites
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"><?php echo $total_favorites ?></span>
                     </button>
                 </form>
+                <br>
+                <a href="all_posts.php">
+                    <button class="btn btn-outline-dark">
+                        <i class="bi-cart-fill me-1"></i>
+                        All Posts
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"><?php echo $total_posts ?></span>
+                    </button>
+                </a>
             </div>
         </div>
     </nav>
@@ -209,11 +208,12 @@ if (isset($_POST['favorite'])) {
     <div class="container cards_landscape_wrap-2 pb-5">
         <div class="row">
             <!--prod 1-->
-            <div class="col-md-6 col-lg-4">
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                ?>
+
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+            ?>
+                    <div class="col-md-6 col-lg-4">
                         <div class="container">
                             <div class="card mb-4">
                                 <!-- RENT/SELL badge-->
@@ -227,10 +227,27 @@ if (isset($_POST['favorite'])) {
                                     <p class="card-text"><?php echo $row['price'] ?> DA</p>
                                     <p class="card-text"><?php echo $row['description'] ?></p>
                                     <p class="card-text"><small class="text-muted"><?php echo $row['date'] ?> , <?php echo $row['wilaya'] ?></small></p>
-                                    <!--icons-->
-                                    <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
-                                        <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon>Add To Favorites</span>
-                                    </button>
+
+                                    <!--buttons-->
+                                    <?php
+                                    $sql_favorites = "SELECT * FROM favorites WHERE user_id = ? AND post_id = ?";
+                                    $stmt_favorites = mysqli_prepare($conn, $sql_favorites);
+                                    mysqli_stmt_bind_param($stmt_favorites, 'ii', $user_id, $row['post_id']);
+                                    mysqli_stmt_execute($stmt_favorites);
+                                    $result_favorites = mysqli_stmt_get_result($stmt_favorites);
+                                    if ($result_favorites->num_rows > 0) {
+                                    ?>
+                                        <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
+                                            <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Delete From Favorites</span>
+                                        </button>
+                                    <?php
+                                    } else { ?>
+                                        <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
+                                            <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Add To Favorites</span>
+                                        </button>
+                                    <?php
+                                    }
+                                    ?>
 
                                     <button class="e-button btn-sm expand-btn" role="button">
                                         <span class="e-button-text"><ion-icon name="person-outline"></ion-icon> Contact Seller</span>
@@ -243,33 +260,39 @@ if (isset($_POST['favorite'])) {
                                     </a>
                                 </div>
                             </div>
-                        <?php
-                    }
-                        ?>
                         </div>
-                    <?php
+                    </div>
+            <?php
                 }
-                    ?>
-            </div>
+            } else {
+                echo "<h1 class='text-center'>No Posts Found</h1>";
+            }
+            ?>
         </div>
     </div>
 
 
     <!-- Pagination -->
-    <div class="d-flex justify-content-center my-4">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <?php
-                for ($i = 1; $i <= $total_pages; $i++) {
-                    if ($i == $current_page) {
-                        echo "<li class='page-item active'><a class='page-link' href='all_posts.php?page=" . $i . "'>" . $i . "</a></li>";
-                    } else {
-                        echo "<li class='page-item'><a class='page-link' href='all_posts.php?page=" . $i . "'>" . $i . "</a></li>";
+    <div class="row mb-5">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <h2 class="heading-section"></h2>
+
+            <div class="block-27">
+                <ul>
+                    <?php
+                    for ($i = 1; $i <= $total_pages; $i++) {
+                        if ($i == $current_page) {
+                            echo "<li class='active'><a href='all_posts.php?page=" . $i . "'>" . $i . "</a></li>";
+                        } else {
+                            echo "<li><a  href='all_posts.php?page=" . $i . "'>" . $i . "</a></li>";
+                        }
                     }
-                }
-                ?>
-            </ul>
-        </nav>
+                    ?>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 </body>
 
@@ -280,6 +303,10 @@ if (isset($_POST['favorite'])) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+<script src="https://use.fontawesome.com/72b693e5a2.js"></script>
 <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
@@ -287,18 +314,18 @@ if (isset($_POST['favorite'])) {
 
 
     //item in favorite list (change later)
-    const button = document.querySelector('.e-button');
-    let isFavorite = false;
+    // const button = document.querySelector('.e-button');
+    // let isFavorite = false;
 
-    button.addEventListener('click', () => {
-        const icon = button.querySelector('ion-icon');
-        isFavorite = !isFavorite;
-        if (isFavorite) {
-            icon.setAttribute('name', 'heart-dislike-outline');
-        } else {
-            icon.setAttribute('name', 'heart-outline');
-        }
-    });
+    // button.addEventListener('click', () => {
+    //     const icon = button.querySelector('ion-icon');
+    //     isFavorite = !isFavorite;
+    //     if (isFavorite) {
+    //         icon.setAttribute('name', 'heart-dislike-outline');
+    //     } else {
+    //         icon.setAttribute('name', 'heart-outline');
+    //     }
+    // });
 
     //togle filter button
     $(document).ready(function() {
@@ -337,9 +364,15 @@ if (isset($_POST['favorite'])) {
                 if (response == 'added') {
                     // the post was added to the user's favorites
                     alert('Post added to favorites');
+                    const icon = document.querySelector('.e-button ion-icon');
+                    icon.setAttribute('name', 'heart-dislike-outline');
+                    icon.classList.add('favorite');
                 } else if (response == 'removed') {
                     // the post was removed from the user's favorites
                     alert('Post removed from favorites');
+                    const icon = document.querySelector('.e-button ion-icon');
+                    icon.setAttribute('name', 'heart-outline');
+                    icon.classList.remove('favorite');
                 }
             },
             error: function() {
@@ -347,6 +380,21 @@ if (isset($_POST['favorite'])) {
             }
         });
     }
+
+    const button = document.querySelector('.e-button');
+    let isFavorite = false;
+
+    button.addEventListener('click', () => {
+        const icon = button.querySelector('ion-icon');
+        isFavorite = !isFavorite;
+        if (isFavorite) {
+            addToFavorites(post_id);
+            icon.setAttribute('name', 'heart-dislike-outline');
+
+        } else {
+            icon.setAttribute('name', 'heart-outline');
+        }
+    });
 </script>
 
 </html>

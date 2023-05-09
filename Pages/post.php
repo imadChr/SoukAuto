@@ -5,7 +5,7 @@ if (!isset($_GET['id'])) {
   die('Post ID parameter is missing');
 }
 
-$sql = "SELECT * from post join car on post.car_id = car.car_id join brand on car.brand_id = brand.brand_id join model on car.model_id = model.model_id join images on images.post_id = post.post_id  where post.post_id = ?";
+$sql = "SELECT * from post inner join car on post.car_id = car.car_id inner join brand on car.brand_id = brand.brand_id inner join model on car.model_id = model.model_id inner join images on images.post_id = post.post_id  where post.post_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $_GET['id']);
 $stmt->execute();

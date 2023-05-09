@@ -72,8 +72,18 @@ require_once 'utility/db_connection.php';
        <a class="nav-link dropdown-toggle" href="#" id="my-account-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $_SESSION['firstname'] . '</a>
       <ul class="dropdown-menu" aria-labelledby="my-account-menu">
         <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">My posts</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">My favorites</a></li>
+        <form method="post" action="Pages/all_posts.php">
+        <input type="hidden" name="action" value="myposts">
+        <button type="submit">
+        <li class="nav-item">My posts</li>
+        </button>
+        </form>
+        <form method="post" action="Pages/all_posts.php">
+        <input type="hidden" name="action" value="favorites">
+        <button type="submit">
+        <li class="nav-item">My Favorites</li>
+        </button>
+        </form>  
         <li class="nav-item"><a class="nav-link" href="utility/logout.php">Logout</a></li>
       </ul>
       </li>';
