@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 session_start();
 require_once "db_connection.php";
 $user_id = $_SESSION['user_id'];
@@ -278,11 +279,7 @@ function display_errors($errors)
     }
 }
 
-function generatePaginationLink($page, $current_page)
-{
-    $class = ($page == $current_page) ? 'active' : '';
-    return "<li class='page-item $class'><a class='page-link' href='all_posts.php?page=$page'>$page</a></li>";
-}
+
 
 function addFavourite($user_id, $post_id)
 {
