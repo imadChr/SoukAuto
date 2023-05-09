@@ -11,7 +11,10 @@
   height: 30px;
   padding: 4px 8px;
 }
-
+/* search icon */
+button#button-addon1 ion-icon {
+    color: #102B3C;
+}
 
 @media (max-width: 991.98px) {
   .container select,
@@ -27,7 +30,7 @@
     box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
     cursor: pointer;
     height: 98%;
-    width:110%;
+    width: 110%;
     padding-bottom: 0%;
     max-height: min-content;
 }

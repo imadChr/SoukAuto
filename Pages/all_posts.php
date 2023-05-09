@@ -108,86 +108,98 @@ $total_pages = ceil($total_posts / $posts_per_page);
     <!--Filter nav-->
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-
-                <!-- Filter Toggle Button -->
-                <div class="d-flex justify-content my-3 ml-3">
+            <div class="col-md-12 d-flex justify-content-between">
+                <!-- Toggle Button -->
+                <div class="d-flex justify-content my-3">
                     <button type="button" class="btn btn-outline-primary toggle-filter-btn">
                         <ion-icon name="funnel-outline"></ion-icon>
                     </button>
                 </div>
 
-                <!-- Filter Form -->
-                <form class="filter-form d-none">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <!-- Brand -->
-                            <label for="brand">Brand:</label>
-                            <select class="form-control" id="brand">
-                                <option>Toyota</option>
-                                <option>Honda</option>
-                                <option>Nissan</option>
-                                <option>Hyundai</option>
-                                <option>Kia</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <!-- Wilaya -->
-                            <label for="wilaya">Wilaya:</label>
-                            <select class="form-control" id="wilaya">
-                                <option>Algiers</option>
-                                <option>Oran</option>
-                                <option>Constantine</option>
-                                <option>Batna</option>
-                                <option>Setif</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <!-- Country -->
-                            <label for="country">Country:</label>
-                            <select class="form-control" id="country">
-                                <option>Japan</option>
-                                <option>Korea</option>
-                                <option>Germany</option>
-                                <option>USA</option>
-                                <option>France</option>
-                            </select>
+                <!-- Search Bar -->
+                <div class="bg-white p-3 rounded ml-auto">
+                    <div class="input-group">
+                        <input type="search" placeholder="Search" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                        <div class="input-group-append">
+                            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><ion-icon name="search-outline"></ion-icon></button>
                         </div>
                     </div>
-                    <div class="row">
-                        <!-- Price range -->
-                        <div class="col-md-4 mb-3">
-                            <label for="price ">Price:</label>
-                            <input type="range" class="form-range" id="price" step="100000" min="1000000" max="10000000">
-                            <div class="price-range-values"></div>
-                            <div class="d-flex justify-content-between">
-                                <span>1,000,000</span>
-                                <span>10,000,000</span>
+                </div>
+            </div>
+            <!-- Filter Form -->
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="filter-form d-none">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <!-- Brand -->
+                                <label for="brand">Brand:</label>
+                                <select class="form-control" id="brand">
+                                    <option>Toyota</option>
+                                    <option>Honda</option>
+                                    <option>Nissan</option>
+                                    <option>Hyundai</option>
+                                    <option>Kia</option>
+                                </select>
                             </div>
-                            <input type="range" class="form-range" id="price2" step="100000" min="1000000" max="10000000">
-                        </div>
-                        <!-- Mileage Range -->
-                        <div class="col-md-4 mb-3">
-                            <label for="mileage">Mileage:</label>
-                            <input type="range" class="form-range" id="mileage" step="5000" min="0" max="500000">
-                            <div class="d-flex justify-content-between">
-                                <span>0</span>
-                                <span>500,000</span>
+                            <div class="col-md-4 mb-3">
+                                <!-- Wilaya -->
+                                <label for="wilaya">Wilaya:</label>
+                                <select class="form-control" id="wilaya">
+                                    <option>Algiers</option>
+                                    <option>Oran</option>
+                                    <option>Constantine</option>
+                                    <option>Batna</option>
+                                    <option>Setif</option>
+                                </select>
                             </div>
-                            <input type="range" class="form-range" id="mileage2" step="5000" min="0" max="500000">
+                            <div class="col-md-4 mb-3">
+                                <!-- Country -->
+                                <label for="country">Country:</label>
+                                <select class="form-control" id="country">
+                                    <option>Japan</option>
+                                    <option>Korea</option>
+                                    <option>Germany</option>
+                                    <option>USA</option>
+                                    <option>France</option>
+                                </select>
+                            </div>
                         </div>
-                        <!-- year Range -->
-                        <div class="col-md-4 mb-3">
-                            <label for="year">Year:</label>
-                            <input type="text" class="form-control datepicker-year" class="year" name="year" placeholder="From" min="1970" max="2023">
-                            <br>
-                            <input type="text" class="form-control datepicker-year" class="year" name="year" placeholder="To" min="1970" max="2023">
+                        <div class="row">
+                            <!-- Price range -->
+                            <div class="col-md-4 mb-3">
+                                <label for="price ">Price:</label>
+                                <input type="range" class="form-range" id="price" step="100000" min="1000000" max="10000000">
+                                <div class="price-range-values"></div>
+                                <div class="d-flex justify-content-between">
+                                    <span>1,000,000</span>
+                                    <span>10,000,000</span>
+                                </div>
+                                <input type="range" class="form-range" id="price2" step="100000" min="1000000" max="10000000">
+                            </div>
+                            <!-- Mileage Range -->
+                            <div class="col-md-4 mb-3">
+                                <label for="mileage">Mileage:</label>
+                                <input type="range" class="form-range" id="mileage" step="5000" min="0" max="500000">
+                                <div class="d-flex justify-content-between">
+                                    <span>0</span>
+                                    <span>500,000</span>
+                                </div>
+                                <input type="range" class="form-range" id="mileage2" step="5000" min="0" max="500000">
+                            </div>
+                            <!-- year Range -->
+                            <div class="col-md-4 mb-3">
+                                <label for="year">Year:</label>
+                                <input type="text" class="form-control datepicker-year" class="year" name="year" placeholder="From" min="1970" max="2023">
+                                <br>
+                                <input type="text" class="form-control datepicker-year" class="year" name="year" placeholder="To" min="1970" max="2023">
+                            </div>
                         </div>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
-                </form>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -196,11 +208,12 @@ $total_pages = ceil($total_posts / $posts_per_page);
     <div class="container cards_landscape_wrap-2 pb-5">
         <div class="row">
             <!--prod 1-->
+
             <?php
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
             ?>
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-4">
                         <div class="container">
                             <div class="card mb-4">
                                 <!-- RENT/SELL badge-->
@@ -214,6 +227,7 @@ $total_pages = ceil($total_posts / $posts_per_page);
                                     <p class="card-text"><?php echo $row['price'] ?> DA</p>
                                     <p class="card-text"><?php echo $row['description'] ?></p>
                                     <p class="card-text"><small class="text-muted"><?php echo $row['date'] ?> , <?php echo $row['wilaya'] ?></small></p>
+
                                     <!--buttons-->
                                     <?php
                                     $sql_favorites = "SELECT * FROM favorites WHERE user_id = ? AND post_id = ?";
@@ -238,6 +252,7 @@ $total_pages = ceil($total_posts / $posts_per_page);
                                     <button class="e-button btn-sm expand-btn" role="button">
                                         <span class="e-button-text"><ion-icon name="person-outline"></ion-icon> Contact Seller</span>
                                     </button>
+
                                     <a href="post.php?id=<?php echo $row['post_id'] ?>">
                                         <button class="e-button btn-sm expand-btn">
                                             <span class="e-button-text"><ion-icon name="add-outline"></ion-icon> Show more</span>
@@ -381,6 +396,5 @@ $total_pages = ceil($total_posts / $posts_per_page);
         }
     });
 </script>
-
 
 </html>
