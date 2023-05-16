@@ -6,6 +6,7 @@ body {
 /* Header */
 
 header {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,12 +21,12 @@ header {
 }
 
 .logo {
-    display: flex;
-    align-items: center;
+position: absolute
+;    left: 5%;
 }
 
 .logo img {
-    height: 40px;
+    height: 60px;
     margin-right: 10px;
 }
 
@@ -53,6 +54,7 @@ header {
 /* Section */
 
 section {
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -24,7 +24,9 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <header>
         <h1 class="post">Post your car</h1>
-        <h1 class="logo">Souk auto</h1>
+        <a class="navbar-brand" href="../index.php">
+            <img src="../images/logo.png" class="logo">
+        </a>
     </header>
 
     <?php if (isset($_SESSION['message'])) {

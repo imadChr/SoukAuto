@@ -3,6 +3,9 @@ error_reporting(E_ERROR | E_PARSE);
 session_start();
 require_once "db_connection.php";
 $user_id = $_SESSION['user_id'];
+
+
+
 function add_car($brand_id, $model_id, $fuel, $year, $mileage)
 {
     global $conn;
@@ -126,30 +129,33 @@ function validate_inputs($email, $password)
 function login($email, $password)
 {
 
-    global $conn;
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    if (validate_inputs($email, $password)) {
 
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        $stored_password = $row["password"];
+        global $conn;
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if (password_verify($password, $stored_password)) {
-            $_SESSION["user_id"] = $row["user_id"];
-            $_SESSION["firstname"] = $row["firstname"];
-            header("Location: ../index.php");
-            exit;
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $stored_password = $row["password"];
+
+            if (password_verify($password, $stored_password)) {
+                $_SESSION["user_id"] = $row["user_id"];
+                $_SESSION["firstname"] = $row["firstname"];
+                header("Location: ../index.php");
+                exit;
+            } else {
+                $_SESSION['message'] = "Invalid email address or password";
+                header("Location: ../Pages/login.php");
+                exit;
+            }
         } else {
             $_SESSION['message'] = "Invalid email address or password";
             header("Location: ../Pages/login.php");
             exit;
         }
-    } else {
-        $_SESSION['message'] = "Invalid email address or password";
-        header("Location: login.php");
-        exit;
     }
     return true;
 }
@@ -167,15 +173,14 @@ function deletePost($user_id, $post_id)
     return $success;
 }
 
-function insert_new_user($firstname, $lastname, $email, $hashed_password, $number)
+function insert_new_user($firstname, $lastname, $email, $hashed_password, $number, $wilaya)
 {
     global $conn;
-    $sql = "INSERT INTO users (firstname, lastname, email, password, PhoneNumber) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO users (firstname, lastname, email, password, PhoneNumber , wilaya) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('sssss', $firstname, $lastname, $email, $hashed_password, $number);
+    $stmt->bind_param('ssssss', $firstname, $lastname, $email, $hashed_password, $number, $wilaya);
     $success = $stmt->execute();
     $stmt->close();
-
     return $success;
 }
 
@@ -206,7 +211,7 @@ function check_for_existing_user($email)
 
 
 
-function create_user($firstname, $lastname, $email, $password, $number)
+function create_user($firstname, $lastname, $email, $password, $number, $wilaya)
 {
     global $conn;
     $user_exists = check_for_existing_user($email);
@@ -214,13 +219,13 @@ function create_user($firstname, $lastname, $email, $password, $number)
     if ($user_exists) {
         $_SESSION['message'] = 'User already exists';
         $_SESSION['message_type'] = 'error';
-        header("Location: ../pages/signup.php");
+        header("Location: ../Pages/signup.php");
         exit();
     }
 
     // Create new user
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $success = insert_new_user($firstname, $lastname, $email, $hashed_password, $number);
+    $success = insert_new_user($firstname, $lastname, $email, $hashed_password, $number, $wilaya);
 
     if ($success) {
         $_SESSION['message'] = 'New user created successfully';
@@ -231,64 +236,63 @@ function create_user($firstname, $lastname, $email, $password, $number)
     } else {
         $_SESSION['message'] = 'Error creating user: ' . $conn->error;
         $_SESSION['message_type'] = 'error';
-        header("Location: ../pages/signup.php");
+        header("Location: ../Pages/signup.php");
     }
 }
 
 function validate_user_input($firstname, $lastname, $email, $password, $number)
 {
-    $errors = [];
-
     if (empty($firstname)) {
         $_SESSION['message'] = 'Please enter your first name.';
+        header("Location: ../Pages/signup.php");
+        exit();
     } else if (!preg_match('/^([a-zA-Z]+ ?){1,3}$/', $firstname)) {
         $_SESSION['message'] = 'Please enter a valid first name using only letters.';
+        header("Location: ../Pages/signup.php");
+        exit();
     }
 
     if (empty($lastname)) {
         $_SESSION['message'] = 'Please enter your last name.';
+        header("Location: ../Pages/signup.php");
+        exit();
     } else if (!preg_match('/^[a-zA-Z]+$/', $lastname)) {
         $_SESSION['message'] = 'Please enter a valid last name using only letters.';
+        header("Location: ../Pages/signup.php");
+        exit();
     }
 
     if (empty($email)) {
         $_SESSION['message'] = 'Please enter your email address.';
+        header("Location: ../Pages/signup.php");
+        exit();
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['message'] = 'Please enter a valid email address.';
+        header("Location: ../Pages/signup.php");
+        exit();
     }
 
     if (empty($password)) {
         $_SESSION['message'] = 'Please enter a password.';
+        header("Location: ../Pages/signup.php");
+        exit();
     } else if (strlen($password) < 8) {
         $_SESSION['message'] = 'Password must be at least 8 characters long.';
+        header("Location: ../Pages/signup.php");
+        exit();
     }
 
     if (empty($number)) {
         $_SESSION['message'] = 'Please enter your phone number.';
+        header("Location: ../Pages/signup.php");
+        exit();
     } else if (!preg_match('/^\d+$/', $number)) {
         $_SESSION['message'] = 'Please enter a valid phone number using only digits.';
+        header("Location: ../Pages/signup.php");
+        exit();
     }
 
     return true;
-}
-
-function display_errors($errors)
-{
-    foreach ($errors as $error) {
-        echo '<div class="alert alert-danger">' . $error . '</div>';
-    }
-}
-
-
-
-function addFavourite($user_id, $post_id)
-{
-    global $conn;
-    $stmt = $conn->prepare("INSERT INTO favourites (user_id, post_id) VALUES (?, ?)");
-    $stmt->bind_param("ii", $user_id, $post_id);
-    $success = $stmt->execute();
-    $stmt->close();
-    return $success;
 }
 
 

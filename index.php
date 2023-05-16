@@ -57,9 +57,6 @@ require_once 'utility/db_connection.php';
               </button>
               <div class="collapse navbar-collapse" id="navbarsExample04">
                 <ul class="navbar-nav mr-auto">
-
-
-
                   <?php
                   if (isset($_SESSION['user_id'])) {
                     echo '<li class="nav-item">
@@ -82,7 +79,7 @@ require_once 'utility/db_connection.php';
         </li>
         <li class="nav-item">
         <form method="post" action="Pages/all_posts.php">
-        <input type="hidden" name="action" value="favorites">
+        <input type="hidden" name="action" value="favorite">
         <button type="submit" class="nav-link">
         My Favorites
         </button>
@@ -93,6 +90,9 @@ require_once 'utility/db_connection.php';
       ';
                   } else {
                     echo '<li class="nav-item">
+                    <a class="nav-link" href="Pages\postform.php">Sell</a>
+                  </li>
+                    <li class="nav-item">
       <a class="nav-link" href="Pages\signup.php">Sign up</a> 
       </li><br>';
                     echo '<li class="nav-item">
@@ -101,7 +101,6 @@ require_once 'utility/db_connection.php';
                   }
                   ?>
                   </li>
-
                 </ul>
               </div>
             </nav>
@@ -152,9 +151,6 @@ require_once 'utility/db_connection.php';
         </div>
       </div>
     </div>
-
-
-
   </section>
   <form method="post" action="pages/all_posts.php" class="search">
     <input type="hidden" name="action" value="search">
@@ -162,12 +158,8 @@ require_once 'utility/db_connection.php';
     <ion-icon name="search-sharp" class="search-logo"></ion-icon>
   </form>
   <!-- end banner -->
-  <!-- search form -->
-
-  <!-- end search form -->
+  
   <!-- wedo  section -->
-
-
   <div class="wedo">
     <div class="container">
       <div class="row">
@@ -193,7 +185,7 @@ require_once 'utility/db_connection.php';
                 <div class="col-md-6 margin_bottom">
                   <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
                     <div class="work">
-                      <figure><img src="<?php echo $row['url']; ?>" height="200" width="400" alt="#" /></figure>
+                      <figure><img src="<?php echo $row['url']; ?>" height="400" width="600" alt="#" /></figure>
                     </div>
                     <div class="work_text">
                       <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>

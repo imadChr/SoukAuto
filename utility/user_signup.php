@@ -10,7 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $number = $_POST['PhoneNumber'];
+    $wilaya = $_POST['wilaya'];
 
-    $errors = validate_user_input($firstname, $lastname, $email, $password, $number);
-    create_user($firstname, $lastname, $email, $password, $number);
+    if (validate_user_input($firstname, $lastname, $email, $password, $number)) {
+
+        create_user($firstname, $lastname, $email, $password, $number, $wilaya);
+    }
 }
