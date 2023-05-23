@@ -131,7 +131,7 @@ if (isset($_GET['delete_comment'])) {
           </div>
           <p><?php echo $row['message']; ?></p>
           <!-- Delete button -->
-          <?php if ($_SESSION['user_id'] == $row['user_id']) { ?>
+          <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $row['user_id']) { ?>
             <a href="?id=<?php echo $post_id; ?>&delete_comment=<?php echo $row['comment_id']; ?>">Delete</a>
           <?php } ?>
         </div>
