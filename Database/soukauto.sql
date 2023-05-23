@@ -1,15 +1,31 @@
-  SET FOREIGN_KEY_CHECKS=0;
-  SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 20, 2023 at 09:51 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-CREATE DATABASE IF NOT EXISTS `soukauto` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `soukauto`;
+--
+-- Database: `soukauto`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand`
+--
 
 CREATE TABLE `brand` (
   `brand_id` int(5) NOT NULL,
@@ -17,6 +33,10 @@ CREATE TABLE `brand` (
   `FullName` varchar(25) DEFAULT NULL,
   `Country` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `brand`
+--
 
 INSERT INTO `brand` (`brand_id`, `brand`, `FullName`, `Country`) VALUES
 (1, 'Ford', 'Ford Motor Company', 1),
@@ -48,6 +68,12 @@ INSERT INTO `brand` (`brand_id`, `brand`, `FullName`, `Country`) VALUES
 (27, 'Citroen', 'Citroen', 6),
 (28, 'Renault', 'Renault', 6);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `car`
+--
+
 CREATE TABLE `car` (
   `car_id` int(5) NOT NULL,
   `brand_id` int(11) NOT NULL,
@@ -57,14 +83,28 @@ CREATE TABLE `car` (
   `mileage` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `car`
+--
+
 INSERT INTO `car` (`car_id`, `brand_id`, `model_id`, `fuel`, `year`, `mileage`) VALUES
 (11, 3, 5, 'Essen', 1988, 120000),
 (12, 4, 7, 'Essen', 2015, 60000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `countries`
+--
 
 CREATE TABLE `countries` (
   `CountryID` int(5) NOT NULL,
   `CountryName` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `countries`
+--
 
 INSERT INTO `countries` (`CountryID`, `CountryName`) VALUES
 (1, 'usa'),
@@ -77,15 +117,52 @@ INSERT INTO `countries` (`CountryID`, `CountryName`) VALUES
 (8, 'United Kingdom'),
 (11, 'australia');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `demo`
+--
+
+CREATE TABLE `demo` (
+  `comment_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `message` mediumtext NOT NULL,
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `demo`
+--
+
+INSERT INTO `demo` (`comment_id`, `name`, `message`, `post_id`) VALUES
+(8, 'larvi', 'I had this car for two and a half years, and I gotta say it\'s a gem', 11),
+(9, 'Bassel', 'very family friendly car, recommend !', 12);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorites`
+--
+
 CREATE TABLE `favorites` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `favorites`
+--
+
 INSERT INTO `favorites` (`id`, `post_id`, `user_id`) VALUES
 (2, 11, 1),
 (4, 12, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images`
+--
 
 CREATE TABLE `images` (
   `image_id` int(11) NOT NULL,
@@ -93,6 +170,10 @@ CREATE TABLE `images` (
   `url` varchar(255) NOT NULL,
   `image_order` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `images`
+--
 
 INSERT INTO `images` (`image_id`, `post_id`, `url`, `image_order`) VALUES
 (1, 11, 'images/uploads/Background.png', 1),
@@ -102,11 +183,21 @@ INSERT INTO `images` (`image_id`, `post_id`, `url`, `image_order`) VALUES
 (5, 12, 'images/uploads/1.PNG', 1),
 (6, 12, 'images/uploads/캡처.PNG', 2);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `model`
+--
+
 CREATE TABLE `model` (
   `model_id` int(5) NOT NULL,
   `brand_id` int(5) DEFAULT NULL,
   `model_name` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `model`
+--
 
 INSERT INTO `model` (`model_id`, `brand_id`, `model_name`) VALUES
 (1, 1, 'Mustang'),
@@ -209,6 +300,12 @@ INSERT INTO `model` (`model_id`, `brand_id`, `model_name`) VALUES
 (101, 17, 'Symbol'),
 (102, 17, 'Megane');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post`
+--
+
 CREATE TABLE `post` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -220,6 +317,10 @@ CREATE TABLE `post` (
   `wilaya` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `post`
+--
+
 INSERT INTO `post` (`post_id`, `user_id`, `car_id`, `title`, `description`, `price`, `date`, `wilaya`) VALUES
 (11, 1, 11, 'BMW E30 325I WAGON', 'swap moteur 325i ', 220000, '2023-05-06', 'Oran'),
 (12, 1, 12, 'Hyundai', 'GOOD car ', 300000, '2023-05-06', 'Adrar'),
@@ -227,6 +328,12 @@ INSERT INTO `post` (`post_id`, `user_id`, `car_id`, `title`, `description`, `pri
 (14, 1, 11, 'BMW E30 325I WAGON', 'swap moteur 325i ', 220000, '2023-05-06', 'Oran'),
 (15, 1, 12, 'Hyundai', 'GOOD car ', 300000, '2023-05-06', 'Adrar'),
 (16, 1, 11, 'BMW E30 325I WAGON', 'swap moteur 325i ', 220000, '2023-05-06', 'Oran');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
@@ -238,82 +345,174 @@ CREATE TABLE `users` (
   `wilaya` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
+
 INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `password`, `PhoneNumber`, `wilaya`) VALUES
 (1, 'Mohammed Mouncef', 'Kadri', 'mohammed.kadri@ensia.edu.dz', '$2y$10$2NW.CbkCQ4LElYbJ.VbctePZYz7wTbzdxa/33FDyr4LG4i2lhsfJO', '0561636981', 'Oran');
 
+--
+-- Indexes for dumped tables
+--
 
+--
+-- Indexes for table `brand`
+--
 ALTER TABLE `brand`
   ADD PRIMARY KEY (`brand_id`),
   ADD KEY `brand_country_id_fk` (`Country`);
 
+--
+-- Indexes for table `car`
+--
 ALTER TABLE `car`
   ADD PRIMARY KEY (`car_id`),
   ADD KEY `fk_brand_id_car` (`brand_id`),
   ADD KEY `fk_model_id_car` (`model_id`);
 
+--
+-- Indexes for table `countries`
+--
 ALTER TABLE `countries`
   ADD PRIMARY KEY (`CountryID`);
 
+--
+-- Indexes for table `demo`
+--
+ALTER TABLE `demo`
+  ADD PRIMARY KEY (`comment_id`),
+  ADD KEY `fk_post_id` (`post_id`);
+
+--
+-- Indexes for table `favorites`
+--
 ALTER TABLE `favorites`
   ADD PRIMARY KEY (`id`),
   ADD KEY `post_id` (`post_id`),
   ADD KEY `user_id` (`user_id`);
 
+--
+-- Indexes for table `images`
+--
 ALTER TABLE `images`
   ADD PRIMARY KEY (`image_id`),
   ADD KEY `fk_post_id_image` (`post_id`);
 
+--
+-- Indexes for table `model`
+--
 ALTER TABLE `model`
   ADD PRIMARY KEY (`model_id`),
   ADD KEY `model_brand_fk` (`brand_id`);
 
+--
+-- Indexes for table `post`
+--
 ALTER TABLE `post`
   ADD PRIMARY KEY (`post_id`),
   ADD KEY `fk_user_id` (`user_id`),
   ADD KEY `fk_car_id` (`car_id`);
 
+--
+-- Indexes for table `users`
+--
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD KEY `email_2` (`email`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
 
+--
+-- AUTO_INCREMENT for table `car`
+--
 ALTER TABLE `car`
   MODIFY `car_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
+--
+-- AUTO_INCREMENT for table `demo`
+--
+ALTER TABLE `demo`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `favorites`
+--
 ALTER TABLE `favorites`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
+--
+-- AUTO_INCREMENT for table `images`
+--
 ALTER TABLE `images`
   MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
+--
+-- AUTO_INCREMENT for table `model`
+--
 ALTER TABLE `model`
   MODIFY `model_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
+--
+-- AUTO_INCREMENT for table `post`
+--
 ALTER TABLE `post`
   MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
+--
+-- AUTO_INCREMENT for table `users`
+--
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
+--
+-- Constraints for dumped tables
+--
 
+--
+-- Constraints for table `brand`
+--
 ALTER TABLE `brand`
   ADD CONSTRAINT `brand_country_id_fk` FOREIGN KEY (`Country`) REFERENCES `countries` (`CountryID`);
 
+--
+-- Constraints for table `car`
+--
 ALTER TABLE `car`
   ADD CONSTRAINT `fk_brand_id_car` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_model_id_car` FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+--
+-- Constraints for table `demo`
+--
+ALTER TABLE `demo`
+  ADD CONSTRAINT `fk_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `favorites`
+--
 ALTER TABLE `favorites`
   ADD CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
   ADD CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
+--
+-- Constraints for table `images`
+--
 ALTER TABLE `images`
   ADD CONSTRAINT `fk_post_id_image` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`);
 
+--
+-- Constraints for table `model`
+--
 ALTER TABLE `model`
   ADD CONSTRAINT `model_brand_fk` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`);
 
+--
+-- Constraints for table `post`
+--
 ALTER TABLE `post`
   ADD CONSTRAINT `fk_car_id` FOREIGN KEY (`car_id`) REFERENCES `car` (`car_id`),
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
