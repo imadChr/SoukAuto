@@ -11,6 +11,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $email = trim($_POST["email"] ?? "");
         $password = trim($_POST["password"] ?? "");
-        login($email, $password);
+        if (login($email, $password)) {
+            if (isset($_SESSION['redirect_url'])) {
+                header("Location: ../Pages/" . $_SESSION['redirect_url']);
+                unset($_SESSION['redirect_url']);
+                exit();
+            } else {
+                header("Location: ../index.php");
+                exit();
+            }
+        }
     }
 }

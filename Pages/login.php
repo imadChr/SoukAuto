@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_GET['redirect_url'])) {
+  $_SESSION['redirect_url'] = $_GET['redirect_url'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
