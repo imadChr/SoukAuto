@@ -33,6 +33,7 @@ To view the details of a specific car listing, click on the title of the listing
 Authors :
 
 Kadri Mohammed Mouncef - WebDev Developer and Back-End developer
+RAHMOUNI Rahil - Design and Front-end developer
 CHARCHAR Imad Eddine - Front-end developer
 Yousfi Chaker - Design and Front-end developer
 GRINE Abdessamed Bassel - Front-end contributor
