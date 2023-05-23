@@ -123,20 +123,13 @@ INSERT INTO `countries` (`CountryID`, `CountryName`) VALUES
 -- Table structure for table `demo`
 --
 
-CREATE TABLE `demo` (
+CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `message` mediumtext NOT NULL,
   `post_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `demo`
---
-
-INSERT INTO `demo` (`comment_id`, `name`, `message`, `post_id`) VALUES
-(8, 'larvi', 'I had this car for two and a half years, and I gotta say it\'s a gem', 11),
-(9, 'Bassel', 'very family friendly car, recommend !', 12);
 
 -- --------------------------------------------------------
 
@@ -380,9 +373,10 @@ ALTER TABLE `countries`
 --
 -- Indexes for table `demo`
 --
-ALTER TABLE `demo`
+ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`),
-  ADD KEY `fk_post_id` (`post_id`);
+  ADD KEY `fk_post_id_comments` (`post_id`);
+  ADD KEY `fk_user_id_comments` (`user_id`);
 
 --
 -- Indexes for table `favorites`
@@ -435,7 +429,7 @@ ALTER TABLE `car`
 --
 -- AUTO_INCREMENT for table `demo`
 --
-ALTER TABLE `demo`
+ALTER TABLE `comments`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
@@ -488,8 +482,10 @@ ALTER TABLE `car`
 --
 -- Constraints for table `demo`
 --
-ALTER TABLE `demo`
-  ADD CONSTRAINT `fk_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `comments`
+  ADD CONSTRAINT `fk_post_id_comments` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_user_id_comments` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 
 --
 -- Constraints for table `favorites`
