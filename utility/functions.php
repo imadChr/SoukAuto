@@ -19,8 +19,6 @@ function add_car($brand_id, $model_id, $fuel, $year, $mileage)
     $stmt_car->bind_param("iisii", $brand_id, $model_id, $fuel, $year, $mileage);
 
     if (!$stmt_car->execute()) {
-        // Log or display error message
-        error_log("Error inserting new car: " . $stmt_car->error);
         $_SESSION['message'] = "Error inserting new car";
         return false;
     }
@@ -55,10 +53,9 @@ function add_post($title, $description, $price, $user_id, $car_id, $wilaya)
 }
 
 
-
 function are_valid_pictures($pictures)
 {
-    if (!is_uploaded_file($pictures["tmp_name"]) || !in_array($pictures["type"], ["image/png", "image/jpeg", "image/jpg"]) || !isset($pictures["tmp_name"])) {
+    if (!is_uploaded_file($pictures["tmp_name"]) || !in_array($pictures["type"], ["image/png", "image/jpeg", "image/jpg"])) {
         return false;
     }
     return true;
@@ -73,31 +70,27 @@ function move_pictures_to_upload_directory($pictures)
     foreach ($pictures["tmp_name"] as $index => $tmp_name) {
         $target_file = $target_dir . basename($pictures["name"][$index]);
         $target = $dir . basename($pictures["name"][$index]);
-        if (!move_uploaded_file($tmp_name, $target_file)) {
-            error_log("Error uploading file");
-            return false;
-        }
+        move_uploaded_file($tmp_name, $target_file);
         $images_path[] = $target;
     }
     return $images_path;
 }
 
+
 function insert_images($post_id, $targets)
 {
     global $conn;
+    // Insert each image into the database.
     $order = 1;
     foreach ($targets as $path) {
         $sql = "INSERT INTO images (post_id, image_order, url) VALUES ('$post_id', '$order', '$path')";
         if (!mysqli_query($conn, $sql)) {
-            error_log("Error inserting image: " . mysqli_error($conn));
             return false;
         }
         $order++;
     }
     return true;
 }
-
-
 
 
 function logout()
@@ -157,20 +150,17 @@ function login($email, $password)
             exit;
         }
     }
-    return true;
 }
-
-
 
 
 function deletePost($user_id, $post_id)
 {
     global $conn;
+
     $stmt = $conn->prepare("DELETE FROM car_selling_posts WHERE id = ? AND user_id = ?");
     $stmt->bind_param("ii", $post_id, $user_id);
-    $success = $stmt->execute();
-    $stmt->close();
-    return $success;
+
+    return $stmt->execute();
 }
 
 function insert_new_user($firstname, $lastname, $email, $hashed_password, $number, $wilaya)
@@ -179,9 +169,7 @@ function insert_new_user($firstname, $lastname, $email, $hashed_password, $numbe
     $sql = "INSERT INTO users (firstname, lastname, email, password, PhoneNumber , wilaya) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('ssssss', $firstname, $lastname, $email, $hashed_password, $number, $wilaya);
-    $success = $stmt->execute();
-    $stmt->close();
-    return $success;
+    return $stmt->execute();
 }
 
 
@@ -189,23 +177,17 @@ function check_for_existing_user($email)
 {
     global $conn;
 
+    // Get the user with the given email address.
     $sql = "SELECT * FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
-    // Handle query preparation errors
-    if (!$stmt) {
-        throw new Exception("Query preparation error: " . $conn->error);
-    }
-
     $stmt->bind_param('s', $email);
 
-    // Handle query execution errors
-    if (!$stmt->execute()) {
-        throw new Exception("Query execution error: " . $stmt->error);
-    }
+    $stmt->execute();
 
     $result = $stmt->get_result();
 
+    // Return true if the user exists, false otherwise.
     return ($result->num_rows > 0);
 }
 
@@ -214,6 +196,8 @@ function check_for_existing_user($email)
 function create_user($firstname, $lastname, $email, $password, $number, $wilaya)
 {
     global $conn;
+
+    // Check if user exists
     $user_exists = check_for_existing_user($email);
 
     if ($user_exists) {
@@ -243,64 +227,50 @@ function create_user($firstname, $lastname, $email, $password, $number, $wilaya)
 function validate_user_input($firstname, $lastname, $email, $password, $number)
 {
     if (empty($firstname)) {
-        $_SESSION['message'] = 'Please enter your first name.';
-        header("Location: ../Pages/signup.php");
-        exit();
+        return "Please enter your first name.";
     } else if (!preg_match('/^([a-zA-Z]+ ?){1,3}$/', $firstname)) {
-        $_SESSION['message'] = 'Please enter a valid first name using only letters.';
-        header("Location: ../Pages/signup.php");
-        exit();
+        return "Please enter a valid first name using only letters.";
     }
 
     if (empty($lastname)) {
-        $_SESSION['message'] = 'Please enter your last name.';
-        header("Location: ../Pages/signup.php");
-        exit();
+        return "Please enter your last name.";
     } else if (!preg_match('/^[a-zA-Z]+$/', $lastname)) {
-        $_SESSION['message'] = 'Please enter a valid last name using only letters.';
-        header("Location: ../Pages/signup.php");
-        exit();
+        return "Please enter a valid last name using only letters.";
     }
 
     if (empty($email)) {
-        $_SESSION['message'] = 'Please enter your email address.';
-        header("Location: ../Pages/signup.php");
-        exit();
+        return "Please enter your email address.";
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['message'] = 'Please enter a valid email address.';
-        header("Location: ../Pages/signup.php");
-        exit();
+        return "Please enter a valid email address.";
     }
 
     if (empty($password)) {
-        $_SESSION['message'] = 'Please enter a password.';
-        header("Location: ../Pages/signup.php");
-        exit();
+        return "Please enter a password.";
     } else if (strlen($password) < 8) {
-        $_SESSION['message'] = 'Password must be at least 8 characters long.';
-        header("Location: ../Pages/signup.php");
-        exit();
+        return "Password must be at least 8 characters long.";
     }
 
     if (empty($number)) {
-        $_SESSION['message'] = 'Please enter your phone number.';
-        header("Location: ../Pages/signup.php");
-        exit();
+        return "Please enter your phone number.";
     } else if (!preg_match('/^\d+$/', $number)) {
-        $_SESSION['message'] = 'Please enter a valid phone number using only digits.';
-        header("Location: ../Pages/signup.php");
-        exit();
+        return "Please enter a valid phone number using only digits.";
     }
 
     return true;
 }
 
+// Call the appropriate function based on the "action" parameter
+if ($_REQUEST["action"] == "getModels") {
+    get_models();
+}
+if ($_REQUEST["action"] == "addtofavorites") {
+    addToFavorites($_POST["post_id"]);
+}
 
 // Function to fetch models based on selected brand
 function get_models()
 {
     $brand_id = $_POST["brand_id"];
-    // Connect to the database
     global $conn;
     // Query the database to get the list of models that belong to the selected brand
     $sql = "SELECT model_id, model_name from model WHERE brand_id='$brand_id' GROUP BY model_name order by model_name asc";
@@ -317,18 +287,12 @@ function get_models()
     echo $models_html;
 }
 
-// Call the appropriate function based on the "action" parameter
-if ($_REQUEST["action"] == "getModels") {
-    get_models();
-}
-if ($_REQUEST["action"] == "addtofavorites") {
-    addToFavorites($_POST["post_id"]);
-}
 
 function addToFavorites($post_id)
 {
     $user_id = $_SESSION['user_id'];
     global $conn;
+
     // check if the post is already in the user's favorites
     $sql = "SELECT * FROM favorites WHERE post_id = $post_id AND user_id = $user_id";
     $result = mysqli_query($conn, $sql);
@@ -337,13 +301,9 @@ function addToFavorites($post_id)
         // add the post to the user's favorites
         $sql = "INSERT INTO favorites (post_id, user_id) VALUES ($post_id, $user_id)";
         mysqli_query($conn, $sql);
-
-        echo 'added';
     } else {
         // remove the post from the user's favorites
         $sql = "DELETE FROM favorites WHERE post_id = $post_id AND user_id = $user_id";
         mysqli_query($conn, $sql);
-
-        echo 'removed';
     }
 }

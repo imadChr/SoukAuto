@@ -28,7 +28,7 @@ $post = $result->fetch_assoc();
 <head>
 
   <meta charset="utf-8">
-  <title>CAR POST</title>
+  <title><?php echo $post['title'] ?></title>
   <link rel="stylesheet" href="../css/post.css">
 </head>
 

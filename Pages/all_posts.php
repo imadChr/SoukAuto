@@ -4,7 +4,7 @@ require_once '../utility/functions.php';
 $user_id = $_SESSION['user_id'];
 
 // set the number of posts per page
-$posts_per_page = 4;
+$posts_per_page = 6;
 
 // get the current page number from query string
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;

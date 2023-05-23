@@ -58,46 +58,44 @@ require_once 'utility/db_connection.php';
               <div class="collapse navbar-collapse" id="navbarsExample04">
                 <ul class="navbar-nav mr-auto">
                   <?php
-                  if (isset($_SESSION['user_id'])) {
-                    echo '<li class="nav-item">
-                    <a class="nav-link" href="Pages\postform.php">Sell</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="">Rent</a>
-                  </li>';
-                    echo '  <li class="nav-item">
-       <a class="nav-link dropdown-toggle" href="#" id="my-account-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $_SESSION['firstname'] . '</a>
-      <ul class="dropdown-menu" aria-labelledby="my-account-menu">
-        <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
-        <li class="nav-item">
-        <form method="post" action="Pages/all_posts.php">
-        <input type="hidden" name="action" value="myposts">
-        <button type="submit" class="nav-link">
-        My posts
-        </button>
-        </form>
-        </li>
-        <li class="nav-item">
-        <form method="post" action="Pages/all_posts.php">
-        <input type="hidden" name="action" value="favorite">
-        <button type="submit" class="nav-link">
-        My Favorites
-        </button>
-        </form>  
-        </li>
-        <li class="nav-item"><a class="nav-link" href="utility/logout.php">Logout</a></li>
-      </ul>
-      ';
-                  } else {
-                    echo '<li class="nav-item">
-                    <a class="nav-link" href="Pages\postform.php">Sell</a>
-                  </li>
+                  if (isset($_SESSION['user_id'])) { ?>
                     <li class="nav-item">
-      <a class="nav-link" href="Pages\signup.php">Sign up</a> 
-      </li><br>';
-                    echo '<li class="nav-item">
-      <a class="nav-link" href="Pages\login.php">Login</a>
-      </li>';
+                      <a class="nav-link" href="Pages\postform.php">Sell</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="">Rent</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-toggle" href="#" id="my-account-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php echo $_SESSION['firstname'] ?></a>
+                      <ul class="dropdown-menu" aria-labelledby="my-account-menu">
+                        <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
+                        <li class="nav-item">
+                          <form method="post" action="Pages/all_posts.php">
+                            <input type="hidden" name="action" value="myposts">
+                            <button type="submit" class="nav-link">My posts</button>
+                          </form>
+                        </li>
+                        <li class="nav-item">
+                          <form method="post" action="Pages/all_posts.php">
+                            <input type="hidden" name="action" value="favorite">
+                            <button type="submit" class="nav-link">
+                              My Favorites
+                            </button>
+                          </form>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="utility/logout.php">Logout</a></li>
+                      </ul>
+                    <?php } else { ?>
+                    <li class="nav-item">
+                      <a class="nav-link" href="Pages\postform.php">Sell</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="Pages\signup.php">Sign up</a>
+                    </li><br>
+                    <li class="nav-item">
+                      <a class="nav-link" href="Pages\login.php">Login</a>
+                    </li>
+                  <?php
                   }
                   ?>
                   </li>
@@ -158,7 +156,7 @@ require_once 'utility/db_connection.php';
     <ion-icon name="search-sharp" class="search-logo"></ion-icon>
   </form>
   <!-- end banner -->
-  
+
   <!-- wedo  section -->
   <div class="wedo">
     <div class="container">
@@ -185,7 +183,7 @@ require_once 'utility/db_connection.php';
                 <div class="col-md-6 margin_bottom">
                   <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
                     <div class="work">
-                      <figure><img src="<?php echo $row['url']; ?>" height="400" width="600" alt="#" /></figure>
+                      <figure><img src="<?php echo $row['url']; ?>" height="300" width="600" alt="#" /></figure>
                     </div>
                     <div class="work_text">
                       <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>

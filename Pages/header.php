@@ -23,8 +23,6 @@
 <!-- body -->
 
 <body class="main-layout">
-  <!-- loader  -->
-  <!-- end loader -->
   <!-- header -->
   <header>
     <!-- header inner -->
@@ -50,37 +48,46 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarsExample04">
                 <ul class="navbar-nav mr-auto">
-
-
-
                   <?php
-                  if (isset($_SESSION['user_id'])) {
-                    echo '<li class="nav-item">
-                    <a class="nav-link" href="Pages\postform.php">Sell</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="">Rent</a>
-                  </li>';
-                    echo '  <li class="nav-item">
-       <a class="nav-link dropdown-toggle" href="#" id="my-account-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $_SESSION['firstname'] . '</a>
-      <ul class="dropdown-menu" aria-labelledby="my-account-menu">
-        <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">My posts</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">My favorites</a></li>
-        <li class="nav-item"><a class="nav-link" href="utility/logout.php">Logout</a></li>
-      </ul>
-      </li>';
-                  } else {
-                    echo '<li class="nav-item">
-      <a class="nav-link" href="..\Pages\signup.php">Sign up</a>
-      </li><br>';
-                    echo '<li class="nav-item">
-      <a class="nav-link" href="..\Pages\login.php">Login</a>
-      </li>';
+                  if (isset($_SESSION['user_id'])) { ?>
+                    <li class="nav-item">
+                      <a class="nav-link" href="postform.php">Sell</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="">Rent</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-toggle" href="#" id="my-account-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php echo $_SESSION['firstname'] ?></a>
+                      <ul class="dropdown-menu" aria-labelledby="my-account-menu">
+                        <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
+                        <li class="nav-item">
+                          <form method="post" action="all_posts.php">
+                            <input type="hidden" name="action" value="myposts">
+                            <button type="submit" class="nav-link">My posts</button>
+                          </form>
+                        </li>
+                        <li class="nav-item">
+                          <form method="post" action="Pages/all_posts.php">
+                            <input type="hidden" name="action" value="favorite">
+                            <button type="submit" class="nav-link">My Favorites</button>
+                          </form>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="utility/logout.php">Logout</a></li>
+                      </ul>
+                    <?php } else { ?>
+                    <li class="nav-item">
+                      <a class="nav-link" href="postform.php">Sell</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="signup.php">Sign up</a>
+                    </li><br>
+                    <li class="nav-item">
+                      <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                  <?php
                   }
                   ?>
                   </li>
-
                 </ul>
               </div>
             </nav>
@@ -89,6 +96,16 @@
       </div>
     </div>
   </header>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery-3.0.0.min.js"></script>
+  <!-- sidebar -->
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="js/custom.js"></script>
+  <!-- icons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <!-- end header inner -->
   <!-- end header -->
 
