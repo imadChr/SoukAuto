@@ -3,7 +3,7 @@ require_once "../utility/functions.php";
 require_once "../utility/db_connection.php";
 if (!isset($_SESSION['user_id'])) {
     // Redirect the user to the login page
-    header('Location: ../pages/login.php');
+    header('Location: ../pages/login.php?redirect_url=postform.php');
     exit();
 }
 ?>

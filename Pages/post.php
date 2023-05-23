@@ -106,8 +106,8 @@ if (isset($_GET['delete_comment'])) {
         <?php if (isset($_SESSION['user_id'])) { ?>
           <button type="submit" class="btn" name="post_comment">Post Comment</button>
         <?php  } else { ?>
-          <a href="login.php"> <button type="submit" class="btn" name="post_comment" disabled>Log in to Post Comment</button></a>
-        <?php        } ?>
+          <a href="login.php?redirect_url=post.php?id=<?php echo intval($post_id); ?>">Log in to Post Comment</a>
+        <?php } ?>
       </form>
     </div> <br>
 

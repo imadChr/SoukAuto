@@ -137,8 +137,7 @@ function login($email, $password)
             if (password_verify($password, $stored_password)) {
                 $_SESSION["user_id"] = $row["user_id"];
                 $_SESSION["firstname"] = $row["firstname"];
-                header("Location: ../index.php");
-                exit;
+                return true;
             } else {
                 $_SESSION['message'] = "Invalid email address or password";
                 header("Location: ../Pages/login.php");
