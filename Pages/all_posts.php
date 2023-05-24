@@ -67,7 +67,6 @@ $total_pages = ceil($total_posts / $posts_per_page);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
     <!-- Iconbox -->
-
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <!-- date picker -->
@@ -95,15 +94,15 @@ $total_pages = ceil($total_posts / $posts_per_page);
                         Favorites
                         <span class="badge bg-dark text-white ms-1 rounded-pill"><?php echo $total_favorites ?></span>
                     </button>
+                    <a href="all_posts.php">
+                        <button class="btn btn-outline-dark">
+                            <i class="bi-cart-fill me-1"></i>
+                            All Posts
+                            <span class="badge bg-dark text-white ms-1 rounded-pill"><?php echo $total_posts ?></span>
+                        </button>
+                    </a>
                 </form>
                 <br>
-                <a href="all_posts.php">
-                    <button class="btn btn-outline-dark">
-                        <i class="bi-cart-fill me-1"></i>
-                        All Posts
-                        <span class="badge bg-dark text-white ms-1 rounded-pill"><?php echo $total_posts ?></span>
-                    </button>
-                </a>
             </div>
         </div>
     </nav>
@@ -232,8 +231,8 @@ $total_pages = ceil($total_posts / $posts_per_page);
                     <div class="col-md-6 col-lg-4">
                         <div class="container">
                             <div class="card mb-4">
-                                <!-- RENT/SELL badge-->
-                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sell</div>
+                                <!-- Price badge-->
+                                <div class="badge bg-dark text-white position-absolute" style="top: 1rem; right: 1rem;">Sell</div>
                                 <!-- Product image-->
                                 <img class="card-img-top" src="../<?php echo $row['url']; ?>" alt="Card image cap">
                                 <!--card body-->
@@ -318,11 +317,12 @@ $total_pages = ceil($total_posts / $posts_per_page);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<!-- date picker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+<!--ion icons-->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
-<script src="https://use.fontawesome.com/72b693e5a2.js"></script>
+<!-- customized js -->
 <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
