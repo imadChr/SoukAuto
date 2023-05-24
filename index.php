@@ -44,83 +44,151 @@ require_once 'utility/db_connection.php';
               <div class="collapse navbar-collapse" id="navbarsExample04"> 
                 <ul class="navbar-nav mr-auto">
                   <?php
-                  if (isset($_SESSION['user_id'])) {
-                    echo '<li class="nav-item">
-                            <a class="nav-link" href="Pages\postform.php">Sell</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="">Rent</a>
-                          </li>';
-                    echo ' <li class="nav-item">
-                            <a class="nav-link dropdown-toggle" href="#" id="my-account-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $_SESSION['firstname'] . '</a>
 
-                            <ul class="dropdown-menu" aria-labelledby="my-account-menu">
-                              <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
-                              <li class="nav-item">
-                                <form method="post" action="Pages/all_posts.php">
-                                  <input type="hidden" name="action" value="myposts">
-                                  <button type="submit" class="nav-link"> My posts </button>
-                                </form>
-                              </li>
-                              <li class="nav-item">
-                                <form method="post" action="Pages/all_posts.php">
-                                  <input type="hidden" name="action" value="favorites">
-                                  <button type="submit" class="nav-link"> My Favorites </button>
-                                </form>
-                              </li>
-                              <li class="nav-item"><a class="nav-link" href="utility/logout.php">Logout</a></li>
-                            </ul> 
-                          '; 
-                  } else {
-                    echo '<li class="nav-item"> 
-                            <a class="nav-link" href="Pages\signup.php">Sign up</a> 
-                          </li><br>'; 
-
-                    echo '<li class="nav-item"> 
-                            <a class="nav-link" href="Pages\login.php">Login</a> 
-                          </li>'; 
-                  } 
-                  ?> 
+                  if (isset($_SESSION['user_id'])) { ?>
+                    <li class="nav-item">
+                      <a class="nav-link" href="Pages\postform.php">Sell</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="">Rent</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-toggle" href="#" id="my-account-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php echo $_SESSION['firstname'] ?></a>
+                      <ul class="dropdown-menu" aria-labelledby="my-account-menu">
+                        <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
+                        <li class="nav-item">
+                          <form method="post" action="Pages/all_posts.php">
+                            <input type="hidden" name="action" value="myposts">
+                            <button type="submit" class="nav-link">My posts</button>
+                          </form>
+                        </li>
+                        <li class="nav-item">
+                          <form method="post" action="Pages/all_posts.php">
+                            <input type="hidden" name="action" value="favorite">
+                            <button type="submit" class="nav-link">
+                              My Favorites
+                            </button>
+                          </form>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="utility/logout.php">Logout</a></li>
+                      </ul>
+                    <?php } else { ?>
+                    <li class="nav-item">
+                      <a class="nav-link" href="Pages\postform.php">Sell</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="Pages\signup.php">Sign up</a>
+                    </li><br>
+                    <li class="nav-item">
+                      <a class="nav-link" href="Pages\login.php">Login</a>
+                    </li>
+                  <?php
+                  }
+                  ?>
+                  </li>
                 </ul>
               </div>
             </nav>
           </div>
         </div>
-      </div> 
-    </div> 
-  </header> 
 
-  <section class="banner_main"> 
-    <div id="banner1" class="carousel slide" data-ride="carousel"> 
-      <ol class="carousel-indicators"> 
-        <li data-target="#banner1" data-slide-to="0" class="active"></li> 
-        <li data-target="#banner1" data-slide-to="1"></li> 
-        <li data-target="#banner1" data-slide-to="2"></li> 
-      </ol> 
-      <div class="carousel-inner"> 
-        <div class="carousel-item active"> 
-          <div class="container-fluid"> 
-            <div class="carousel-caption"> 
-              <div class="row"> 
-                <div class="col-md-6"> 
-                  <div class="text-bg"> 
-                    <?php if (isset($_SESSION['message'])) { ?> 
-                      <h5 style="color:red;"><?php echo $_SESSION['message'] ?></h5>; 
-                      <?php unset($_SESSION['message']); } ?> 
-                    <h1>Welcome to SoukAuto</h1> 
-                    <span>"You need Auto! there is SoukAuto"</span><br> 
-                    <a href="Pages/all_posts.php">View All Posts</a> 
-                  </div> 
-                </div> 
-              </div> 
-            </div> 
-          </div> 
-        </div> 
-      </div> 
-    </div> 
-  </section> 
+      </div>
+    </div>
+  </header>
+  <!-- end header inner -->
+  <!-- end header -->
+  <!-- banner -->
+  <section class="banner_main">
+    <div id="banner1" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#banner1" data-slide-to="0" class="active"></li>
+        <li data-target="#banner1" data-slide-to="1"></li>
+        <li data-target="#banner1" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="container-fluid">
+            <div class="carousel-caption">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="text-bg">
+                    <?php
+                    if (isset($_SESSION['message'])) { ?>
+                      <h5 style="color:red;"><?php echo $_SESSION['message'] ?></h5>;
+                    <?php unset($_SESSION['message']);
+                    } ?>
+                    <h1>Welcome to SoukAuto</h1>
+                    <span>"You need Auto! there is SoukAuto!"</span>
+                    <p>
+                      Your platform for buying and selling and renting cars
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="text_img">
+                    <figure>
+                      <img src="images/mazda.png" alt="#" />
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <form method="post" action="pages/all_posts.php" class="search">
+    <input type="hidden" name="action" value="search">
+    <input type="text" name="keyword" placeholder="Search..." class="search-filter">
+    <ion-icon name="search-sharp" class="search-logo"></ion-icon>
+  </form>
+  <!-- end banner -->
 
-  <section class="about_section"> 
+  <!-- wedo  section -->
+  <div class="wedo">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="titlepage">
+            <a href="#posts">
+              <p>Explore</p>
+              <ion-icon class="arrow1" name="chevron-down-outline"></ion-icon>
+              <ion-icon class="arrow2" name="chevron-down-outline"></ion-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="posts">
+        <div class="col-md-10 offset-md-1">
+          <div class="row">
+            <?php
+            $sql = "SELECT * FROM ( post join car on post.car_id = car.car_id ) join images on images.post_id = post.post_id where image_order = 1 order by post.post_id desc limit 4";
+            $result = mysqli_query($conn, $sql);
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+            ?>
+                <div class="col-md-6 margin_bottom">
+                  <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
+                    <div class="work">
+                      <figure><img src="<?php echo $row['url']; ?>" height="300" width="600" alt="#" /></figure>
+                    </div>
+                    <div class="work_text">
+                      <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
+                    </div>
+                  </a>
+                </div>
+            <?php
+              }
+            } else {
+              echo "0 results";
+            }
+            ?>
+          </div>
+        </div>
+      </div>
+
+ <section class="about_section"> 
     <div class="container"> 
       <div class="row"> 
         <div class="col-md-12"> 
@@ -225,65 +293,6 @@ require_once 'utility/db_connection.php';
       </div> 
     </div> 
   </section> 
-
-  <footer> 
-    <div class="footer"> 
-      <div class="container"> 
-        <div class="row"> 
-          <div class="col-md-12"> 
-            <div class="full"> 
-              <div class="heading_main text_align_center white_fonts"> 
-                <h2>Subscribe to our Newsletter</h2> 
-              </div> 
-            </div> 
-          </div> 
-        </div> 
-        <div class="row"> 
-          <div class="col-md-12"> 
-            <div class="full"> 
-              <div class="newsletter_form">
-                <form method="post" action="utility/newsletter.php">
-                  <?php if (isset($_SESSION['message'])) { ?> 
-                    <h5 style="color:red;"><?php echo $_SESSION['message'] ?></h5>; 
-                    <?php unset($_SESSION['message']); } ?> 
-                  <input type="email" placeholder="Your Email" name="email" /> 
-                  <button type="submit">Subscribe</button> 
-                </form> 
-              </div> 
-            </div> 
-          </div> 
-        </div> 
-        <div class="row"> 
-          <div class="col-md-12"> 
-            <div class="full"> 
-              <div class="footer-social-icons"> 
-                <ul> 
-                  <li><a href="#"><i class="fa fa-facebook"></i></a></li> 
-                  <li><a href="#"><i class="fa fa-twitter"></i></a></li> 
-                  <li><a href="#"><i class="fa fa-google-plus"></i></a></li> 
-                  <li><a href="#"><i class="fa fa-youtube"></i></a></li> 
-                  <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                </ul> 
-              </div> 
-              <div class="footer-menu"> 
-                <ul> 
-                  <li><a href="index.php">Home</a></li> 
-                  <li><a href="Pages/all_posts.php">Posts</a></li> 
-                  <li><a href="Pages\about.php">About Us</a></li> 
-                  <li><a href="Pages\contact.php">Contact Us</a></li> 
-                  <li><a href="Pages\privacypolicy.php">Privacy Policy</a></li> 
-                  <li><a href="Pages\termsandconditions.php">Terms & Conditions</a></li> 
-                </ul> 
-              </div> 
-              <div class="footer-bottom"> 
-                <p>Designed and developed by <a href="#">Your Company Name</a></p> 
-              </div> 
-            </div> 
-          </div> 
-        </div> 
-      </div> 
-    </div> 
-  </footer> 
 
   <script src="js/jquery.min.js"></script> 
   <script src="js/popper.min.js"></script> 

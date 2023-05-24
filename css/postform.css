@@ -375,8 +375,8 @@ button[type="submit"] {
     position: absolute;
     width: 300px;
     height: 44px;
-    left: 500px;
-    top: 600px;
+    left: 39%;
+    top: 85%;
     border: 2px solid #81B29A;
     border-radius: 10px;
     padding: 10px;
@@ -384,6 +384,7 @@ button[type="submit"] {
     box-shadow: 1px 1px 2px rgba(32, 83, 117, 0.68);
     background: #F66B02;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+    
 }
 
 button[type="submit"]:hover {
@@ -506,19 +507,21 @@ input:focus {
             border: none;
         }
 
-        .btn {
-            width: 250px;
-            height: 40px;
-            position: absolute;
-            border-radius: 12px;
-            top: 750px;
-            left: 70%;
-            background-color: #ED6C15;
-            border: none;
-
-        }
+      
+    
 
         .btn:hover {
             background-color: #205375;
 
+        }
+
+        .navbar-brand 
+        {
+            position: absolute;
+            width: 12%;
+            height: 14%;
+            left: 15%;
+            top: 7%;
+            transform: translateX(-50%);
+            margin: 0 auto;
         }

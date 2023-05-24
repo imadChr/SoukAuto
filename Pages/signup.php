@@ -1,6 +1,4 @@
 <?php session_start(); ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +14,7 @@
   <header>
     <div class="logo">
       <a href="../index.php">
-        <p class="Souk">Souk</p>
-        <p class="Auto">Auto</p>
+        <img src="../images/logo.png">
       </a>
     </div>
     <p class="Loggin">Signing up...</p>
@@ -32,7 +29,6 @@
       unset($_SESSION['message_type']);
     }
     ?>
-
     <div class="info">
       <form method="POST" action="../utility/user_signup.php">
         <div>
@@ -55,13 +51,66 @@
           <label for="PhoneNumber">Phone Number:</label>
           <input type="tel" name="PhoneNumber" id="PhoneNumber" required />
         </div>
-        <p>
-          By clicking "Create account" You agree to SoukAuto TOS & Privacy
-          Policy.
-        </p>
         <div>
-          <input type="submit" class="sign" value="Signup" />
+          <label for="wilaya">Wilaya:</label>
+          <select id="wilaya" name="wilaya">
+            <option value="">Select a wilaya</option>
+            <option value="Adrar">Adrar</option>
+            <option value="Chlef">Chlef</option>
+            <option value="Laghouat">Laghouat</option>
+            <option value="Oum El Bouaghi">Oum El Bouaghi</option>
+            <option value="Batna">Batna</option>
+            <option value="Béjaïa">Béjaïa</option>
+            <option value="Biskra">Biskra</option>
+            <option value="Béchar">Béchar</option>
+            <option value="Blida">Blida</option>
+            <option value="Bouira">Bouira</option>
+            <option value="Tamanrasset">Tamanrasset</option>
+            <option value="Tébessa">Tébessa</option>
+            <option value="Tlemcen">Tlemcen</option>
+            <option value="Tiaret">Tiaret</option>
+            <option value="Tizi Ouzou">Tizi Ouzou</option>
+            <option value="Algiers">Algiers</option>
+            <option value="Djelfa">Djelfa</option>
+            <option value="Jijel">Jijel</option>
+            <option value="Sétif">Sétif</option>
+            <option value="Saïda">Saïda</option>
+            <option value="Skikda">Skikda</option>
+            <option value="Sidi Bel Abbès">Sidi Bel Abbès</option>
+            <option value="Annaba">Annaba</option>
+            <option value="Guelma">Guelma</option>
+            <option value="Constantine">Constantine</option>
+            <option value="Médéa">Médéa</option>
+            <option value="Mostaganem">Mostaganem</option>
+            <option value="M'Sila">M'Sila</option>
+            <option value="Mascara">Mascara</option>
+            <option value="Ouargla">Ouargla</option>
+            <option value="Oran">Oran</option>
+            <option value="El Bayadh">El Bayadh</option>
+            <option value="Illizi">Illizi</option>
+            <option value="Bordj Bou Arreridj">Bordj Bou Arreridj</option>
+            <option value="Boumerdès">Boumerdès</option>
+            <option value="El Tarf">El Tarf</option>
+            <option value="Tindouf">Tindouf</option>
+            <option value="Tissemsilt">Tissemsilt</option>
+            <option value="El Oued">El Oued</option>
+            <option value="Khenchela">Khenchela</option>
+            <option value="Souk Ahras">Souk Ahras</option>
+            <option value="Tipaza">Tipaza</option>
+            <option value="Mila">Mila</option>
+            <option value="Aïn Defla">Aïn Defla</option>
+            <option value="Naâma">Naâma</option>
+            <option value="Aïn Témouchent">Aïn Témouchent</option>
+            <option value="Ghardaïa">Ghardaïa</option>
+            <option value="Relizane">Relizane</option>
+          </select>
         </div>
+        <div>
+          <label for="terms">By clicking "Create account" You agree to SoukAuto TOS & Privacy Policy.</label>
+          <input type="checkbox" class="check" name="terms" id="terms" required />
+          <div>
+            <input type="submit" class="sign" value="Create Account" />
+          </div>
       </form>
     </div>
   </section>

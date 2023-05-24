@@ -4,7 +4,7 @@ require_once '../utility/functions.php';
 $user_id = $_SESSION['user_id'];
 
 // set the number of posts per page
-$posts_per_page = 9;
+$posts_per_page = 6;
 
 // get the current page number from query string
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -40,7 +40,9 @@ $result = mysqli_query($conn, $sql);
 
 // get the total number of posts
 $total_posts = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM post"));
-$total_favorites = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM favorites WHERE user_id = " . $_SESSION['user_id']));
+if (!empty($user_id)) {
+    $total_favorites = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM favorites WHERE user_id = " . $_SESSION['user_id']));
+}
 
 // calculate the total number of pages
 $total_pages = ceil($total_posts / $posts_per_page);
@@ -92,7 +94,7 @@ $total_pages = ceil($total_posts / $posts_per_page);
                     <button class="btn btn-outline-dark" type="submit">
                         <i class="bi-cart-fill me-1"></i>
                         Favorites
-                        <span class="badge bg-dark text-white ms-1 rounded-pill"><?php echo $total_favorites ?></span>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"><?php echo $total_favorites ?? 0 ?></span>
                     </button>
                     <a href="all_posts.php">
                         <button class="btn btn-outline-dark">
@@ -234,6 +236,7 @@ $total_pages = ceil($total_posts / $posts_per_page);
                                 <!-- Price badge-->
                                 <div class="badge bg-dark text-white position-absolute" style="top: 1rem; right: 1rem;">Sell</div>
                                 <!-- Product image-->
+
                                 <img class="card-img-top" src="../<?php echo $row['url']; ?>" alt="Card image cap">
                                 <!--card body-->
                                 <div class="card-body">
@@ -245,30 +248,33 @@ $total_pages = ceil($total_posts / $posts_per_page);
 
                                     <!--buttons-->
                                     <?php
-                                    $sql_favorites = "SELECT * FROM favorites WHERE user_id = ? AND post_id = ?";
-                                    $stmt_favorites = mysqli_prepare($conn, $sql_favorites);
-                                    mysqli_stmt_bind_param($stmt_favorites, 'ii', $user_id, $row['post_id']);
-                                    mysqli_stmt_execute($stmt_favorites);
-                                    $result_favorites = mysqli_stmt_get_result($stmt_favorites);
-                                    if ($result_favorites->num_rows > 0) {
+                                    if (isset($_SESSION['user_id'])) {
+
+                                        $sql_favorites = "SELECT * FROM favorites WHERE user_id = ? AND post_id = ?";
+                                        $stmt_favorites = mysqli_prepare($conn, $sql_favorites);
+                                        mysqli_stmt_bind_param($stmt_favorites, 'ii', $user_id, $row['post_id']);
+                                        mysqli_stmt_execute($stmt_favorites);
+                                        $result_favorites = mysqli_stmt_get_result($stmt_favorites);
+                                        if ($result_favorites->num_rows > 0) {
                                     ?>
-                                        <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
-                                            <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Delete From Favorites</span>
-                                        </button>
+                                            <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
+                                                <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Delete From Favorites</span>
+                                            </button>
+                                        <?php
+                                        } else { ?>
+                                            <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
+                                                <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Add To Favorites</span>
+                                            </button>
                                     <?php
-                                    } else { ?>
-                                        <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
-                                            <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Add To Favorites</span>
-                                        </button>
-                                    <?php
+                                        }
                                     }
                                     ?>
 
                                     <button class="e-button btn-sm expand-btn" role="button">
                                         <span class="e-button-text"><ion-icon name="person-outline"></ion-icon> Contact Seller</span>
                                     </button>
-
                                     <a href="post.php?id=<?php echo $row['post_id'] ?>">
+
                                         <button class="e-button btn-sm expand-btn">
                                             <span class="e-button-text"><ion-icon name="add-outline"></ion-icon> Show more</span>
                                         </button>
@@ -327,21 +333,6 @@ $total_pages = ceil($total_posts / $posts_per_page);
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
-
-
-    //item in favorite list (change later)
-    // const button = document.querySelector('.e-button');
-    // let isFavorite = false;
-
-    // button.addEventListener('click', () => {
-    //     const icon = button.querySelector('ion-icon');
-    //     isFavorite = !isFavorite;
-    //     if (isFavorite) {
-    //         icon.setAttribute('name', 'heart-dislike-outline');
-    //     } else {
-    //         icon.setAttribute('name', 'heart-outline');
-    //     }
-    // });
 
     //togle filter button
     $(document).ready(function() {
