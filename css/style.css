@@ -675,16 +675,11 @@ header .container-fluid {
 }
 
 .work figure:hover {
-    opacity: 0.5;
+    opacity: 0.5 !important;
 }
 
 .work figure {
     margin: 0;
-}
-
-.work figure img {
-    width: 400px;
-    height: 200px;
 }
 
 .work_text {

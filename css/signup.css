@@ -17,38 +17,30 @@ body {
     padding: 0 20px;
   }
 
+
   .logo {
-    display: flex;
-    align-items: center;
-  }
+    position: absolute
+    ;    left: 5%;
+    }
+    
+    .logo img {
+        height: 60px;
+        margin-right: 10px;
+    }
   
-  .logo img {
-    height: 40px;
-    margin-right: 10px;
-  }
-  
-  .Souk,
-  .Auto {
-    font-size: 31px;
-    font-weight: bold;
-  }
-  
-  .Souk {
-    color: #205375;
-  }
-  
-  .Auto {
-    color: #ED6C15;
-  }
   
   .Loggin {
     font-size: 30px;
     color: #102B3C;
     font-weight: bold;
+    position: absolute;
+    left: 80%;
   }
   
   /* Section */
   section {
+    position: absolute;
+    top: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -90,6 +82,16 @@ body {
     align-items: center;
     margin-bottom: 20px;
   }
+  .info select
+  {
+    width: 360px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #EFEFEF;
+    border: none;
+    padding: 5px 15px;
+    margin-bottom: 10px;
+  }
   
   .info div {
     display: flex;
@@ -103,7 +105,7 @@ body {
     transform: scale(1.05);
   }
   
-  .info input:not(.sign) {
+  .info input:not(.sign,.check) {
     width: 340px;
     height: 30px;
     border-radius: 10px;
@@ -129,7 +131,7 @@ body {
   /* Sign-up button */
   .sign {
  background-color: #ED6C15;
-  width: 84.71px;
+  width: 100%;
   height: 41px;
   border: none;
   border-radius: 10px;
@@ -138,6 +140,15 @@ body {
   font-weight: bold;
   font-size: 18px;
   margin-top: 10px;
+  text-align: center;
+  }
+
+  .check
+  {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
   }
   
   .sign:hover {
@@ -162,4 +173,7 @@ body {
   section a:hover {
     color: #ED6C15;
   }
+  .main
+  {position: absolute;
+  top: 9%;}
   

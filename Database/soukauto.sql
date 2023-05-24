@@ -1,5 +1,5 @@
-  SET FOREIGN_KEY_CHECKS=0;
-  SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET FOREIGN_KEY_CHECKS=0;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -52,14 +52,32 @@ CREATE TABLE `car` (
   `car_id` int(5) NOT NULL,
   `brand_id` int(11) NOT NULL,
   `model_id` int(11) DEFAULT NULL,
-  `fuel` varchar(5) DEFAULT NULL,
+  `fuel` varchar(10) DEFAULT NULL,
   `year` int(4) NOT NULL,
   `mileage` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `car` (`car_id`, `brand_id`, `model_id`, `fuel`, `year`, `mileage`) VALUES
-(11, 3, 5, 'Essen', 1988, 120000),
-(12, 4, 7, 'Essen', 2015, 60000);
+(11, 3, 5, 'Essence', 1988, 120000),
+(12, 4, 7, 'Essence', 2015, 60000),
+(13, 11, 22, 'Diesel', 1992, 120000),
+(14, 6, 12, 'Essence', 1992, 150000),
+(15, 6, 103, 'Essence', 1999, 60000),
+(16, 15, 29, 'Essence', 2015, 30000),
+(17, 26, 51, 'Diesel', 2018, 20000),
+(18, 3, 86, 'GPL', 2023, 5),
+(19, 12, 23, 'Essence', 2007, 150000);
+
+CREATE TABLE `comments` (
+  `comment_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `message` mediumtext NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `date_posted` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `comments` (`comment_id`, `user_id`, `message`, `post_id`, `date_posted`) VALUES
+(11, 1, 'seems odd, canada and no rust?', 23, '2023-05-23');
 
 CREATE TABLE `countries` (
   `CountryID` int(5) NOT NULL,
@@ -84,8 +102,10 @@ CREATE TABLE `favorites` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `favorites` (`id`, `post_id`, `user_id`) VALUES
-(2, 11, 1),
-(4, 12, 1);
+(13, 11, 15),
+(15, 21, 1),
+(17, 11, 19),
+(18, 23, 1);
 
 CREATE TABLE `images` (
   `image_id` int(11) NOT NULL,
@@ -100,7 +120,17 @@ INSERT INTO `images` (`image_id`, `post_id`, `url`, `image_order`) VALUES
 (3, 11, 'images/uploads/IMG_20220901_200955.jpg', 3),
 (4, 11, 'images/uploads/IMG_20220901_201100.jpg', 4),
 (5, 12, 'images/uploads/1.PNG', 1),
-(6, 12, 'images/uploads/캡처.PNG', 2);
+(6, 12, 'images/uploads/캡처.PNG', 2),
+(7, 17, 'images/uploads/engels-flaz-0lh_fY6NEBM-unsplash.jpg', 1),
+(8, 18, 'images/uploads/civic EK9.jpeg', 1),
+(9, 19, 'images/uploads/eloy-carrasco-fmF95zYq_CY-unsplash.jpg', 1),
+(10, 20, 'images/uploads/eloy-carrasco-fmF95zYq_CY-unsplash.jpg', 1),
+(11, 20, 'images/uploads/aachal-WwRkM7CduQA-unsplash.jpg', 2),
+(12, 20, 'images/uploads/engels-flaz-0lh_fY6NEBM-unsplash.jpg', 3),
+(13, 20, 'images/uploads/anthony-bautista-ngsvXuGixaM-unsplash.jpg', 4),
+(14, 21, 'images/uploads/aachal-WwRkM7CduQA-unsplash.jpg', 1),
+(15, 22, 'images/uploads/civic EK9.jpeg', 1),
+(16, 23, 'images/uploads/Volvo_S60_002.jpg', 1);
 
 CREATE TABLE `model` (
   `model_id` int(5) NOT NULL,
@@ -207,7 +237,8 @@ INSERT INTO `model` (`model_id`, `brand_id`, `model_name`) VALUES
 (99, 3, 'M4'),
 (100, 3, 'M5'),
 (101, 17, 'Symbol'),
-(102, 17, 'Megane');
+(102, 17, 'Megane'),
+(103, 6, 'S2000');
 
 CREATE TABLE `post` (
   `post_id` int(11) NOT NULL,
@@ -223,10 +254,13 @@ CREATE TABLE `post` (
 INSERT INTO `post` (`post_id`, `user_id`, `car_id`, `title`, `description`, `price`, `date`, `wilaya`) VALUES
 (11, 1, 11, 'BMW E30 325I WAGON', 'swap moteur 325i ', 220000, '2023-05-06', 'Oran'),
 (12, 1, 12, 'Hyundai', 'GOOD car ', 300000, '2023-05-06', 'Adrar'),
-(13, 1, 11, 'BMW E30 325I WAGON', 'swap moteur 325i ', 220000, '2023-05-06', 'Oran'),
-(14, 1, 11, 'BMW E30 325I WAGON', 'swap moteur 325i ', 220000, '2023-05-06', 'Oran'),
-(15, 1, 12, 'Hyundai', 'GOOD car ', 300000, '2023-05-06', 'Adrar'),
-(16, 1, 11, 'BMW E30 325I WAGON', 'swap moteur 325i ', 220000, '2023-05-06', 'Oran');
+(17, 1, 13, 'Integra Type-R', '8250Rpm ', 160000, '2023-05-09', 'Oran'),
+(18, 1, 14, 'Civic Type-R EK9 K20', 'imported from japan', 250000, '2023-05-10', 'Béjaïa'),
+(19, 1, 15, 'Honda S2000 AP1', 'imported from japan and tastefully modified', 300000, '2023-05-10', 'Tizi Ouzou'),
+(20, 15, 16, '911', 'lol', 5000000, '2023-05-10', ''),
+(21, 1, 17, '208 tb9a 208', 'Freelancin', -2147483648, '2023-05-14', 'Biskra'),
+(22, 19, 18, 'aezazr', 'zheuize kjazeh', 765432, '2023-05-17', 'Biskra'),
+(23, 1, 19, 'VOLVO S60 from canada', 'it has no rust dont worry', 500000, '2023-05-18', 'El Tarf');
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
@@ -239,7 +273,10 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `password`, `PhoneNumber`, `wilaya`) VALUES
-(1, 'Mohammed Mouncef', 'Kadri', 'mohammed.kadri@ensia.edu.dz', '$2y$10$2NW.CbkCQ4LElYbJ.VbctePZYz7wTbzdxa/33FDyr4LG4i2lhsfJO', '0561636981', 'Oran');
+(1, 'Mohammed Mouncef', 'Kadri', 'mohammed.kadri@ensia.edu.dz', '$2y$10$2NW.CbkCQ4LElYbJ.VbctePZYz7wTbzdxa/33FDyr4LG4i2lhsfJO', '0561636981', 'Oran'),
+(15, 'nihel ', 'hocine', 'NIHEL@GMAIL.COM', '$2y$10$5Nn2aDE9Zgf4vYJJlYw/Tuz5TVAx5yyXrpsUbsrAUDP6Ts8ov/yOC', '0557543645', ''),
+(28, 'Mohammed Mouncef', 'Kadri', 'mohammed.kadri@ensia.edu.dz.L', '$2y$10$p19VwbHunQYDpiq4ZP3by.fLTTzYd9XlJ3EwRRRcBiwxyxcYSnBJa', '0561636981', 'Tébessa'),
+(29, 'Mohammed Mouncef', 'Kadri', 'mohammed.kadri@ensia.edu', '$2y$10$JjVFk7dbenIkhxB5WETz2OdMTfHAfPFhuq6l/dE7c.7wQnARIKbMe', '0561636981', 'Tizi Ouzou');
 
 
 ALTER TABLE `brand`
@@ -250,6 +287,11 @@ ALTER TABLE `car`
   ADD PRIMARY KEY (`car_id`),
   ADD KEY `fk_brand_id_car` (`brand_id`),
   ADD KEY `fk_model_id_car` (`model_id`);
+
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`comment_id`),
+  ADD KEY `fk_post_id_comments` (`post_id`),
+  ADD KEY `fk_user_id_comments` (`user_id`);
 
 ALTER TABLE `countries`
   ADD PRIMARY KEY (`CountryID`);
@@ -279,22 +321,25 @@ ALTER TABLE `users`
 
 
 ALTER TABLE `car`
-  MODIFY `car_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `car_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+ALTER TABLE `comments`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 ALTER TABLE `favorites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 ALTER TABLE `model`
-  MODIFY `model_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `model_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 
 ALTER TABLE `brand`
@@ -303,6 +348,13 @@ ALTER TABLE `brand`
 ALTER TABLE `car`
   ADD CONSTRAINT `fk_brand_id_car` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_model_id_car` FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `comments`
+  ADD CONSTRAINT `fk_post_id_comments` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_id_comments` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `countries`
+  ADD CONSTRAINT `country_continent_id_fk` FOREIGN KEY (`Continent`) REFERENCES `continents` (`ContID`);
 
 ALTER TABLE `favorites`
   ADD CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
@@ -317,6 +369,7 @@ ALTER TABLE `model`
 ALTER TABLE `post`
   ADD CONSTRAINT `fk_car_id` FOREIGN KEY (`car_id`) REFERENCES `car` (`car_id`),
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

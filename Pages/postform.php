@@ -3,7 +3,7 @@ require_once "../utility/functions.php";
 require_once "../utility/db_connection.php";
 if (!isset($_SESSION['user_id'])) {
     // Redirect the user to the login page
-    header('Location: ../pages/login.php');
+    header('Location: ../pages/login.php?redirect_url=postform.php');
     exit();
 }
 ?>
@@ -14,7 +14,6 @@ if (!isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../css/postform.css"> -->
     <title>Post Your AD</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -24,7 +23,9 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <header>
         <h1 class="post">Post your car</h1>
-        <h1 class="logo">Souk auto</h1>
+        <a class="navbar-brand" href="../index.php">
+            <img src="../images/logo.png" class="logo">
+        </a>
     </header>
 
     <?php if (isset($_SESSION['message'])) {
@@ -148,7 +149,6 @@ if (!isset($_SESSION['user_id'])) {
         </section>
         <button type="submit" class="btn">Submit</button>
     </form>
-    <!-- brand(select),model(select),fuel(select),wilaya(select),title,description,year,price,upload file,mileage -->
 
 </body>
 <script>
