@@ -79,6 +79,7 @@ $total_pages = ceil($total_posts / $posts_per_page);
 
 
 <body>
+    <?php include "header2.php"; ?>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
@@ -311,7 +312,9 @@ $total_pages = ceil($total_posts / $posts_per_page);
     </div>
 </body>
 
-
+<?php 
+    include "footer.php";
+?>
 
 <!-- Bootstrap JavaScript files -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

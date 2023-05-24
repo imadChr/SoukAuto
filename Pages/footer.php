@@ -33,7 +33,7 @@
   </head>
   <body>
     <!-- footer -->
-    <footer id="contact">
+    <footer id="contact fixed-bottom">
       <br><br>
       <div class="container">
         <div class="row">
