@@ -49,14 +49,13 @@ if (isset($_GET['delete_comment'])) {
 <html lang="en" dir="ltr">
 
 <head>
-
   <meta charset="utf-8">
   <title><?php echo $post['title'] ?></title>
   <link rel="stylesheet" href="../css/post.css">
 </head>
 
 <body>
-  <header><?php include "header.php"; ?></header>
+  <?php include "header2.php"; ?>
   <br><br>
 
   <div class="car-container">
@@ -149,5 +148,10 @@ if (isset($_GET['delete_comment'])) {
   <br><br>
   <?php include "footer.php"; ?>
 </body>
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 
 </html>

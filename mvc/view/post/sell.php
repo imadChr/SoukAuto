@@ -1,12 +1,3 @@
-<?php
-require_once "../utility/functions.php";
-require_once "../utility/db_connection.php";
-if (!isset($_SESSION['user_id'])) {
-    // Redirect the user to the login page
-    header('Location: ../pages/login.php?redirect_url=postform.php');
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,18 +12,13 @@ if (!isset($_SESSION['user_id'])) {
 
 <body>
     <header>
-        <h1 class="post">Post your car</h1>
+        <h1 class="post">Sell your car</h1>
         <a class="navbar-brand" href="../index.php">
             <img src="../images/logo.png" class="logo">
         </a>
     </header>
 
-    <?php if (isset($_SESSION['message'])) {
-        echo '<h5 style="color:red;">' . $_SESSION['message'] . '</h5>';
-        unset($_SESSION['message']);
-    } ?>
-
-    <form method="POST" action="..\utility\create_post.php" enctype="multipart/form-data">
+    <form method="POST" action="" enctype="multipart/form-data">
         <section>
             <div>
                 <label for="brand">Brand:</label>
@@ -148,33 +134,3 @@ if (!isset($_SESSION['user_id'])) {
         </section>
         <button type="submit" class="btn">Submit</button>
     </form>
-
-</body>
-<script>
-    // Function to fetch models based on selected brand
-    function getModels(brand_id) {
-        // Make an AJAX request to fetch the models from the database
-        $.ajax({
-            type: "POST",
-            url: "../utility/functions.php?action=getModels",
-            data: {
-                brand_id: brand_id,
-            },
-            success: function(models) {
-                console.log("Response from getModels:", models);
-                // Populate the "Select Model" dropdown menu with the retrieved models
-                $("#select_model").html(models);
-            }
-        });
-    }
-
-    // Call the getModels function when the user selects a brand
-    $("#brand").change(function() {
-        var brand_id = $(this).val();
-        if (brand_id !== "") {
-            getModels(brand_id);
-        }
-    });
-</script>
-
-</html>

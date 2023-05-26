@@ -1,36 +1,40 @@
 <?php
-require_once '../utility/db_connection.php';
-require_once '../utility/functions.php';
-$user_id = $_SESSION['user_id'];
-
-// set the number of posts per page
-$posts_per_page = 6;
-
-// get the current page number from query string
-$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-// calculate the offset for the posts query
-$offset = ($current_page - 1) * $posts_per_page;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (strcmp($_POST["action"], "favorite") == 0) {
+    if (strcmp($vars["see"], "favorite") == 0) {
         $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id inner join favorites on favorites.post_id = post.post_id  where image_order = 1 and favorites.user_id = $user_id ORDER BY date LIMIT $offset, $posts_per_page";
     } else 
-    if (strcmp($_POST["action"], "myposts") == 0) {
+    if (strcmp($_POST["see"], "myposts") == 0) {
         $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 and post.user_id = $user_id ORDER BY date LIMIT $offset, $posts_per_page";
     } else 
-    if (strcmp($_POST["action"], "search") == 0) {
+    if (strcmp($vars["see"], "search") == 0) {
         $keyword = "%" . $_POST["keyword"] . "%";
-        $sql = " SELECT p.*, c.*, i.*
-FROM post p 
-inner JOIN car c ON p.car_id = c.car_id 
-inner JOIN images i ON i.post_id = p.post_id 
-inner JOIN brand b ON b.brand_id = c.brand_id 
-inner JOIN model m ON m.model_id = c.model_id 
-WHERE i.image_order = 1 
-AND (p.title LIKE '%{$keyword}%' OR p.description LIKE '%{$keyword}%' OR b.brand LIKE '%{$keyword}%' OR m.model_name LIKE '%{$keyword}%')
-ORDER BY p.date 
-LIMIT $offset, $posts_per_page";
+        $brand = $_POST["brand"];
+        $wilaya = $_POST["wilaya"];
+        $country = $_POST["country"];
+        $priceMin = $_POST["priceMin"];
+        $priceMax = $_POST["priceMax"];
+        $mileageMin = $_POST["mileageMin"];
+        $mileageMax = $_POST["mileageMax"];
+        $yearMin = $_POST["yearMin"];
+        $yearMax = $_POST["yearMax"];
+
+        $sql = "SELECT p.*, c.*, i.*
+            FROM post p 
+            INNER JOIN car c ON p.car_id = c.car_id 
+            INNER JOIN images i ON i.post_id = p.post_id 
+            INNER JOIN brand b ON b.brand_id = c.brand_id 
+            INNER JOIN model m ON m.model_id = c.model_id 
+            WHERE i.image_order = 1 
+            AND (p.title LIKE '%{$keyword}%' OR p.description LIKE '%{$keyword}%' OR b.brand LIKE '%{$keyword}%' OR m.model_name LIKE '%{$keyword}%')
+            AND (c.brand = '{$brand}' OR '{$brand}' = '')
+            AND (p.wilaya = '{$wilaya}' OR '{$wilaya}' = '')
+            AND (c.country = '{$country}' OR '{$country}' = '')
+            AND (p.price >= {$priceMin} AND p.price <= {$priceMax})
+            AND (c.mileage >= {$mileageMin} AND c.mileage <= {$mileageMax})
+            AND (YEAR(c.year) >= {$yearMin} AND YEAR(c.year) <= {$yearMax})
+            ORDER BY p.date 
+            LIMIT $offset, $posts_per_page";
     } else exit;
 } else {
     $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 ORDER BY date LIMIT $offset, $posts_per_page";
@@ -76,7 +80,7 @@ $total_pages = ceil($total_posts / $posts_per_page);
         https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css
         " rel="stylesheet">
     <!-- style css -->
-    <link rel="stylesheet" href="../css/all_posts.css">
+    <link rel="stylesheet" href="assets/css/all_posts.css">
 </head>
 
 
@@ -114,7 +118,7 @@ $total_pages = ceil($total_posts / $posts_per_page);
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Shop For Your Dream Car</h1>
-                <p class="lead fw-normal text-white-50 mb-0">With <img src="../images/icon.ico" style="height:37px; margin-top: -6px;"></p>
+                <p class="lead fw-normal text-white-50 mb-0">With <img src="assets/images/icon.ico" style="height:37px; margin-top: -6px;"></p>
             </div>
         </div>
     </header>
@@ -129,7 +133,6 @@ $total_pages = ceil($total_posts / $posts_per_page);
                         <ion-icon name="funnel-outline"></ion-icon>
                     </button>
                 </div>
-
                 <!-- Search Bar -->
                 <div class="bg-white p-3 rounded ml-auto">
                     <form method="post" action="">
@@ -143,177 +146,189 @@ $total_pages = ceil($total_posts / $posts_per_page);
                     </form>
                 </div>
             </div>
-            <!-- Filter Form -->
             <div class="row">
                 <div class="col-md-12">
-                    <form class="filter-form d-none">
+                    <form class="filter-form d-none" method="post" action="">
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <!-- Brand -->
                                 <label for="brand">Brand:</label>
-                                <select class="form-control" id="brand">
-                                    <option>Toyota</option>
-                                    <option>Honda</option>
-                                    <option>Nissan</option>
-                                    <option>Hyundai</option>
-                                    <option>Kia</option>
+                                <select class="form-control" id="brand" name="brand">
+                                    <option value="">All</option>
+                                    <option value="Toyota">Toyota</option>
+                                    <option value="Honda">Honda</option>
+                                    <option value="Nissan">Nissan</option>
+                                    <option value="Hyundai">Hyundai</option>
+                                    <option value="Kia">Kia</option>
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <!-- Wilaya -->
                                 <label for="wilaya">Wilaya:</label>
-                                <select class="form-control" id="wilaya">
-                                    <option>Algiers</option>
-                                    <option>Oran</option>
-                                    <option>Constantine</option>
-                                    <option>Batna</option>
-                                    <option>Setif</option>
+                                <select class="form-control" id="wilaya" name="wilaya">
+                                    <option value="">All</option>
+                                    <option value="Algiers">Algiers</option>
+                                    <option value="Oran">Oran</option>
+                                    <option value="Constantine">Constantine</option>
+                                    <option value="Batna">Batna</option>
+                                    <option value="Setif">Setif</option>
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <!-- Country -->
                                 <label for="country">Country:</label>
-                                <select class="form-control" id="country">
-                                    <option>Japan</option>
-                                    <option>Korea</option>
-                                    <option>Germany</option>
-                                    <option>USA</option>
-                                    <option>France</option>
+                                <select class="form-control" id="country" name="country">
+                                    <option value="">All</option>
+                                    <option value="Algeria">Algeria</option>
+                                    <option value="Morocco">Morocco</option>
+                                    <option value="Tunisia">Tunisia</option>
+                                    <option value="Egypt">Egypt</option>
+                                    <option value="Libya">Libya</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
-                            <!-- Price range -->
                             <div class="col-md-4 mb-3">
-                                <label for="price ">Price:</label>
-                                <input type="range" class="form-range" id="price" step="100000" min="1000000" max="10000000">
-                                <div class="price-range-values"></div>
-                                <div class="d-flex justify-content-between">
-                                    <span>1,000,000</span>
-                                    <span>10,000,000</span>
+                                <!-- Price Range -->
+                                <label for="priceMin">Price Range:</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" id="priceMin" name="priceMin" placeholder="Min" step="100">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" id="priceMax" name="priceMax" placeholder="Max" step="100">
+                                    </div>
                                 </div>
-                                <input type="range" class="form-range" id="price2" step="100000" min="1000000" max="10000000">
                             </div>
-                            <!-- Mileage Range -->
                             <div class="col-md-4 mb-3">
-                                <label for="mileage">Mileage:</label>
-                                <input type="range" class="form-range" id="mileage" step="5000" min="0" max="500000">
-                                <div class="d-flex justify-content-between">
-                                    <span>0</span>
-                                    <span>500,000</span>
+                                <!-- Mileage Range -->
+                                <label for="mileageMin">Mileage Range:</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" id="mileageMin" name="mileageMin" placeholder="Min" step="1000">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" id="mileageMax" name="mileageMax" placeholder="Max" step="1000">
+                                    </div>
                                 </div>
-                                <input type="range" class="form-range" id="mileage2" step="5000" min="0" max="500000">
                             </div>
-                            <!-- year Range -->
                             <div class="col-md-4 mb-3">
-                                <label for="year">Year:</label>
-                                <input type="text" class="form-control datepicker-year" class="year" name="year" placeholder="From" min="1970" max="2023">
-                                <br>
-                                <input type="text" class="form-control datepicker-year" class="year" name="year" placeholder="To" min="1970" max="2023">
+                                <!-- Year Range -->
+                                <label for="yearMin">Year Range:</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" id="yearMin" name="yearMin" placeholder="Min">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" id="yearMax" name="yearMax" placeholder="Max">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Filter</button>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">Apply Filters</button>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!--shopping part-->
-    <div class="container cards_landscape_wrap-2 pb-5">
-        <div class="row">
-            <!--prod 1-->
+            <!--shopping part-->
+            <div class="container cards_landscape_wrap-2 pb-5">
+                <div class="row">
+                    <!--prod 1-->
 
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-            ?>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="container">
-                            <div class="card mb-4">
-                                <!-- Price badge-->
-                                <div class="badge bg-dark text-white position-absolute" style="top: 1rem; right: 1rem;">Sell</div>
-                                <!-- Product image-->
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                    ?>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="container">
+                                    <div class="card mb-4">
+                                        <!-- Price badge-->
+                                        <div class="badge bg-dark text-white position-absolute" style="top: 1rem; right: 1rem;">Sell</div>
+                                        <!-- Product image-->
 
-                                <img class="card-img-top" src="../<?php echo $row['url']; ?>" alt="Card image cap">
-                                <!--card body-->
-                                <div class="card-body">
-                                    <!-- Product name-->
-                                    <h5 class="card-title"><?php echo $row['year'], '   ', $row['title'] ?></h5>
-                                    <p class="card-text"><?php echo $row['price'] ?> DA</p>
-                                    <p class="card-text"><?php echo $row['description'] ?></p>
-                                    <p class="card-text"><small class="text-muted"><?php echo $row['date'] ?> , <?php echo $row['wilaya'] ?></small></p>
+                                        <img class="card-img-top" src="../<?php echo $row['url']; ?>" alt="Card image cap">
+                                        <!--card body-->
+                                        <div class="card-body">
+                                            <!-- Product name-->
+                                            <h5 class="card-title"><?php echo $row['year'], '   ', $row['title'] ?></h5>
+                                            <p class="card-text"><?php echo $row['price'] ?> DA</p>
+                                            <p class="card-text"><?php echo $row['description'] ?></p>
+                                            <p class="card-text"><small class="text-muted"><?php echo $row['date'] ?> , <?php echo $row['wilaya'] ?></small></p>
 
-                                    <!--buttons-->
-                                    <?php
-                                    if (isset($_SESSION['user_id'])) {
+                                            <!--buttons-->
+                                            <?php
+                                            if (isset($_SESSION['user_id'])) {
 
-                                        $sql_favorites = "SELECT * FROM favorites WHERE user_id = ? AND post_id = ?";
-                                        $stmt_favorites = mysqli_prepare($conn, $sql_favorites);
-                                        mysqli_stmt_bind_param($stmt_favorites, 'ii', $user_id, $row['post_id']);
-                                        mysqli_stmt_execute($stmt_favorites);
-                                        $result_favorites = mysqli_stmt_get_result($stmt_favorites);
-                                        if ($result_favorites->num_rows > 0) {
-                                    ?>
-                                            <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
-                                                <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Delete From Favorites</span>
+                                                $sql_favorites = "SELECT * FROM favorites WHERE user_id = ? AND post_id = ?";
+                                                $stmt_favorites = mysqli_prepare($conn, $sql_favorites);
+                                                mysqli_stmt_bind_param($stmt_favorites, 'ii', $user_id, $row['post_id']);
+                                                mysqli_stmt_execute($stmt_favorites);
+                                                $result_favorites = mysqli_stmt_get_result($stmt_favorites);
+                                                if ($result_favorites->num_rows > 0) {
+                                            ?>
+                                                    <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
+                                                        <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Delete From Favorites</span>
+                                                    </button>
+                                                <?php
+                                                } else { ?>
+                                                    <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
+                                                        <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Add To Favorites</span>
+                                                    </button>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+
+                                            <button class="e-button btn-sm expand-btn" role="button">
+                                                <span class="e-button-text"><ion-icon name="person-outline"></ion-icon> Contact Seller</span>
                                             </button>
-                                        <?php
-                                        } else { ?>
-                                            <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
-                                                <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Add To Favorites</span>
-                                            </button>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
+                                            <a href="post.php?id=<?php echo $row['post_id'] ?>">
 
-                                    <button class="e-button btn-sm expand-btn" role="button">
-                                        <span class="e-button-text"><ion-icon name="person-outline"></ion-icon> Contact Seller</span>
-                                    </button>
-                                    <a href="post.php?id=<?php echo $row['post_id'] ?>">
-
-                                        <button class="e-button btn-sm expand-btn">
-                                            <span class="e-button-text"><ion-icon name="add-outline"></ion-icon> Show more</span>
-                                        </button>
-                                    </a>
+                                                <button class="e-button btn-sm expand-btn">
+                                                    <span class="e-button-text"><ion-icon name="add-outline"></ion-icon> Show more</span>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-            <?php
-                }
-            } else {
-                echo "<h1 class='text-center'>No Posts Found</h1>";
-            }
-            ?>
-        </div>
-    </div>
-
-
-    <!-- Pagination -->
-    <div class="row mb-5">
-        <div class="col-md-4"></div>
-        <div class="col-md-4 text-center">
-            <h2 class="heading-section"></h2>
-
-            <div class="block-27">
-                <ul>
                     <?php
-                    for ($i = 1; $i <= $total_pages; $i++) {
-                        if ($i == $current_page) {
-                            echo "<li class='active'><a href='all_posts.php?page=" . $i . "'>" . $i . "</a></li>";
-                        } else {
-                            echo "<li><a  href='all_posts.php?page=" . $i . "'>" . $i . "</a></li>";
                         }
+                    } else {
+                        echo "<h1 class='text-center'>No Posts Found</h1>";
                     }
                     ?>
-                </ul>
+                </div>
+            </div>
+
+
+            <!-- Pagination -->
+            <div class="row mb-5">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 text-center">
+                    <h2 class="heading-section"></h2>
+
+                    <div class="block-27">
+                        <ul>
+                            <?php
+                            for ($i = 1; $i <= $total_pages; $i++) {
+                                if ($i == $current_page) {
+                                    echo "<li class='active'><a href='all_posts.php?page=" . $i . "'>" . $i . "</a></li>";
+                                } else {
+                                    echo "<li><a  href='all_posts.php?page=" . $i . "'>" . $i . "</a></li>";
+                                }
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
             </div>
         </div>
-        <div class="col-md-4"></div>
     </div>
 </body>
 
