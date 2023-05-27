@@ -287,10 +287,12 @@ function get_models()
 }
 
 
-function addToFavorites($post_id)
+function addtoFavorites($post_id)
 {
     $user_id = $_SESSION['user_id'];
     global $conn;
+    // Create an associative array to store the response
+    $response = array();
 
     // check if the post is already in the user's favorites
     $sql = "SELECT * FROM favorites WHERE post_id = $post_id AND user_id = $user_id";
@@ -299,10 +301,29 @@ function addToFavorites($post_id)
     if (mysqli_num_rows($result) == 0) {
         // add the post to the user's favorites
         $sql = "INSERT INTO favorites (post_id, user_id) VALUES ($post_id, $user_id)";
-        mysqli_query($conn, $sql);
+        if (mysqli_query($conn, $sql)) {
+            $response['status'] = 'added';
+            $response['message'] = 'Post added to favorites';
+            
+        } else {
+            $response['status'] = 'error';
+            $response['message'] = 'Failed to add post to favorites';
+        }
     } else {
         // remove the post from the user's favorites
         $sql = "DELETE FROM favorites WHERE post_id = $post_id AND user_id = $user_id";
-        mysqli_query($conn, $sql);
+        if (mysqli_query($conn, $sql)) {
+            $response['status'] = 'removed';
+            $response['message'] = 'Post removed from favorites';
+        } else {
+            $response['status'] = 'error';
+            $response['message'] = 'Failed to remove post from favorites';
+        }
     }
+    // Send the JSON response back to the client
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit();
 }
+
+

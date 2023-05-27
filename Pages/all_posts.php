@@ -258,12 +258,13 @@ $total_pages = ceil($total_posts / $posts_per_page);
                                         $result_favorites = mysqli_stmt_get_result($stmt_favorites);
                                         if ($result_favorites->num_rows > 0) {
                                     ?>
-                                            <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
+                                            
+                                            <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>) data-post-id=<?php echo $row['post_id']; ?>">
                                                 <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Delete From Favorites</span>
                                             </button>
                                         <?php
                                         } else { ?>
-                                            <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>)">
+                                            <button class="e-button btn-sm expand-btn" onclick="addToFavorites(<?php echo $row['post_id']; ?>) data-post-id=<?php echo $row['post_id']; ?>">
                                                 <span class="e-button-text"><ion-icon name="heart-outline"></ion-icon> Add To Favorites</span>
                                             </button>
                                     <?php
@@ -323,6 +324,7 @@ $total_pages = ceil($total_posts / $posts_per_page);
 <!-- Bootstrap JavaScript files -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -359,49 +361,61 @@ $total_pages = ceil($total_posts / $posts_per_page);
 
 
     function addToFavorites(post_id) {
+        const button = document.querySelector('.e-button');
+        const icon = button.querySelector('ion-icon');
+        const buttonText = button.querySelector('.e-button-text');
+        const isFavorite = icon.classList.contains('favorite');
         // send an AJAX request to the server to add or remove the post from the user's favorites
         $.ajax({
             url: '../utility/functions.php?action=addtofavorites',
-            method: 'post',
+            type: 'post',
             data: {
                 post_id: post_id
             },
             success: function(response) {
                 // update the UI to reflect the changes
-                if (response == 'added') {
+                const button = document.querySelector('.e-button');
+                const icon = button.querySelector('ion-icon');
+                if (response.status == 'added') {
                     // the post was added to the user's favorites
                     alert('Post added to favorites');
-                    const icon = document.querySelector('.e-button ion-icon');
                     icon.setAttribute('name', 'heart-dislike-outline');
                     icon.classList.add('favorite');
-                } else if (response == 'removed') {
+                    buttonText.innerText = 'Delete From Favorites';
+                } else if (response.status == 'removed') {
                     // the post was removed from the user's favorites
                     alert('Post removed from favorites');
-                    const icon = document.querySelector('.e-button ion-icon');
                     icon.setAttribute('name', 'heart-outline');
                     icon.classList.remove('favorite');
-                }
+                    buttonText.innerText = 'Add To Favorites';
+                    }
             },
             error: function() {
                 alert('An error occurred');
             }
         });
     }
-
-    const button = document.querySelector('.e-button');
-    let isFavorite = false;
-
-    button.addEventListener('click', () => {
+    $('.container').on('click', '.e-button', function() {   
+        const button = document.getElementById('.e-button')
         const icon = button.querySelector('ion-icon');
-        isFavorite = !isFavorite;
+        const isFavorite = icon.classList.contains('favorite');
+        const post_id = button.dataset.postId;
         if (isFavorite) {
+            // Remove from favorites
+            addToFavorites(post_id);
+            icon.setAttribute('name', 'heart-outline');
+            button.querySelector('.e-button-text').innerText = 'Add To Favorites';
+        } else {
+            // Add to favorites
             addToFavorites(post_id);
             icon.setAttribute('name', 'heart-dislike-outline');
-
-        } else {
-            icon.setAttribute('name', 'heart-outline');
+            button.querySelector('.e-button-text').innerText = 'Delete From Favorites';
         }
+        
     });
+    // JavaScript code
+
+    
 </script>
 
 </html>

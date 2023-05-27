@@ -52,7 +52,9 @@ if (isset($_GET['delete_comment'])) {
 
   <meta charset="utf-8">
   <title><?php echo $post['title'] ?></title>
-  <link rel="stylesheet" href="../css/post.css">
+  <link rel="stylesheet" href="../css/post.css">-
+  <link rel="stylesheet" href="../css/lightbox.min.css">
+  
 </head>
 
 <body>
@@ -73,13 +75,19 @@ if (isset($_GET['delete_comment'])) {
       $result = $stmt->get_result();
       $image = $result->fetch_assoc();
       ?>
-      <img class="big-image" src="../<?php echo $image['url']; ?>" alt="Main Picture">
+      <a href="../<?php echo $image['url']; ?>" data-lightbox="gallery" data-title="Main Picture">
+        <img class="big-image" src="../<?php echo $image['url']; ?>" alt="Main Picture">
+      </a>
       <div class="small-images">
         <?php
+        $index = 0;
         while ($image = $result->fetch_assoc()) {
           echo '<div class="column">';
+          echo '<a href="../' . $image['url'] . '" data-lightbox="gallery" data-title="Small Picture ' . $index . '">';
           echo '<img src="../' . $image['url'] . '" alt="Small Picture">';
+          echo '</a>';
           echo '</div>';
+          $index++;
         }
         ?>
       </div>
@@ -148,6 +156,8 @@ if (isset($_GET['delete_comment'])) {
   </div>
   <br><br>
   <?php include "footer.php"; ?>
+  <script src="../js/lightbox-plus-jquery.min.js"></script>
+
 </body>
 
 </html>
