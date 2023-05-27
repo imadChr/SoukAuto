@@ -23,10 +23,10 @@
             <!-- Search Bar -->
             <div class="bg-white p-3 rounded ml-auto">
                 <form method="post" action="index.php?action=list&see=search">
-                    <div class="input-group">
-                        <input type="text" name="keyword" placeholder="Search" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                    <div class="input-group inline-group">
+                        <input type="text" name="keyword" placeholder="Search" aria-describedby="button-addon1" class="inline-group-item form-control form-control bg-light search">
                         <div class="input-group-append">
-                            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><ion-icon name="search-outline"></ion-icon></button>
+                            <button id="button-addon1 " type="submit" class="btn btn-link inline-group-item text-primary"><ion-icon name="search-outline"></ion-icon></button>
                         </div>
                     </div>
                 </form>

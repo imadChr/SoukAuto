@@ -35,6 +35,14 @@ button#button-addon1 ion-icon {
     color: var(--primary-color);
 }
 
+form .search {
+    border: 4px 0px solid var(--primary-color);
+    height: 45px !important;
+    padding: 10px !important;
+    margin-left: 2px; /* Move to the right by 2 pixels */
+    line-height: 40px;
+}
+
 @media (max-width: 900px) {
     .container select,
     .container input[type="text"],
@@ -44,6 +52,7 @@ button#button-addon1 ion-icon {
         padding: 3px 6px;
     }
 }
+
 
 .card {
     background: #fff;
