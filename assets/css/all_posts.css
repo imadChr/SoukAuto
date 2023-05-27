@@ -214,7 +214,7 @@ form .search {
 .btn-outline-primary {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
-    color: #fff; 
+    color: #fff !important; 
 }
 
 .d-flex button.btn-primary,
