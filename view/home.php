@@ -60,7 +60,7 @@
                     ?>
 
                             <div class="col-md-4 margin_bottom">
-                                <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
+                                <a href="index.php?action=post&id=<?php echo $row['post_id']; ?>">
                                     <div class="work text-center square-image">
                                         <img src="assets/<?php echo $row['url']; ?>" class="rounded img-fluid square-image" alt="#">
                                     </div>
@@ -104,7 +104,7 @@
                     ?>
 
                             <div class="col-md-4 margin_bottom">
-                                <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
+                                <a href="index.php?action=post&id=<?php echo $row['post_id']; ?>">
                                     <div class="work text-center square-image">
                                         <img src="assets/<?php echo $row['url']; ?>" class="rounded img-fluid square-image" alt="#">
                                     </div>
