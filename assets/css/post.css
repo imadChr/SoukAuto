@@ -10,15 +10,18 @@
     box-sizing: border-box;
     font-family: 'Nasalization', sans-serif;
 }
+<<<<<<< Updated upstream
 body {
     background-color: #f2f2f2;
 }
+=======
+
+>>>>>>> Stashed changes
 
 .date
 { position: relative;
     left: 89%;
     top: -5%;}
-    
     
     .car-container {
     background-color: #205375;
@@ -31,7 +34,6 @@ body {
 
 .car-post {
     font-family: 'Nasalization', sans-serif;
-
     margin-bottom: 40px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
@@ -39,7 +41,7 @@ body {
 }
 
 .car-title {
-    font-family: Sukar, sans-serif;
+    font-family:'Nasalization', sans-serif;
     font-size: 42px;
     font-weight: bold;
     margin-bottom: 20px;
