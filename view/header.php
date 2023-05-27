@@ -109,14 +109,14 @@
           <ul class="navbar-nav ml-auto d-flex align-items-center">
             <?php
             if ($appuser) { ?>
-              <li class="nav-item mr-3">
+              <li class="nav-item mr-2">
                 <div class="nav-link-wrapper">
-                  <a class="nav-link btn" href="index.php?action=sell">Sell</a>
+                  <a class="nav-link btn" href="index.php?action=sell">Post a Sell</a>
                 </div>
               </li>
               <li class="nav-item mr-3">
                 <div class="nav-link-wrapper">
-                  <a class="nav-link btn" href="#">Rent</a>
+                  <a class="nav-link btn" href="#">Post a Rent</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
