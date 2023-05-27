@@ -221,7 +221,7 @@ form .search {
 .d-flex button.btn-outline-primary {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
-    color: #fff; 
+    color: #fff !important; 
     margin: 10px;
 }
 
@@ -230,7 +230,7 @@ form .search {
     background-color: #ef8e4e!important; 
     border-color: #ef8e4e!important; 
     box-shadow: 0 0 0 0.25rem rgba(255, 165, 0, 0.25) !important;
-    color: #fff; 
+    color: #fff !important; 
 }
 .btn-outline-primary ion-icon,
 .btn-primary ion-icon {

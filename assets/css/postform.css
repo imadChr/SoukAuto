@@ -289,3 +289,35 @@ section select {
     transform: translateX(-50%);
     margin: 0 auto;
 }
+
+.btn-primary,
+.btn-outline-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: #fff !important; 
+}
+
+.d-flex button.btn-primary,
+.d-flex button.btn-outline-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: #fff !important; 
+    margin: 10px;
+}
+
+.d-flex button.btn-primary:hover,
+.d-flex button.btn-outline-primary:hover {
+    background-color: #ef8e4e!important; 
+    border-color: #ef8e4e!important; 
+    box-shadow: 0 0 0 0.25rem rgba(255, 165, 0, 0.25) !important;
+    color: #fff !important; 
+}
+.btn-outline-primary ion-icon,
+.btn-primary ion-icon {
+    color: white !important;
+}
+
+.btn-outline-primary,
+.btn-primary {
+    color: white !important;
+}

@@ -16,7 +16,7 @@
         <div class="col-md-12 d-flex justify-content-between">
             <!-- Toggle Button -->
             <div class="d-flex justify-content my-3">
-                <button type="button" class="btn btn-outline-primary toggle-filter-btn">
+                <button type="button" class="btn btn-outline-primary">
                     <ion-icon name="funnel-outline"></ion-icon>
                 </button>
             </div>
