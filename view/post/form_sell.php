@@ -7,11 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Your AD</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="assets/css/postform.css">
 
 </head>
 
 <body>
+    <div class="d-flex justify-content my-3">
+        <button type="button" class="btn btn-outline-primary toggle-filter-btn">
+            <ion-icon name="funnel-outline"></ion-icon>
+        </button>
+    </div>
     <h5 class="form-title">Post your car for sale!</h5>
     <form method="POST" action="index.php?action=addPost" enctype="multipart/form-data">
         <section class="form1">

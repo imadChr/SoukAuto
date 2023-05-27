@@ -24,9 +24,9 @@
             <div class="bg-white p-3 rounded ml-auto">
                 <form method="post" action="index.php?action=list&see=search">
                     <div class="input-group">
-                        <input type="text" name="keyword" placeholder="Search" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                        <input type="text" name="keyword" placeholder="Search" aria-describedby="button-addon1" class="d-inline form-control form-control bg-light search">
                         <div class="input-group-append">
-                            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><ion-icon name="search-outline"></ion-icon></button>
+                            <button id="button-addon1 " type="submit" class="btn btn-link d-inline text-primary"><ion-icon name="search-outline"></ion-icon></button>
                         </div>
                     </div>
                 </form>
@@ -53,12 +53,55 @@
                             <!-- Wilaya -->
                             <label for="wilaya">Wilaya:</label>
                             <select class="form-control" id="wilaya" name="wilaya">
-                                <option value="ALL">All</option>
-                                <option value="Algiers">Algiers</option>
-                                <option value="Oran">Oran</option>
-                                <option value="Constantine">Constantine</option>
+                                <option value="">Select a wilaya</option>
+                                <option value="Adrar">Adrar</option>
+                                <option value="Chlef">Chlef</option>
+                                <option value="Laghouat">Laghouat</option>
+                                <option value="Oum El Bouaghi">Oum El Bouaghi</option>
                                 <option value="Batna">Batna</option>
-                                <option value="Setif">Setif</option>
+                                <option value="Béjaïa">Béjaïa</option>
+                                <option value="Biskra">Biskra</option>
+                                <option value="Béchar">Béchar</option>
+                                <option value="Blida">Blida</option>
+                                <option value="Bouira">Bouira</option>
+                                <option value="Tamanrasset">Tamanrasset</option>
+                                <option value="Tébessa">Tébessa</option>
+                                <option value="Tlemcen">Tlemcen</option>
+                                <option value="Tiaret">Tiaret</option>
+                                <option value="Tizi Ouzou">Tizi Ouzou</option>
+                                <option value="Algiers">Algiers</option>
+                                <option value="Djelfa">Djelfa</option>
+                                <option value="Jijel">Jijel</option>
+                                <option value="Sétif">Sétif</option>
+                                <option value="Saïda">Saïda</option>
+                                <option value="Skikda">Skikda</option>
+                                <option value="Sidi Bel Abbès">Sidi Bel Abbès</option>
+                                <option value="Annaba">Annaba</option>
+                                <option value="Guelma">Guelma</option>
+                                <option value="Constantine">Constantine</option>
+                                <option value="Médéa">Médéa</option>
+                                <option value="Mostaganem">Mostaganem</option>
+                                <option value="M'Sila">M'Sila</option>
+                                <option value="Mascara">Mascara</option>
+                                <option value="Ouargla">Ouargla</option>
+                                <option value="Oran">Oran</option>
+                                <option value="El Bayadh">El Bayadh</option>
+                                <option value="Illizi">Illizi</option>
+                                <option value="Bordj Bou Arreridj">Bordj Bou Arreridj</option>
+                                <option value="Boumerdès">Boumerdès</option>
+                                <option value="El Tarf">El Tarf</option>
+                                <option value="Tindouf">Tindouf</option>
+                                <option value="Tissemsilt">Tissemsilt</option>
+                                <option value="El Oued">El Oued</option>
+                                <option value="Khenchela">Khenchela</option>
+                                <option value="Souk Ahras">Souk Ahras</option>
+                                <option value="Tipaza">Tipaza</option>
+                                <option value="Mila">Mila</option>
+                                <option value="Aïn Defla">Aïn Defla</option>
+                                <option value="Naâma">Naâma</option>
+                                <option value="Aïn Témouchent">Aïn Témouchent</option>
+                                <option value="Ghardaïa">Ghardaïa</option>
+                                <option value="Relizane">Relizane</option>
                             </select>
                         </div>
                         <div class="col-md-4 mb-3">

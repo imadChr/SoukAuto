@@ -35,6 +35,14 @@ button#button-addon1 ion-icon {
     color: var(--primary-color);
 }
 
+form .search {
+    border: 4px 0px solid var(--primary-color);
+    height: 45px !important;
+    padding: 10px !important;
+    margin-left: 2px; /* Move to the right by 2 pixels */
+    line-height: 40px;
+}
+
 @media (max-width: 900px) {
     .container select,
     .container input[type="text"],
@@ -44,6 +52,7 @@ button#button-addon1 ion-icon {
         padding: 3px 6px;
     }
 }
+
 
 .card {
     background: #fff;
@@ -205,14 +214,14 @@ button#button-addon1 ion-icon {
 .btn-outline-primary {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
-    color: #fff; 
+    color: #fff !important; 
 }
 
 .d-flex button.btn-primary,
 .d-flex button.btn-outline-primary {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
-    color: #fff; 
+    color: #fff !important; 
     margin: 10px;
 }
 
@@ -221,7 +230,7 @@ button#button-addon1 ion-icon {
     background-color: #ef8e4e!important; 
     border-color: #ef8e4e!important; 
     box-shadow: 0 0 0 0.25rem rgba(255, 165, 0, 0.25) !important;
-    color: #fff; 
+    color: #fff !important; 
 }
 .btn-outline-primary ion-icon,
 .btn-primary ion-icon {
