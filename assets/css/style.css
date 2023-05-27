@@ -561,12 +561,6 @@ header li {
     text-transform: uppercase;
 }
 
-.wedo .read_more {
-    margin: 0 auto;
-    display: block;
-    margin-top: 60px;
-}
-
 .aspect-ratio {
     position: relative;
     width: 350px;

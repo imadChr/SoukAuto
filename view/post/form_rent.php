@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <h5 class="form-title">Post your car for sale!</h5>
+    <h5 class="form-title">Post your car for Rental!</h5>
     <form method="POST" action="index.php?action=addPost" enctype="multipart/form-data">
         <section class="form1" >
             <div>
@@ -111,7 +111,7 @@
             </div>
             <div>
                 <label for="price">Price:</label>
-                <input type="number" name="price" placeholder="Enter price">
+                <input type="number" name="price" placeholder="Enter price per day">
             </div>
             <div>
                 <label for="mileage">Mileage:</label>
