@@ -139,8 +139,10 @@
                                     <!-- Price badge-->
                                     <div class="badge bg-dark text-white position-absolute" style="top: 1rem; right: 1rem;">Sell</div>
                                     <!-- Product image-->
+                                    <div class="card-img-top">
+                                        <img class="card-img-top" src="assets/<?php echo $row['url']; ?>" alt="Card image cap">
+                                    </div>
 
-                                    <img class="card-img-top" src="assets/<?php echo $row['url']; ?>" alt="Card image cap">
                                     <!--card body-->
                                     <div class="card-body">
                                         <!-- Product name-->

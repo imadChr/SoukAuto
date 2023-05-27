@@ -92,7 +92,8 @@ h2 a,
 h3 a,
 h4 a,
 h5 a,
-h6 a {
+h6 a,
+div a{
     color: #212121;
     text-decoration: none!important;
     opacity: 1
@@ -403,6 +404,7 @@ header .container-fluid {
 }
 
 .text-bg span {
+    font-family: 'Nasalization', sans-serif;
     text-transform: uppercase;
     color: #ED6C15;
     font-size: 40px;
@@ -458,6 +460,26 @@ header .container-fluid {
     transition: ease-in all 0.5s;
 }
 
+.button1 {
+    font-family: 'Nasalization', sans-serif;
+    font-size: 28px;
+    background-color: #205375;
+    border: 1px solid grey;
+    color: #fff !important;
+    padding: 12px 0px;
+    width: 250px;
+    text-align: center;
+    display: inline-block;
+    transition: ease-in all 0.5s;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.button1:hover {
+    background: #141629;
+    color: #fff;
+    transition: ease-in all 0.5s;
+}
 
 /** end banner section **/
 
@@ -487,33 +509,13 @@ header .container-fluid {
     color: #0808ff;
 }
 
-.read_more {
-    font-size: 17px;
-    background-color: #141629;
-    color: #fff !important;
-    padding: 13px 0px;
-    width: 100%;
-    max-width: 190px;
-    text-align: center;
-    display: inline-block;
-    transition: ease-in all 0.5s;
-    border-radius: 30px;
-    font-weight: 500;
-}
 
-.read_more:hover {
-    background: #ED6C15;
-    ;
-    color: #fff;
-    transition: ease-in all 0.5s;
-}
 
 
 /**  search **/
 
 .search {
-    position: absolute;
-    top: 600px;
+    position: relative;
     width: 80%;
     height: 60px;
     background: rgba(32, 83, 117, 0.69);
@@ -587,8 +589,7 @@ header .container-fluid {
     color: #ED6C15;
 }
 
-.wedo .titlepage p {
-    color: #141629;
+.wedo .titlepage p, .idk {
     display: block;
     font-weight: bold;
     text-align: center;
@@ -599,7 +600,7 @@ header .container-fluid {
     color: #ED6C15;
 }
 
-.work figure:hover {
+.work img:hover {
     opacity: 0.5 !important;
 }
 
@@ -615,14 +616,30 @@ header .container-fluid {
     top: 0;
     bottom: 0;
     margin: 0 auto;
-    vertical-align: middle;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: ease-in all 0.5s;
     cursor: pointer;
+}
+
+.square-image {
+    width: 420px; /* Adjust the width and height as per your requirements */
+    height: 250px;
+}
+
+.square-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 1;
+}
+
+.square-image:hover img {
+    opacity: 0.7 !important;
+    transition: opacity 0.5s ease-in;
 }
 
 .margin_bottom {
@@ -648,7 +665,7 @@ header .container-fluid {
 
 .blu {
     color: #ED6C15;
-    ;
+    text-align:center;
     font-size: 17px;
     line-height: 28px;
     font-weight: 600;
@@ -659,6 +676,18 @@ header .container-fluid {
     margin: 0 auto;
     display: block;
     margin-top: 60px;
+}
+
+.aspect-ratio {
+    position: relative;
+    width: 350px;
+}
+
+.aspect-ratio:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+    /* Controls the aspect ratio, 1x1 for square */
 }
 
 
