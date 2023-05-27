@@ -194,6 +194,15 @@ button#button-addon1 ion-icon {
     box-shadow: 0 0 0 0.25rem rgba(255, 165, 0, 0.25) !important;
     color: #fff; 
 }
+.btn-outline-primary ion-icon,
+.btn-primary ion-icon {
+    color: white !important;
+}
+
+.btn-outline-primary,
+.btn-primary {
+    color: white !important;
+}
 
 /* Change border color */
 .form-control:focus {
