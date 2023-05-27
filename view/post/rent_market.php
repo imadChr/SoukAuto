@@ -3,7 +3,7 @@
 </head>
 
 <header>
-    <img src="assets/images/rent_header.png" class="img-fluid" alt="Responsive image">
+    <img src="assets/images/rent_header.jpg" class="img-fluid" alt="Responsive image">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <!-- Content within the header -->
