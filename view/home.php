@@ -61,13 +61,16 @@
 
                             <div class="col-md-4 margin_bottom">
                                 <a href="index.php?action=post&id=<?php echo $row['post_id']; ?>">
-                                    <div class="work text-center square-image">
-                                        <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
-                                        <img src="assets/<?php echo $row['url']; ?>" class="rounded img-fluid square-image" alt="#">
+                                    <div class="work text-center">
+                                        <div class="image-container square-image">
+                                            <img src="assets/<?php echo $row['url']; ?>" class="rounded img-fluid square-image" alt="#">
+                                            <div class="overlay">
+                                                <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?> DA</span></h3>
+                                            </div>
+                                        </div>
                                     </div>
                                 </a>
                             </div>
-
                     <?php
                         }
                     } else {
@@ -100,13 +103,14 @@
                     if (count($posts) > 0) {
                         foreach ($posts as $row) {
                     ?>
-
                             <div class="col-md-4 margin_bottom">
                                 <a href="index.php?action=post&id=<?php echo $row['post_id']; ?>">
-                                    <div class="work text-center square-image">
-                                        <img src="assets/<?php echo $row['url']; ?>" class="rounded img-fluid square-image" alt="#">
-                                        <div class="work_text">
-                                            <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
+                                    <div class="work text-center">
+                                        <div class="image-container square-image">
+                                            <img src="assets/<?php echo $row['url']; ?>" class="rounded img-fluid square-image" alt="#">
+                                            <div class="overlay">
+                                                <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?> DA</span></h3>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
