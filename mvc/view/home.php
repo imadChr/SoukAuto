@@ -1,3 +1,4 @@
+<!-- banner -->
 <section class="banner_main">
     <div class="container mt-1">
         <br><br>
@@ -7,7 +8,7 @@
                     <span class ="flex">" Get Behind the Wheel of Your Dreams with <mark style="color:#205375; background:none;">SoukAuto</mark>! "</span>
                     <p>Your destination for purchasing & renting cars.</p>
                 </div>
-
+                <!-- buttons -->
                 <br>
                 <div class="text-center">
                     <div class="d-inline-block">
@@ -16,6 +17,7 @@
                     </div>
                 </div>
             </div>
+            <!-- banner img -->
             <div class="col-lg-6 text_img">
                 <figure>
                     <img src="assets/images/mazda.png" alt="#" />
@@ -58,7 +60,7 @@
                     if (count($posts) > 0) {
                         foreach ($posts as $row) {
                     ?>
-
+   
                         <div class="col-md-4 margin_bottom">
                             <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
                                 <div class="work text-center square-image">
