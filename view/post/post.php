@@ -1,6 +1,8 @@
 <head>
     <title><?php echo $post['title'] ?></title>
     <link rel="stylesheet" href="assets/css/post.css">
+    <link rel="stylesheet" href="assets/css/lightbox.min.css">
+
 </head>
 <div class="car-container">
     <h1 class="car-title"><?php echo $post['title']; ?></h1>
@@ -8,13 +10,21 @@
     <h2 class="car-price">Price: <?php echo $post['price']; ?>DA</h2>
 
     <div class="image-container">
-        <img class="big-image" src="assets/<?php echo $post['url']; ?>" alt="Main Picture">
+        <div class="big">
+            <a href="assets/<?php echo $post['url']; ?>" data-lightbox="gallery" data-title="<?php $post['title']; ?>">
+                <img class="big-image" src="assets/<?php echo $post['url']; ?>" alt="Main Picture">
+            </a>
+        </div>
         <div class="small-images">
             <?php
+            $index = 0;
             foreach ($images as $image) {
                 echo '<div class="column">';
+                echo '<a href="assets/' . $image['url'] . '" data-lightbox="gallery" data-title=' . $post['title'] . '>';
                 echo '<img src="assets/' . $image['url'] . '" alt="Small Picture">';
+                echo '</a>';
                 echo '</div>';
+                $index++;
             }
             ?>
         </div>
@@ -124,3 +134,4 @@
         });
     }
 </script>
+<script src="assets/js/lightbox-plus-jquery.min.js"></script>
