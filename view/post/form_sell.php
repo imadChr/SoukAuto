@@ -8,12 +8,13 @@
     <title>Post Your AD</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/css/postform.css">
+
 </head>
 
 <body>
     <h5 class="form-title">Post your car for sale!</h5>
     <form method="POST" action="index.php?action=addPost" enctype="multipart/form-data">
-        <section class="form1" >
+        <section class="form1">
             <div>
                 <label for="brand">Brand:</label>
                 <select id="brand" name="brand_id" required>

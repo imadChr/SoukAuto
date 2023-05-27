@@ -4,11 +4,13 @@
 <head>
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/all_posts.css">
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/all_posts.css">
+  <link rel="stylesheet" href="https://unpkg.com/notyf/notyf.min.css" />
+
 
   <!-- External libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
@@ -116,7 +118,7 @@
               </li>
               <li class="nav-item mr-3">
                 <div class="nav-link-wrapper">
-                  <a class="nav-link btn" href="#">Post for Rent</a>
+                  <a class="nav-link btn" href="index.php?action=rent">Post for Rent</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -127,9 +129,11 @@
                   </div>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <a class="dropdown-item" href="#"><ion-icon name="person-circle-outline"></ion-icon> My profile</a>
-                  </li>
+                  <?php if ($appuser['firstname'] == 'admin') { ?>
+                    <li>
+                      <a class="dropdown-item" href="index.php?action=admin"><ion-icon name="person-circle-outline"></ion-icon> Dashboard</a>
+                    </li>
+                  <?php } ?>
                   <li>
                     <a href="index.php?action=list&see=myposts" class="dropdown-item"><ion-icon name="document-outline"></ion-icon> My posts</a>
                   </li>

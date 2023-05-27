@@ -18,4 +18,5 @@ include("modules/user.php");
 if (is_array($appuser)) {
   include("modules/home.php");
   include("modules/post.php");
+  include("modules/admin.php");
 }

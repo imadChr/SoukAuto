@@ -55,10 +55,9 @@
             <div class="col-md-12">
                 <div class="row">
                     <?php
-                    if (count($posts) > 0) {
-                        foreach ($posts as $row) {
+                    if (count($sale) > 0) {
+                        foreach ($sale as $row) {
                     ?>
-
                             <div class="col-md-4 margin_bottom">
                                 <a href="index.php?action=post&id=<?php echo $row['post_id']; ?>">
                                     <div class="work text-center">
@@ -74,7 +73,7 @@
                     <?php
                         }
                     } else {
-                        echo "<h1> No posts yet </h1>";
+                        echo "<h1 class='text-center'> No posts yet </h1>";
                     }
                     ?>
                 </div>
@@ -100,8 +99,8 @@
             <div class="col-md-12">
                 <div class="row">
                     <?php
-                    if (count($posts) > 0) {
-                        foreach ($posts as $row) {
+                    if (count($rent) > 0) {
+                        foreach ($rent as $row) {
                     ?>
                             <div class="col-md-4 margin_bottom">
                                 <a href="index.php?action=post&id=<?php echo $row['post_id']; ?>">
@@ -119,7 +118,7 @@
                     <?php
                         }
                     } else {
-                        echo "<h1> No posts yet </h1>";
+                        echo "<h1 class='text-center'> No posts yet </h1>";
                     }
                     ?>
                 </div>

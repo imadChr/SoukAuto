@@ -1,0 +1,43 @@
+body {
+    font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    background-color: #fff;
+    font-weight: 300;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.centered-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Set the width of the table cells to max-content */
+table tbody td {
+    width: max-content;
+}
+
+/* Exclude specific columns from being sized based on content */
+.no-content-size {
+    width: auto !important;
+}
+
+.text-bg span {
+    font-family: 'Nasalization', sans-serif;
+    text-transform: uppercase;
+    color: #2b495e;
+    font-size: 40px;
+    line-height: 68px;
+    font-weight: 700;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

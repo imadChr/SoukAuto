@@ -2,10 +2,10 @@
 
 switch ($vars['action']) {
     case "list": {
-        $posts_per_page = 6;
-        $current_page = isset($vars['page']) ? $vars['page'] : 1;
-        $offset = ($current_page - 1) * $posts_per_page;
-        $brands = $db->query("SELECT * FROM brand ORDER BY brand")->fetchAll();
+            $posts_per_page = 6;
+            $current_page = isset($vars['page']) ? $vars['page'] : 1;
+            $offset = ($current_page - 1) * $posts_per_page;
+            $brands = $db->query("SELECT * FROM brand ORDER BY brand")->fetchAll();
             switch ($vars['what']) {
                 default: {
                         switch ($vars['see']) {
@@ -295,7 +295,6 @@ switch ($vars['action']) {
                                     exit();
                                 }
                                 break;
-                            
                         }
                         break;
                     }
@@ -306,7 +305,7 @@ switch ($vars['action']) {
             exit;
         }
         break;
-        case ("myposts"): {
+    case ("myposts"): {
             $query = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 and post.user_id = ? ORDER BY date desc";
             $posts = $db->query($query, $appuser['user_id'])->fetchAll();
             $total_pages = ceil(count($posts) / $posts_per_page);
@@ -318,7 +317,7 @@ switch ($vars['action']) {
             exit();
         }
         break;
-        case ("favourites"): {
+    case ("favourites"): {
             $query = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 and post.post_id in (select post_id from favorites where user_id = ?) ORDER BY date desc";
             $posts = $db->query($query, $appuser['user_id'])->fetchAll();
             $total_pages = ceil(count($posts) / $posts_per_page);
@@ -330,7 +329,7 @@ switch ($vars['action']) {
             exit();
         }
         break;
-        
+
     case "post": {
             $post_id = $_GET['id'];
             $post = $db->query("SELECT * from post inner join car on post.car_id = car.car_id inner join brand on car.brand_id = brand.brand_id inner join model on car.model_id = model.model_id inner join images on images.post_id = post.post_id  where post.post_id = $post_id LIMIT 1")->fetchArray();
@@ -349,7 +348,7 @@ switch ($vars['action']) {
             exit();
         }
         break;
-        case "rent": {
+    case "rent": {
             $brands = $db->query("SELECT * FROM brand ORDER BY brand")->fetchAll();
             include("view/post/form_rent.php");
             include("view/footer.php");

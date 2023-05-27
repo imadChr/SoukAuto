@@ -1,7 +1,9 @@
+<!-- used for myposts and favorties -->
+
 <head>
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Market</title>
+    <title><?php $vars['see']; ?></title>
 </head>
 <header>
     <img src="assets/images/sell_header.png" class="img-fluid" alt="Responsive image">
@@ -199,8 +201,8 @@
         </div>
     </div>
 </div>
-
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://unpkg.com/notyf/notyf.min.css" />
 <script src="https://unpkg.com/notyf/notyf.min.js"></script>
 <script>
     var notyf = new Notyf();
