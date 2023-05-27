@@ -19,18 +19,112 @@ switch ($vars['action']) {
                         exit();
                     }
                     break;
+                case ("filter"): {
+                        $brand_id = $vars["request_brand"];
+                        $wilaya = $vars["request_wilaya"];
+                        $country_id = $vars["request_country"];
+                        $priceMin = $vars["request_priceMin"];
+                        $priceMax = $vars["request_priceMax"];
+                        $mileageMin = $vars["request_mileageMin"];
+                        $mileageMax = $vars["request_mileageMax"];
+                        $yearMin = $vars["request_yearMin"];
+                        $yearMax = $vars["request_yearMax"];
+
+                        $sql_query = "SELECT *
+                        FROM post p 
+                        INNER JOIN car c ON p.car_id = c.car_id 
+                        INNER JOIN images i ON i.post_id = p.post_id 
+                        INNER JOIN brand b ON b.brand_id = c.brand_id 
+                        INNER JOIN model m ON m.model_id = c.model_id 
+                        where i.image_order = 1";
+
+
+                        if ($brand_id !== 'ALL') {
+                            $sql_query .= " AND b.brand_id = '$brand_id' ";
+                        }
+
+                        if ($country_id !== 'ALL') {
+                            $sql_query .= " AND b.Country = '$country_id' ";
+                        }
+
+                        if ($wilaya !== 'ALL') {
+                            $sql_query .= " AND p.wilaya = '$wilaya' ";
+                        }
+
+                        if (isset($vars['request_priceMin'])) {
+                            $sql_query .= " AND  p.price >= '$priceMin' ";
+                        }
+
+                        if (isset($vars['request_priceMax'])) {
+                            $sql_query .= " AND  p.price <= '$priceMax' ";
+                        }
+
+                        // if (isset($_POST['request_mileageMin'])) {
+                        //     $sql_query .= " AND  c.mileage >= '$mileageMin' ";
+                        // }
+
+                        if (isset($_POST['request_yearMax'])) {
+                            $sql_query .= " AND  c.year <= '$yearMax' ";
+                        }
+
+                        if (isset($_POST['request_yearMin'])) {
+                            $sql_query .= " AND  c.year >= '$yearMin' ";
+                        }
+
+                        // if (isset($_POST['request_mileageMax'] )) {
+                        //     $sql_query .= " AND  c.mileage <= '$mileageMax' ";
+                        // }
+                        $posts = $db->query($sql_query)->fetchAll(); ?>
+                        <div class="row">
+                            <?php
+                            if (count($posts)) {
+                                foreach ($posts as $row) {
+                            ?>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="container">
+                                            <div class="card mb-4">
+                                                <!-- Price badge-->
+                                                <div class="badge bg-dark text-white position-absolute" style="top: 1rem; right: 1rem;">Sell</div>
+                                                <!-- Product image-->
+
+                                                <img class="card-img-top" src="assets/<?php echo $row['url']; ?>" alt="Card image cap">
+                                                <!--card body-->
+                                                <div class="card-body">
+                                                    <!-- Product name-->
+                                                    <h5 class="card-title"><?php echo $row['year'], '   ', $row['title'] ?></h5>
+                                                    <p class="card-text"><?php echo $row['price'] ?> DA</p>
+                                                    <p class="card-text"><?php echo $row['description'] ?></p>
+                                                    <p class="card-text"><small class="text-muted"><?php echo $row['date'] ?> , <?php echo $row['wilaya'] ?></small></p>
+
+                                                    <!--buttons-->
+                                                    <?php
+                                                    if (is_array($appuser)) {
+                                                        $favorited = $db->query("SELECT * FROM favorites WHERE user_id = ? AND post_id = ?",  $appuser['user_id'], $row['post_id'])->fetchAll();
+                                                    ?>
+                                                        <button class="e-button btn-sm expand-btn" data-post-id="<?php echo $row['post_id']; ?>" onclick="<?php echo count($favorited) > 0 ? 'deleteFavorites(' . $row['post_id'] . ')' : 'addFavorites(' . $row['post_id'] . ')'; ?>">
+                                                            <span class=" e-button-text"><ion-icon name="<?php echo count($favorited) > 0 ? 'heart-dislike-outline' : 'heart-outline'; ?>"></ion-icon> <?php echo count($favorited) > 0 ? 'Delete From Favorites' : 'Add To Favorites'; ?></span>
+                                                        </button>
+                                                    <?php } ?>
+                                                    <button class="e-button btn-sm expand-btn" onclick="contactSeller(<?php echo $row['user_id'] ?>)" role="button">
+                                                        <span class="e-button-text"><ion-icon name="person-outline"></ion-icon> Contact Seller</span>
+                                                    </button>
+                                                    <a href="index.php?action=post&id=<?php echo $row['post_id']; ?>">
+                                                        <button class="e-button btn-sm expand-btn">
+                                                            <span class="e-button-text"><ion-icon name="add-outline"></ion-icon> Show more</span>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php }
+                            } ?>
+                        </div>
+<?php exit();
+                    }
+                    break;
                 case ("search"): {
                         $keyword = "%" . $vars["keyword"] . "%";
-                        $brand_id = $vars["brand_id"];
-                        $wilaya = $vars["wilaya"];
-                        $country_id = $vars["country_id"];
-                        $priceMin = $vars["priceMin"];
-                        $priceMax = $vars["priceMax"];
-                        $mileageMin = $vars["mileageMin"];
-                        $mileageMax = $vars["mileageMax"];
-                        $yearMin = $vars["yearMin"];
-                        $yearMax = $vars["yearMax"];
-
                         $search_query = "SELECT p.*, c.*, i.*
                         FROM post p 
                         INNER JOIN car c ON p.car_id = c.car_id 
@@ -38,44 +132,14 @@ switch ($vars['action']) {
                         INNER JOIN brand b ON b.brand_id = c.brand_id 
                         INNER JOIN model m ON m.model_id = c.model_id 
                         WHERE i.image_order = 1
-                        AND (p.title LIKE ? OR p.description LIKE ? OR b.brand LIKE ? OR m.model_name LIKE ? or ? = '')
-                        AND (c.brand_id = ? OR ? = '')
-                        AND (p.wilaya = ? OR ? = '')
-                        AND (b.Country = ? OR ? = '')
-                        AND ((p.price >= ? AND p.price <= ?) OR (? = '' AND ? = ''))
-                        AND ((c.mileage >= ? AND c.mileage <= ?) OR (? = '' OR ? = ''))
-                        AND ((YEAR(c.year) >= ? AND YEAR(c.year) <= ?) OR (? = '' OR ? = ''))
+                        AND (p.title LIKE ? OR p.description LIKE ? OR b.brand LIKE ? OR m.model_name LIKE ? OR c.fuel LIKE ? OR c.year LIKE ? OR c.mileage LIKE ? OR p.price LIKE ? OR p.wilaya LIKE ? OR b.country LIKE ?)
                         ORDER BY p.date DESC";
 
-                        $total_posts = $db->query(
-                            $search_query,
-                            $keyword,
-                            $keyword,
-                            $keyword,
-                            $keyword,
-                            $keyword,
-                            $brand_id,
-                            $brand_id,
-                            $wilaya,
-                            $wilaya,
-                            $country_id,
-                            $country_id,
-                            $priceMin,
-                            $priceMax,
-                            $priceMin,
-                            $priceMax,
-                            $mileageMin,
-                            $mileageMax,
-                            $mileageMin,
-                            $mileageMax,
-                            $yearMin,
-                            $yearMax,
-                            $yearMin,
-                            $yearMax
-                        )->fetchAll();
-                        $total_pages = count($total_posts) / $posts_per_page;
+                        $posts = $db->query($search_query, $keyword, $keyword, $keyword, $keyword, $keyword, $keyword, $keyword, $keyword, $keyword, $keyword)->fetchAll();
+                        $total_pages = ceil(count($posts) / $posts_per_page);
                         $search_query .= " LIMIT ?, ?";
-                        $posts = $db->query($search_query, $keyword, $keyword,  $keyword, $keyword, $keyword, $brand_id, $brand_id, $wilaya, $wilaya, $country_id, $country_id, $priceMin, $priceMax, $priceMin, $priceMax, $mileageMin, $mileageMax, $mileageMin, $mileageMax, $yearMin, $yearMax, $yearMin, $yearMax, $offset, $posts_per_page)->fetchAll();
+                        $posts = $db->query($search_query, $keyword, $keyword, $keyword, $keyword, $keyword, $keyword, $keyword, $keyword, $keyword, $keyword, $offset, $posts_per_page)->fetchAll();
+
                         include("view/header.php");
                         include("view/post/market.php");
                         include("view/footer.php");

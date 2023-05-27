@@ -1,11 +1,12 @@
 <head>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>Market</title>
 </head>
-<header class="bg-dark py-5">
+<header>
+    <img src="assets/images/sell_header.png" class="img-fluid" alt="Responsive image">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Shop For Your Dream Car</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With <img src="assets/images/icon.ico" style="height:37px; margin-top: -6px;"></p>
         </div>
     </div>
 </header>
@@ -34,13 +35,13 @@
         <!-- filtering section -->
         <div class="row">
             <div class="col-md-12">
-                <form class="filter-form d-none" method="post" action="index.php?action=list&see=search">
+                <form class="filter-form d-none" method="post" action="index.php?action=list">
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <!-- Brand -->
                             <label for="brand">Brand:</label>
-                            <select class="form-control" id="brand" name="brand_id">
-                                <option value="">All</option>
+                            <select class="form-control" id="brand_id" name="brand_id">
+                                <option value="ALL">All</option>
                                 <?php
                                 foreach ($brands as $row) {
                                     echo '<option value="' . $row['brand_id'] . '">' . $row['brand'] . '</option>';
@@ -52,7 +53,7 @@
                             <!-- Wilaya -->
                             <label for="wilaya">Wilaya:</label>
                             <select class="form-control" id="wilaya" name="wilaya">
-                                <option value="">All</option>
+                                <option value="ALL">All</option>
                                 <option value="Algiers">Algiers</option>
                                 <option value="Oran">Oran</option>
                                 <option value="Constantine">Constantine</option>
@@ -64,7 +65,7 @@
                             <!-- Country -->
                             <label for="country">Country:</label>
                             <select class="form-control" id="country" name="country_id">
-                                <option value="">All</option>
+                                <option value="ALL">All</option>
                                 <option value="1">USA</option>
                                 <option value="2">Japan</option>
                                 <option value="3">Germany</option>
@@ -80,25 +81,25 @@
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <!-- Price Range -->
-                            <label for="priceMin">Price Range:</label>
+                            <label for="price">Price Range:</label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="number" class="form-control" id="priceMin" name="priceMin" placeholder="Min" step="100">
+                                    <input type="number" min='0' class="form-control" id="priceMin" name="priceMin" placeholder="Min" step="10000" value="0">
                                 </div>
                                 <div class="col">
-                                    <input type="number" class="form-control" id="priceMax" name="priceMax" placeholder="Max" step="100">
+                                    <input type="number" min='0' class="form-control" id="priceMax" name="priceMax" placeholder="Max" step="10000" value="10000000">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <!-- Mileage Range -->
-                            <label for="mileageMin">Mileage Range:</label>
+                            <label for="mileage">Mileage Range:</label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="number" class="form-control" id="mileageMin" name="mileageMin" placeholder="Min" step="1000">
+                                    <input type="number" min="0" class="form-control" id="mileageMin" name="mileageMin" placeholder="Min" step="10000" value="0">
                                 </div>
                                 <div class="col">
-                                    <input type="number" class="form-control" id="mileageMax" name="mileageMax" placeholder="Max" step="1000">
+                                    <input type="number" min="0" class="form-control" id="mileageMax" name="mileageMax" placeholder="Max" step="10000" max="100000000000000" value="100000000">
                                 </div>
                             </div>
                         </div>
@@ -107,24 +108,24 @@
                             <label for="yearMin">Year Range:</label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="number" class="form-control" id="yearMin" name="yearMin" placeholder="Min">
+                                    <input type="number" class="form-control" id="yearMin" name="yearMin" placeholder="Min" min="1950" value="1950">
                                 </div>
                                 <div class="col">
-                                    <input type="number" class="form-control" id="yearMax" name="yearMax" placeholder="Max">
+                                    <input type="number" class="form-control" id="yearMax" name="yearMax" placeholder="Max" min="1950" value="2023">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">Apply Filters</button>
+                            <button type="submit" class="btn btn-primary d-flex justify-content-center">Discard Filters</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        <div class="container cards_landscape_wrap-2 pb-5">
+        <div class="container cards_landscape_wrap-2 pb-5" id='filter'>
             <div class="row">
                 <!--prod 1-->
                 <?php
@@ -269,4 +270,79 @@
             }
         });
     }
+</script>
+<script type='text/javascript'>
+    function fetchData(changingID) {
+        var brand = $('#brand_id').val();
+        var country = $('#country').val();
+        var wilaya = $('#wilaya').val();
+        var priceMin = $('#priceMin').val();
+        var priceMax = $('#priceMax').val();
+        var mileagaMin = $('#mileageMin').val();
+        var mileageMax = $('#mileageMax').val();
+        var yearMin = $('#yearMin').val();
+        var yearMax = $('#yearMax').val();
+
+
+        $.ajax({
+            url: 'index.php?action=list&see=filter',
+            type: 'POST',
+            data: {
+                request_brand: brand,
+                request_country: country,
+                request_wilaya: wilaya,
+                request_priceMin: priceMin,
+                request_priceMax: priceMax,
+                // request_mileageMin: mileageMin,
+                // request_mileageMax: mileageMax,
+                request_yearMin: yearMin,
+                request_yearMax: yearMax
+            },
+            beforeSend: function() {
+                $("#filter").html("<span>Working...</span>");
+            },
+            success: function(data) {
+                $("#filter").html(data);
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $('#country').on('keyup change', function() {
+            fetchData('#country');
+        });
+
+        $('#brand_id').on('keyup change', function() {
+            fetchData('#brand_id');
+        });
+
+        $('#priceMin').on('keyup change', function() {
+            fetchData('#priceMin');
+        });
+
+        $('#priceMax').on('keyup change', function() {
+            fetchData('#priceMax');
+        });
+
+        $('#wilaya').on('keyup change', function() {
+            fetchData('#wilaya');
+        });
+
+        $('#mileageMax').on('keyup change', function() {
+            fetchData('#mileageMax');
+        });
+
+        $('#mileageMin').on('keyup change', function() {
+            fetchData('#mileageMin');
+        });
+
+        $('#yearMin').on('keyup change', function() {
+            fetchData('#yearMin');
+        });
+
+        $('#yearMax').on('keyup change', function() {
+            fetchData('#yearMax');
+        });
+
+    });
 </script>

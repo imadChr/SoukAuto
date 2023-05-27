@@ -1,4 +1,7 @@
 <?php
+if (!isset($vars['action'])) {
+    $vars['action'] = 'home';
+}
 
 switch ($vars['action']) {
 

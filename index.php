@@ -1,5 +1,4 @@
 <?php
-
 include("init.php");
 session_start();
 
@@ -8,7 +7,7 @@ $public_actions = array('do_login', 'signup', 'do_signup');
 
 //non-logged user are forced to the login page...
 if ($appuser == 0  and !in_array($vars['action'], $public_actions)) {
-	$vars['action'] = 'login';
+	$vars['action'] = 'home';
 } else if (is_array($appuser) and !isset($vars['action'])) {
 	$vars['action'] = 'home';
 }
