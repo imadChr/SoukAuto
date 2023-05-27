@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nasalization', sans-serif;
+}
+
+body {
+    background-color: #f2f2f2;
+}
+
+.date {
+    position: relative;
+    left: 89%;
+<<<<<<< HEAD:css/post.css
+    top: -5%;
+}
+
+.car-container {
+=======
+    top: -5%;}
+    
+    
+    .car-container {
+>>>>>>> mvc:assets/css/post.css
+    background-color: #205375;
+    border-radius: 24px;
+    padding: 20px;
+    border: 8px solid #ed6c15;
+    width: 87%;
+    margin: 0 auto;
+}
+
+.car-post {
+    font-family: 'Nasalization', sans-serif;
+
+    margin-bottom: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.car-title {
+    font-family: Sukar, sans-serif;
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #FFA500;
+    text-transform: uppercase;
+}
+
+.car-description {
+    font-family: Sukar, sans-serif;
+    font-size: 22px;
+    font-style: italic;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+}
+
+.car-price {
+    font-family: Sukar, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+}
+
+.car-info {
+    font-family: Sukar, sans-serif;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #FFFFFF;
+}
+
+.car-info li {
+    font-family: Sukar, sans-serif;
+    margin-bottom: 10px;
+}
+
+.car-info li strong {
+    font-family: Sukar, sans-serif;
+    font-weight: bold;
+    color: #FFA500;
+    text-transform: uppercase;
+}
+
+.image-container {
+    display: flex;
+    align-items: center;
+}
+
+.big-image {
+    max-width: 61%;
+    margin-right: 20px;
+    border-radius: 20px;
+}
+
+.small-images {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex-basis: 50%;
+}
+
+.column img {
+    width: 100%;
+    height: 183px;
+    object-fit: cover;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+.comment-section {
+    border-radius: 15px;
+    background-color: white;
+    padding: 20px;
+}
+
+.wrapper {
+    font-family: Sukar, sans-serif;
+    border-radius: 15px;
+    background-color: #dc6618;
+    padding: 10px;
+    margin: auto;
+    width: 80%;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.wrapper h2 {
+    font-family: Sukar, sans-serif;
+    font-size: 24px;
+    font-weight: bolder;
+    color: #000000;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-top: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+ textarea {
+    font-family: Sukar, sans-serif;
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-height: 150px;
+    overflow: auto;
+}
+
+.btn-comment {
+    font-family: Sukar, sans-serif;
+    border-radius: 15px;
+    background-color: #205375;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.comment {
+    font-family: Sukar, sans-serif;
+    margin: 20px auto auto;
+    border-radius: 15px;
+    background-color: #f2f2f2;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
+}
+
+.no-comment,
+.comment a {
+    text-align: center;
+    color: #205375;
+}
+
+.comment h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    text-align: left;
+}
+
+.comment p {
+    margin-top: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    text-align: left;
+}
+
+.no-comment {
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.comment a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    background-color: #205375;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+}
+
+<<<<<<< HEAD:css/post.css
+.footer {
+    background-color: #205375;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+=======
+>>>>>>> mvc:assets/css/post.css
