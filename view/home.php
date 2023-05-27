@@ -11,8 +11,8 @@
                 <br>
                 <div class="text-center">
                     <div class="d-inline-block">
-                        <a class="button1 mx-3" href="index.php?action=list">BUY</a>
-                        <a class="button1 mx-3" href="index.php?action=list">RENT</a>
+                        <a class="button1 mx-3" href="index.php?action=list&what=sale">BUY</a>
+                        <a class="button1 mx-3" href="index.php?action=list&what=rent">RENT</a>
                     </div>
                 </div>
             </div>
@@ -60,12 +60,10 @@
                     ?>
 
                             <div class="col-md-4 margin_bottom">
-                                <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
+                                <a href="index.php?action=post&id=<?php echo $row['post_id']; ?>">
                                     <div class="work text-center square-image">
-                                        <img src="assets/<?php echo $row['url']; ?>" class="rounded img-fluid square-image" alt="#">
-                                    </div>
-                                    <div class="work_text">
                                         <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
+                                        <img src="assets/<?php echo $row['url']; ?>" class="rounded img-fluid square-image" alt="#">
                                     </div>
                                 </a>
                             </div>
@@ -104,12 +102,12 @@
                     ?>
 
                             <div class="col-md-4 margin_bottom">
-                                <a href="Pages/post.php?id=<?php echo $row['post_id']; ?>">
+                                <a href="index.php?action=post&id=<?php echo $row['post_id']; ?>">
                                     <div class="work text-center square-image">
                                         <img src="assets/<?php echo $row['url']; ?>" class="rounded img-fluid square-image" alt="#">
-                                    </div>
-                                    <div class="work_text">
-                                        <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
+                                        <div class="work_text">
+                                            <h3><?php echo $row['title']; ?><br /><span class="blu"><?php echo $row['price']; ?></span></h3>
+                                        </div>
                                     </div>
                                 </a>
                             </div>
