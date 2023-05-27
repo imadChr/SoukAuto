@@ -136,7 +136,7 @@
                             <div class="container">
                                 <div class="card mb-4">
                                     <!-- Price badge-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 1rem; right: 1rem;">Sell</div>
+                                    <div class="badge text-white position-absolute"> <?php echo $row['price'] ?> DA</div>
                                     <!-- Product image-->
                                     <div class="card-img-top">
                                         <img class="card-img-top" src="assets/<?php echo $row['url']; ?>" alt="Card image cap">
@@ -145,8 +145,7 @@
                                     <div class="card-body">
                                         <!-- Product name-->
                                         <h5 class="card-title"><?php echo $row['year'], '   ', $row['title'] ?></h5>
-                                        <p class="card-text"><?php echo $row['price'] ?> DA</p>
-                                        <p class="card-text"><?php echo $row['description'] ?></p>
+                                        <p class="card-text desc"><?php echo $row['description'] ?></p>
                                         <p class="card-text"><small class="text-muted"><?php echo $row['date'] ?> , <?php echo $row['wilaya'] ?></small></p>
 
                                         <!--buttons-->
