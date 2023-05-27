@@ -86,8 +86,18 @@ button#button-addon1 ion-icon {
     line-height: 1.5;
 }
 
+.card-text.desc {
+    font-family: Como, serif !important;
+    font-size: 20px;
+}
+
+
 .card .badge {
-    font-size: 1rem;
+    top: 1rem; 
+    right: 1rem; 
+    width: auto; 
+    font-size: 1.2rem;
+    background-color: #ED6C15;
 }
 
 /* Add some space around each card */
