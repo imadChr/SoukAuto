@@ -10,7 +10,8 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/notyf/notyf.min.css" />
-
+  <script src="assets/js/posts.js"></script>
+  <script src="assets/js/sell.js"></script>
 
   <!-- External libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
@@ -138,7 +139,7 @@
                     <a href="index.php?action=list&see=myposts" class="dropdown-item"><ion-icon name="document-outline"></ion-icon> My posts</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="index.php?action=favourites"><ion-icon name="heart-outline"></ion-icon> My Favorites</a>
+                    <a class="dropdown-item" href="index.php?action=list?see=favourites"><ion-icon name="heart-outline"></ion-icon> My Favorites</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="index.php?action=logout"><ion-icon name="log-out-outline"></ion-icon> Logout</a>

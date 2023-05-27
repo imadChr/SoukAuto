@@ -5,14 +5,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <title><?php $vars['see']; ?></title>
 </head>
-<header>
-    <img src="assets/images/sell_header.png" class="img-fluid" alt="Responsive image">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-        </div>
-    </div>
-</header>
-
 <div class="container">
     <div class="row">
         <div class="col-md-12 d-flex justify-content-between">

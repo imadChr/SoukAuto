@@ -11,7 +11,7 @@
                 <br>
                 <div class="text-center">
                     <div class="d-inline-block">
-                        <a class="button1 mx-3" href="index.php?action=list&what=sale">BUY</a>
+                        <a class="button1 mx-3" href="index.php?action=list">BUY</a>
                         <a class="button1 mx-3" href="index.php?action=list&what=rent">RENT</a>
                     </div>
                 </div>

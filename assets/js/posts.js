@@ -9,13 +9,12 @@ includeScript('https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bu
 includeScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js');
 
 $(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip();
 
+    $('[data-toggle="tooltip"]').tooltip();
     // Toggle filter button
     $(".toggle-filter-btn").click(function() {
         $(".filter-form").toggleClass("d-none");
     });
-
     // Pagination
         $(document).on('click', '.page-link', function(e) {
             e.preventDefault();

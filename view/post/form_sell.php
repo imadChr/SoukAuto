@@ -21,6 +21,7 @@
     </div>
     <h5 class="form-title">Post your car for sale!</h5>
     <form method="POST" action="index.php?action=addPost" enctype="multipart/form-data">
+        <input type="hidden" value="sell">
         <section class="form1">
             <div>
                 <label for="brand">Brand:</label>
