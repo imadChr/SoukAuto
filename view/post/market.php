@@ -181,15 +181,14 @@
             <div class="col-md-4"></div>
             <div class="col-md-4 text-center">
                 <h2 class="heading-section"></h2>
-
                 <div class="block-27">
                     <ul class="pagination">
                         <?php
                         for ($i = 1; $i <= $total_pages; $i++) {
                             if ($i == $current_page) {
-                                echo "<li class='active'><a href='#'>" . $i . "</a></li>";
+                                echo "<li class='active'><a href=''>" . $i . "</a></li>";
                             } else {
-                                echo "<li><a class='page-link' href='#'>" . $i . "</a></li>";
+                                echo "<li><a class='page-link' href=''>" . $i . "</a></li>";
                             }
                         }
                         ?>

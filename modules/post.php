@@ -349,7 +349,10 @@ switch ($vars['action']) {
                         break;
                     }
                     break;
+                    exit;
             }
+            break;
+            exit;
         }
         break;
     case "post": {

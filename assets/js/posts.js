@@ -16,20 +16,6 @@ $(document).ready(function() {
         $(".filter-form").toggleClass("d-none");
     });
 
-    // Date picker
-    $('.datepicker-year').datepicker({
-        format: 'yyyy',
-        viewMode: 'years',
-        minViewMode: 'years',
-        startDate: '1970',
-        endDate: '2023'
-    });
-
-    $('#year').on('changeDate', function() {
-        const year = $(this).datepicker('getDate').getFullYear();
-        console.log(year);
-    });
-
     // Add to favorites
     function addToFavorites(post_id) {
         // Send an AJAX request to the server to add or remove the post from the user's favorites
@@ -76,65 +62,15 @@ $(document).ready(function() {
     });
 
     // Pagination
-    $(document).on('click', '.page-link', function(e) {
-        e.preventDefault();
-        var page = $(this).text();
-        var url = window.location.href;
-        if (url.indexOf('&page=') > -1) {
-            url = url.replace(/&page=\d+/, '&page=' + page);
-        } else {
-            url += '&page=' + page;
-        }
-        window.location.href = url;
-    });
+        $(document).on('click', '.page-link', function(e) {
+            e.preventDefault();
+            var page = $(this).text();
+            var url = window.location.href;
+            if (url.indexOf('?page=') > -1) {
+                url = url.replace(/page=\d+/, 'page=' + page);
+            } else {
+                url += '&page=' + page;
+            }
+            window.location.href = url;
+        });
 });
-
-
-
-// function addcomment(user_id, post_id) {
-//     var comment = $("#comment").val();
-//     $.ajax({
-//         type: "POST",
-//         url: "index.php?action=addcomment",
-//         data: {
-//             post_id: post_id,
-//             user_id: user_id,
-//             comment: comment,
-//         },
-//         success: function(post_id) {
-//             // Refresh the comment section
-//             loadComments(post_id);
-//             $("#comment").val("");
-//         }
-//     });
-// }
-
-// function deletecomment(comment_id , post_id) {
-//     $.ajax({
-//         type: "POST",
-//         url: "index.php?action=deletecomment",
-//         data: {
-//             comment_id: comment_id,
-//         },
-//         success: function(post_id) {
-//             // Refresh the comment section
-//             loadComments(post_id);
-//         }
-//     });
-// }
-
-// function loadComments(post_id) {
-//     // Perform an AJAX request to fetch the updated comments
-//     $.ajax({
-//         type: "GET",
-//         url: "index.php?action=getcomments",
-//         data: {
-//             post_id: post_id,
-//         },
-//         success: function(response) {
-//             // Update the comment section with the new comments
-//             alert(response);
-//             $(".comments").html(response);
-//         }
-//     });
-// }
