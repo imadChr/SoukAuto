@@ -59,6 +59,8 @@
                                 <option value="Constantine">Constantine</option>
                                 <option value="Batna">Batna</option>
                                 <option value="Setif">Setif</option>
+                                <option value="Bejaia">Bejaia</option>
+
                             </select>
                         </div>
                         <div class="col-md-4 mb-3">
@@ -91,18 +93,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <!-- Mileage Range -->
-                            <label for="mileage">Mileage Range:</label>
-                            <div class="row">
-                                <div class="col">
-                                    <input type="number" min="0" class="form-control" id="mileageMin" name="mileageMin" placeholder="Min" step="10000" value="0">
-                                </div>
-                                <div class="col">
-                                    <input type="number" min="0" class="form-control" id="mileageMax" name="mileageMax" placeholder="Max" step="10000" max="100000000000000" value="100000000">
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="col-md-4 mb-3">
                             <!-- Year Range -->
                             <label for="yearMin">Year Range:</label>
