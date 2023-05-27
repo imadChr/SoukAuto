@@ -1,20 +1,9 @@
-    <head>
-            <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
-        <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-
-        <!-- Popper JS -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-        <!-- Latest compiled JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Market</title>
+<head>
+    <title>Rent</title>
 </head>
 
 <header>
-    <img src="assets/images/sell_header.png" class="img-fluid" alt="Responsive image">
+    <img src="assets/images/rent_header.png" class="img-fluid" alt="Responsive image">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <!-- Content within the header -->
@@ -44,15 +33,15 @@
             </div>
         </div>
         <!-- filtering section -->
-        <div class="row" >
-            <div class="col-md-12" >
+        <div class="row">
+            <div class="col-md-12">
                 <form class="filter-form d-none" method="post" action="index.php?action=list&see=search">
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <!-- Brand -->
                             <label for="brand">Brand:</label>
-                            <select class="form-control" id="brand_id" name="brand_id">
-                                <option value="ALL">All</option>
+                            <select class="form-control" id="brand" name="brand_id">
+                                <option value="">All</option>
                                 <?php
                                 foreach ($brands as $row) {
                                     echo '<option value="' . $row['brand_id'] . '">' . $row['brand'] . '</option>';
@@ -64,7 +53,7 @@
                             <!-- Wilaya -->
                             <label for="wilaya">Wilaya:</label>
                             <select class="form-control" id="wilaya" name="wilaya">
-                                <option value="ALL">All</option>
+                                <option value="">All</option>
                                 <option value="Algiers">Algiers</option>
                                 <option value="Oran">Oran</option>
                                 <option value="Constantine">Constantine</option>
@@ -76,7 +65,7 @@
                             <!-- Country -->
                             <label for="country">Country:</label>
                             <select class="form-control" id="country" name="country_id">
-                                <option value="ALL">All</option>
+                                <option value="">All</option>
                                 <option value="1">USA</option>
                                 <option value="2">Japan</option>
                                 <option value="3">Germany</option>
@@ -95,10 +84,10 @@
                             <label for="priceMin">Price Range:</label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="number" min= '0' class="form-control" id="priceMin" name="priceMin" placeholder="Min" step="10000" value="0">
+                                    <input type="number" class="form-control" id="priceMin" name="priceMin" placeholder="Min" step="100">
                                 </div>
                                 <div class="col">
-                                    <input type="number" min='0' class="form-control" id="priceMax" name="priceMax" placeholder="Max" step="10000" value="10000000">
+                                    <input type="number" class="form-control" id="priceMax" name="priceMax" placeholder="Max" step="100">
                                 </div>
                             </div>
                         </div>
@@ -107,10 +96,10 @@
                             <label for="mileageMin">Mileage Range:</label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="number" min="0" class="form-control" id="mileageMin" name="mileageMin" placeholder="Min"  step="10000" value="0">
+                                    <input type="number" class="form-control" id="mileageMin" name="mileageMin" placeholder="Min" step="1000">
                                 </div>
                                 <div class="col">
-                                    <input type="number" min="0" class="form-control" id="mileageMax" name="mileageMax" placeholder="Max" step="10000" max="100000000000000" value="100000000">
+                                    <input type="number" class="form-control" id="mileageMax" name="mileageMax" placeholder="Max" step="1000">
                                 </div>
                             </div>
                         </div>
@@ -119,10 +108,10 @@
                             <label for="yearMin">Year Range:</label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="number" class="form-control" id="yearMin" name="yearMin" placeholder="Min" min="1950" value="1950">
+                                    <input type="number" class="form-control" id="yearMin" name="yearMin" placeholder="Min">
                                 </div>
                                 <div class="col">
-                                    <input type="number" class="form-control" id="yearMax" name="yearMax" placeholder="Max" min="1950" value="2023">
+                                    <input type="number" class="form-control" id="yearMax" name="yearMax" placeholder="Max">
                                 </div>
                             </div>
                         </div>
@@ -137,7 +126,7 @@
             </div>
         </div>
 
-        <div class="container cards_landscape_wrap-2 pb-5" id="filter">
+        <div class="container cards_landscape_wrap-2 pb-5">
             <div class="row">
                 <!--prod 1-->
                 <?php
@@ -221,92 +210,3 @@
         </div>
     </div>
 </div>
-<script type='text/javascript'>
-
-function fetchData(changingID) {
-  var brand = $('#brand_id').val();
-  var country = $('#country').val();
-  var wilaya = $('#wilaya').val();
-  var priceMin = $('#priceMin').val();
-  var priceMax = $('#priceMax').val();
-//   var mileageMax = $('#mileageMax').val();
-//   var mileagaMin = $('#mileageMin').val();
-  var yearMin = $('#yearMin').val();
-  var yearMax = $('#yearMax').val();
-
-
-    $.ajax({
-        url: 'index.php?action=list&see=search',
-        type: 'POST',
-        data: {
-        request_brand: brand,
-        request_country: country,
-        request_wilaya: wilaya,
-        request_priceMin: priceMin,
-        request_priceMax: priceMax,
-        // request_mileageMin: mileageMin,
-        //   request_mileageMax: mileageMax,
-        request_yearMin: yearMin,
-        request_yearMax: yearMax
-
-        
-        },
-        beforeSend: function() {
-        $("#filter").html("<span>Working...</span>");
-        },
-        success: function(data) {
-        $("#filter").html(data);
-        }
-    });
-    }
-
-$(document).ready(function() {
-  $('#country').on('change', function() {
-    fetchData('#country');
-  });
-
-  $('#brand_id').on('change', function() {
-    fetchData('#brand_id');
-  });
-
-  $('#priceMin').on('change', function() {
-    fetchData('#priceMin');
-  });
-
-  $('#priceMax').on('change', function() {
-    fetchData('#priceMax');
-  });
-
-  $('#wilaya').on('change', function() {
-    fetchData('#wilaya');
-  });
-
-//   $('#mileageMax').on('change', function() {
-//     fetchData('#mileageMax');
-//   });
-
-//   $('#mileageMin').on('change', function() {
-//     fetchData('#mileageMin');
-//   });
-
-$('#yearMin').on('change', function() {
-    fetchData('#yearMin');
-  });
-
-  $('#yearMax').on('change', function() {
-    fetchData('#yearMax');
-  });
-
-});
-
-
-
-    
-    
-
-        
-    
-
-
-
-  </script>

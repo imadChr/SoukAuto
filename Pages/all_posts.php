@@ -1,44 +1,4 @@
 <?php
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (strcmp($vars["see"], "favorite") == 0) {
-        $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id inner join favorites on favorites.post_id = post.post_id  where image_order = 1 and favorites.user_id = $user_id ORDER BY date LIMIT $offset, $posts_per_page";
-    } else 
-    if (strcmp($_POST["see"], "myposts") == 0) {
-        $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 and post.user_id = $user_id ORDER BY date LIMIT $offset, $posts_per_page";
-    } else 
-    if (strcmp($vars["see"], "search") == 0) {
-        $keyword = "%" . $_POST["keyword"] . "%";
-        $brand = $_POST["brand"];
-        $wilaya = $_POST["wilaya"];
-        $country = $_POST["country"];
-        $priceMin = $_POST["priceMin"];
-        $priceMax = $_POST["priceMax"];
-        $mileageMin = $_POST["mileageMin"];
-        $mileageMax = $_POST["mileageMax"];
-        $yearMin = $_POST["yearMin"];
-        $yearMax = $_POST["yearMax"];
-
-        $sql = "SELECT p.*, c.*, i.*
-            FROM post p 
-            INNER JOIN car c ON p.car_id = c.car_id 
-            INNER JOIN images i ON i.post_id = p.post_id 
-            INNER JOIN brand b ON b.brand_id = c.brand_id 
-            INNER JOIN model m ON m.model_id = c.model_id 
-            WHERE i.image_order = 1 
-            AND (p.title LIKE '%{$keyword}%' OR p.description LIKE '%{$keyword}%' OR b.brand LIKE '%{$keyword}%' OR m.model_name LIKE '%{$keyword}%')
-            AND (c.brand = '{$brand}' OR '{$brand}' = '')
-            AND (p.wilaya = '{$wilaya}' OR '{$wilaya}' = '')
-            AND (c.country = '{$country}' OR '{$country}' = '')
-            AND (p.price >= {$priceMin} AND p.price <= {$priceMax})
-            AND (c.mileage >= {$mileageMin} AND c.mileage <= {$mileageMax})
-            AND (YEAR(c.year) >= {$yearMin} AND YEAR(c.year) <= {$yearMax})
-            ORDER BY p.date 
-            LIMIT $offset, $posts_per_page";
-    } else exit;
-} else {
-    $sql = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 ORDER BY date LIMIT $offset, $posts_per_page";
-}
 // query the database to get the posts for the current page
 $result = mysqli_query($conn, $sql);
 
