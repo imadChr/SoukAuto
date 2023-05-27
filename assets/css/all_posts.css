@@ -3,7 +3,6 @@
     --secondary-color: #f8d5be;
     --border-color: #f8d5b0;
 }
- 
 .logo {
     width: 150px;
     margin-right: auto;
@@ -233,6 +232,7 @@ button#button-addon1 ion-icon {
 .btn-primary {
     color: white !important;
 }
+
 
 /* Change border color */
 .form-control:focus {

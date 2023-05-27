@@ -142,6 +142,7 @@
                                     <div class="card-img-top">
                                         <img class="card-img-top" src="assets/<?php echo $row['url']; ?>" alt="Card image cap">
                                     </div>
+
                                     <!--card body-->
                                     <div class="card-body">
                                         <!-- Product name-->
