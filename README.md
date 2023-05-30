@@ -34,7 +34,7 @@ Authors :
 
 Kadri Mohammed Mouncef - WebDev Developer and Back-End developer
 RAHMOUNI Rahil - Design and Front-end developer
-CHARCHAR Imad Eddine - Front-end developer
+CHARCHAR Imad Eddine - Front-end developer and Back-end developer
 Yousfi Chaker - Design and Front-end developer
 GRINE Abdessamed Bassel - Front-end contributor
 
