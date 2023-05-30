@@ -58,15 +58,24 @@ CREATE TABLE `car` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `car` (`car_id`, `brand_id`, `model_id`, `fuel`, `year`, `mileage`) VALUES
-(11, 3, 5, 'Essence', 1988, 120000),
-(12, 4, 7, 'Essence', 2015, 60000),
-(13, 11, 22, 'Diesel', 1992, 120000),
-(14, 6, 12, 'Essence', 1992, 150000),
-(15, 6, 103, 'Essence', 1999, 60000),
-(16, 15, 29, 'Essence', 2015, 30000),
-(17, 26, 51, 'Diesel', 2018, 20000),
+(11, 3, 5, 'Essen', 1988, 120000),
+(12, 4, 7, 'Essen', 2015, 60000),
+(13, 11, 22, 'Diese', 1992, 120000),
+(14, 6, 12, 'Essen', 1992, 150000),
+(15, 6, 103, 'Essen', 1999, 60000),
+(16, 15, 29, '', 2015, 30000),
+(17, 26, 51, 'Diese', 2018, 20000),
 (18, 3, 86, 'GPL', 2023, 5),
-(19, 12, 23, 'Essence', 2007, 150000);
+(19, 12, 23, 'Essen', 2007, 150000),
+(20, 3, 5, 'Essence', 1993, 122000),
+(21, 3, 5, 'Essence', 1993, 122000),
+(22, 3, 81, 'Diesel', 1950, 1),
+(23, 5, 10, 'Diesel', 1950, 1),
+(24, 5, 10, 'Diesel', 1950, 1),
+(25, 2, 3, 'Essence', 1954, 3),
+(26, 2, 3, 'Essence', 1954, 3),
+(27, 5, 10, 'Essence', 1952, 4),
+(28, 5, 10, 'Essence', 1952, 4);
 
 CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
@@ -77,7 +86,7 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `comments` (`comment_id`, `user_id`, `message`, `post_id`, `date_posted`) VALUES
-(11, 1, 'seems odd, canada and no rust?', 23, '2023-05-23');
+(92, 1, 'khghj', 20, '2023-05-28');
 
 CREATE TABLE `countries` (
   `CountryID` int(5) NOT NULL,
@@ -103,9 +112,11 @@ CREATE TABLE `favorites` (
 
 INSERT INTO `favorites` (`id`, `post_id`, `user_id`) VALUES
 (13, 11, 15),
-(15, 21, 1),
 (17, 11, 19),
-(18, 23, 1);
+(43, 25, 1),
+(44, 18, 1),
+(47, 19, 1),
+(48, 17, 1);
 
 CREATE TABLE `images` (
   `image_id` int(11) NOT NULL,
@@ -130,7 +141,9 @@ INSERT INTO `images` (`image_id`, `post_id`, `url`, `image_order`) VALUES
 (13, 20, 'images/uploads/anthony-bautista-ngsvXuGixaM-unsplash.jpg', 4),
 (14, 21, 'images/uploads/aachal-WwRkM7CduQA-unsplash.jpg', 1),
 (15, 22, 'images/uploads/civic EK9.jpeg', 1),
-(16, 23, 'images/uploads/Volvo_S60_002.jpg', 1);
+(16, 23, 'images/uploads/Volvo_S60_002.jpg', 1),
+(17, 25, 'images/uploads/E30-transformed.jpeg', 1),
+(18, 30, 'images/uploads/Volvo_S60_002.jpg', 1);
 
 CREATE TABLE `model` (
   `model_id` int(5) NOT NULL,
@@ -248,19 +261,27 @@ CREATE TABLE `post` (
   `description` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp(),
-  `wilaya` varchar(10) NOT NULL
+  `wilaya` varchar(10) NOT NULL,
+  `approved` tinyint(4) NOT NULL DEFAULT 0,
+  `type` enum('sell','rent') NOT NULL DEFAULT 'sell'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `post` (`post_id`, `user_id`, `car_id`, `title`, `description`, `price`, `date`, `wilaya`) VALUES
-(11, 1, 11, 'BMW E30 325I WAGON', 'swap moteur 325i ', 220000, '2023-05-06', 'Oran'),
-(12, 1, 12, 'Hyundai', 'GOOD car ', 300000, '2023-05-06', 'Adrar'),
-(17, 1, 13, 'Integra Type-R', '8250Rpm ', 160000, '2023-05-09', 'Oran'),
-(18, 1, 14, 'Civic Type-R EK9 K20', 'imported from japan', 250000, '2023-05-10', 'Béjaïa'),
-(19, 1, 15, 'Honda S2000 AP1', 'imported from japan and tastefully modified', 300000, '2023-05-10', 'Tizi Ouzou'),
-(20, 15, 16, '911', 'lol', 5000000, '2023-05-10', ''),
-(21, 1, 17, '208 tb9a 208', 'Freelancin', -2147483648, '2023-05-14', 'Biskra'),
-(22, 19, 18, 'aezazr', 'zheuize kjazeh', 765432, '2023-05-17', 'Biskra'),
-(23, 1, 19, 'VOLVO S60 from canada', 'it has no rust dont worry', 500000, '2023-05-18', 'El Tarf');
+INSERT INTO `post` (`post_id`, `user_id`, `car_id`, `title`, `description`, `price`, `date`, `wilaya`, `approved`, `type`) VALUES
+(11, 1, 11, 'BMW E30 325I WAGON', 'swap moteur 325i ', 220000, '2023-05-06', 'Oran', 1, 'sell'),
+(12, 1, 12, 'Hyundai', 'GOOD car ', 300000, '2023-05-06', 'Adrar', 1, 'sell'),
+(17, 1, 13, 'Integra Type-R', '8250Rpm ', 160000, '2023-05-09', 'Oran', 1, 'sell'),
+(18, 1, 14, 'Civic Type-R EK9 K20', 'imported from japan', 250000, '2023-05-10', 'Béjaïa', 1, 'sell'),
+(19, 1, 15, 'Honda S2000 AP1', 'imported from japan and tastefully modified', 300000, '2023-05-10', 'Tizi Ouzou', 1, 'sell'),
+(20, 15, 16, '911', 'lol', 5000000, '2023-05-10', '', 1, 'sell'),
+(21, 1, 17, '208 tb9a 208', 'Freelancin', -2147483648, '2023-05-14', 'Biskra', 1, 'sell'),
+(22, 19, 18, 'aezazr', 'zheuize kjazeh', 765432, '2023-05-17', 'Biskra', 1, 'sell'),
+(23, 1, 19, 'VOLVO S60 from canada', 'it has no rust dont worry', 500000, '2023-05-18', 'El Tarf', 1, 'sell'),
+(25, 1, 21, 'Wagon E30 325i', 'great for hooning with the whole family', 2200000, '2023-05-27', 'Oran', 1, 'sell'),
+(26, 1, 22, 'hbh', 'hhuhu', 6, '2023-05-27', 'Oum El Bou', 1, 'sell'),
+(27, 1, 23, 'hbh', 'hhuhu', 6, '2023-05-27', 'Oum El Bou', 1, 'sell'),
+(28, 1, 24, 'hbh', 'hhuhu', 6, '2023-05-27', 'Oum El Bou', 1, 'sell'),
+(29, 30, 27, 'efdsf', 'great for hooning with the whole family', 3, '2023-05-28', 'Oum El Bou', 0, 'sell'),
+(30, 30, 28, 'efdsf', 'great for hooning with the whole family', 3, '2023-05-28', 'Oum El Bou', 0, 'sell');
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
@@ -268,15 +289,16 @@ CREATE TABLE `users` (
   `lastname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `PhoneNumber` varchar(15) NOT NULL,
+  `phonenumber` varchar(20) NOT NULL,
   `wilaya` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `password`, `PhoneNumber`, `wilaya`) VALUES
+INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `password`, `phonenumber`, `wilaya`) VALUES
 (1, 'Mohammed Mouncef', 'Kadri', 'mohammed.kadri@ensia.edu.dz', '$2y$10$2NW.CbkCQ4LElYbJ.VbctePZYz7wTbzdxa/33FDyr4LG4i2lhsfJO', '0561636981', 'Oran'),
 (15, 'nihel ', 'hocine', 'NIHEL@GMAIL.COM', '$2y$10$5Nn2aDE9Zgf4vYJJlYw/Tuz5TVAx5yyXrpsUbsrAUDP6Ts8ov/yOC', '0557543645', ''),
 (28, 'Mohammed Mouncef', 'Kadri', 'mohammed.kadri@ensia.edu.dz.L', '$2y$10$p19VwbHunQYDpiq4ZP3by.fLTTzYd9XlJ3EwRRRcBiwxyxcYSnBJa', '0561636981', 'Tébessa'),
-(29, 'Mohammed Mouncef', 'Kadri', 'mohammed.kadri@ensia.edu', '$2y$10$JjVFk7dbenIkhxB5WETz2OdMTfHAfPFhuq6l/dE7c.7wQnARIKbMe', '0561636981', 'Tizi Ouzou');
+(29, 'Mohammed Mouncef', 'Kadri', 'mohammed.kadri@ensia.edu', '$2y$10$JjVFk7dbenIkhxB5WETz2OdMTfHAfPFhuq6l/dE7c.7wQnARIKbMe', '0561636981', 'Tizi Ouzou'),
+(30, 'Mohamed Nadjib', 'Bentayeb', 'najibbentayeb@gmail.com', '$2y$10$OWZn3R.Bqis3rcPpxpTrXO6Spys8EZnpQ8tL0HfH5.UFc/E60ozBe', '0562198660', 'Batna');
 
 
 ALTER TABLE `brand`
@@ -321,25 +343,25 @@ ALTER TABLE `users`
 
 
 ALTER TABLE `car`
-  MODIFY `car_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `car_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 ALTER TABLE `favorites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 ALTER TABLE `model`
   MODIFY `model_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 
 ALTER TABLE `brand`
