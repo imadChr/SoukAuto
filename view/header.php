@@ -59,7 +59,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex align-items-center">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle mr-2" height="30" alt="" loading="lazy">
+                    <img src="https://static.vecteezy.com/system/resources/previews/000/550/731/original/user-icon-vector.jpg" class="rounded-circle mr-2" height="30" alt="" loading="lazy">
                     <span class="text-truncate name"><?php echo $appuser['firstname']  ?></span>
                   </div>
                 </a>

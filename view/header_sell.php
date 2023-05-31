@@ -42,7 +42,7 @@
     background-color:#ED6C15 !important;
     color: white !important;
   }
-  ion-icon:hover{
+  .btn:hover ion-icon{
     color: white !important;
   }
   ion-icon{

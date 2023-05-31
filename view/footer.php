@@ -1,3 +1,7 @@
+<!-- Include the Ionicons library -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 <!-- footer -->
 <footer id="contact">
   <br><br>
@@ -5,26 +9,26 @@
     <div class="col-md-4">
       <h5 class="mb-4">Social Media</h5>
       <div class="d-flex mb-3">
-        <i class="fa fa-facebook mr-3"></i>
+        <ion-icon name="logo-facebook" class="mr-3"></ion-icon>
         <a href="#">Facebook</a>
       </div>
       <div class="d-flex mb-3">
-        <i class="fa fa-instagram mr-3"></i>
+        <ion-icon name="logo-instagram" class="mr-3"></ion-icon>
         <a href="#">Instagram</a>
       </div>
       <div class="d-flex mb-3">
-        <i class="fa fa-linkedin mr-3"></i>
+        <ion-icon name="logo-linkedin" class="mr-3"></ion-icon>
         <a href="#">LinkedIn</a>
       </div>
     </div>
     <div class="col-md-4">
       <h5 class="mb-4">Contact Us</h5>
       <div class="d-flex mb-3">
-        <i class="fa fa-envelope mr-3"></i>
+        <ion-icon name="mail" class="mr-3"></ion-icon>
         <a href="#">Email</a>
       </div>
       <div class="d-flex mb-3">
-        <i class="fa fa-phone mr-3"></i>
+        <ion-icon name="call" class="mr-3"></ion-icon>
         <a href="#">Phone</a>
       </div>
     </div>
@@ -40,6 +44,8 @@
   </div>
   <br><br>
 </footer>
+
+<!-- Include the JavaScript libraries -->
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
