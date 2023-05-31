@@ -341,15 +341,15 @@ switch ($vars['action']) {
                 break;
             case "sell": {
                     $brands = $db->query("SELECT * FROM brand ORDER BY brand")->fetchAll();
+                    include("view/header_sell.php");
                     include("view/post/form_sell.php");
-                    include("view/footer.php");
                     exit();
                 }
                 break;
             case "rent": {
                     $brands = $db->query("SELECT * FROM brand ORDER BY brand")->fetchAll();
+                    include("view/header_rent.php");
                     include("view/post/form_rent.php");
-                    include("view/footer.php");
                     exit();
                 }
                 break;
