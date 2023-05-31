@@ -12,10 +12,8 @@
     </style>
 </head>
 <div class="car-container" >
-    <div class="inline">
     <h1 class="car-title inline-item"><?php echo $post['title']; ?></h1>
     <h2 class="car-price inline-item">Price: <?php echo $post['price']; ?>DA</h2>
-    </div>
     <p class="car-description"><?php echo $post['description']; ?></p>
 
     <div class="image-container">
