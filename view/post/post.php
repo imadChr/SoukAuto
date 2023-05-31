@@ -1,13 +1,22 @@
 <head>
     <title><?php echo $post['title'] ?></title>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="assets/css/post.css">
     <link rel="stylesheet" href="assets/css/lightbox.min.css">
-
+    <style>
+        body{
+            background-color: white !important;
+        }
+    </style>
 </head>
-<div class="car-container">
-    <h1 class="car-title"><?php echo $post['title']; ?></h1>
+<div class="car-container" >
+    <div class="inline">
+    <h1 class="car-title inline-item"><?php echo $post['title']; ?></h1>
+    <h2 class="car-price inline-item">Price: <?php echo $post['price']; ?>DA</h2>
+    </div>
     <p class="car-description"><?php echo $post['description']; ?></p>
-    <h2 class="car-price">Price: <?php echo $post['price']; ?>DA</h2>
 
     <div class="image-container">
         <div class="big">
@@ -31,17 +40,28 @@
     </div>
 
     <ul class="car-info">
-        <li><strong><br>Specifications<br><br></strong></li>
-        <li><strong>Brand:</strong> <?php echo $post['brand']; ?></li>
-        <li><strong>Brand:</strong> <?php echo $post['post_id']; ?></li>
-
-        <li><strong>Model:</strong> <?php echo $post['model_name']; ?></li>
-        <li><strong>Fuel Type:</strong> <?php echo $post['fuel']; ?></li>
-        <li><strong>Year:</strong> <?php echo $post['year']; ?></li>
-        <li><strong>Mileage:</strong> <?php echo $post['mileage']; ?> km</li>
-        <li><strong>Wilaya:</strong> <?php echo $post['wilaya']; ?></li>
-        <li><strong>Date of post:</strong> <?php echo date('d/m/Y', strtotime($post['date'])); ?></li>
+        <li><strong style="font-size:30px;"><br>Specifications<br></strong></li>
+        <div class="row">
+            <li class="col-md-6"><strong>Brand:</strong> <?php echo $post['brand']; ?></li>
+            <li class="col-md-6"><strong>Model:</strong> <?php echo $post['model_name']; ?></li>
+        </div>
+        <div class="row">
+            <li class="col-md-6"><strong>Mileage:</strong> <?php echo $post['mileage']; ?> km</li>
+            <li class="col-md-6"><strong>Fuel Type:</strong> <?php echo $post['fuel']; ?></li>
+        </div>
+        <div class="row">
+            <li class="col-md-6"><strong>Wilaya:</strong> <?php echo $post['wilaya']; ?></li>
+            <li class="col-md-6"><strong>Year:</strong> <?php echo $post['year']; ?></li>
+        </div>
     </ul>
+    <div class="row">
+        <div class="col-md-10">
+            <button class="btn" onclick="contactSeller(<?php echo $row['user_id'] ?>)" role="button" style="font-size:25px; padding:+1%;background-color:#ed6c15; color:white !important;">
+                <span><ion-icon name="person-outline"></ion-icon> Contact Seller</span>
+            </button>
+        </div>
+        <span class="col-md-2" style="color: white; font-size:20px; margin-top:10px;"><?php echo date('d/m/Y', strtotime($post['date'])); ?></span>
+    </div>
 </div>
 <br><br>
 <div class="comment-section">
@@ -117,6 +137,29 @@
                 });
             }
         });
+    }
+
+    //event listener to #contactseller
+    function contactSeller(seller_id) {
+    // send an AJAX request to get the phone number and first name of the seller
+    $.ajax({
+        url: 'index.php?action=getSellerInfo',
+        type: 'POST',
+        data: {
+            seller_id: seller_id
+        },
+        success: function(response) {
+            // display the phone number and first name in a SweetAlert2 popup
+            response = JSON.parse(response);
+            Swal.fire({
+                title: 'Contact Seller',
+                html: '<div class="btn-popup" ><i class="fas fa-user"></i> Name: ' + response['firstname'] + '</div><br><div class="btn-popup"><i class="fas fa-envelope"></i> Email: ' + response['email'] + '</div><br><div class="btn-popup" style="background-color:#ED6C15;><i class="fas fa-phone"></i> Phone number: ' + response['phonenumber'] + '</div>',
+                showConfirmButton: true,
+                showLoaderOnConfirm: true,
+                allowOutsideClick: () => !Swal.isLoading()
+            });
+        }
+    });
     }
 
     function deletecomment(comment_id, post_id) {

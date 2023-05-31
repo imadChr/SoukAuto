@@ -609,7 +609,7 @@ footer {
     height: 300px;
     width: 100%;
     margin-top: 100px;
-    padding-left: 100px !important;
+    padding-left: 150px !important;
 }
 
 .mb-4
@@ -779,7 +779,7 @@ footer {
     background-color: #D9D9D9 !important;
 }
 
-ion-icon {
+.foot {
     color: #fff !important;
 }
 

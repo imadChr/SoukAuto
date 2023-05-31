@@ -10,9 +10,6 @@
     box-sizing: border-box;
     font-family: 'Nasalization', sans-serif;
 }
-body {
-    background-color: #f2f2f2;
-}
 
 .date {
     position: relative;
@@ -31,7 +28,6 @@ body {
 .car-post {
     font-family: 'Nasalization', sans-serif;
     margin-bottom: 40px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     padding: 20px;
 }
@@ -71,13 +67,14 @@ body {
     color: #FFFFFF;
 }
 
-.car-info li {
-    font-family: Sukar, sans-serif;
-    margin-bottom: 10px;
+.car-info li, span .col-md-1 {
+    font-family: Sukar, sans-serif !important;
+    margin-bottom: 10px !important;
+    color:#FFFFFF !important;
 }
 
 .car-info li strong {
-    font-family: Sukar, sans-serif;
+    font-family:'Nasalization', sans-serif !important;
     font-weight: bold;
     color: #FFA500;
     text-transform: uppercase;
@@ -172,7 +169,7 @@ body {
     background-color: #f2f2f2;
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    width: 95%;
 }
 
 .no-comment,

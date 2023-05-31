@@ -5,40 +5,43 @@
 <!-- footer -->
 <footer id="contact">
   <br><br>
-  <div class="row">
+  <div class="row d-flex">
     <div class="col-md-4">
       <h5 class="mb-4">Social Media</h5>
-      <div class="d-flex mb-3">
-        <ion-icon name="logo-facebook" class="mr-3"></ion-icon>
+      <div class="d-flex mb-3 ">
+        <ion-icon name="logo-facebook" class="mr-3 foot"></ion-icon>
         <a href="#">Facebook</a>
       </div>
       <div class="d-flex mb-3">
-        <ion-icon name="logo-instagram" class="mr-3"></ion-icon>
+        <ion-icon name="logo-instagram" class="mr-3 foot"></ion-icon>
         <a href="#">Instagram</a>
       </div>
       <div class="d-flex mb-3">
-        <ion-icon name="logo-linkedin" class="mr-3"></ion-icon>
+        <ion-icon name="logo-linkedin" class="mr-3 foot"></ion-icon>
         <a href="#">LinkedIn</a>
       </div>
     </div>
     <div class="col-md-4">
       <h5 class="mb-4">Contact Us</h5>
       <div class="d-flex mb-3">
-        <ion-icon name="mail" class="mr-3"></ion-icon>
-        <a href="#">Email</a>
+        <ion-icon name="mail" class="mr-3 foot"></ion-icon>
+        <a href="mailto:rahil.rahmouni@ensia.edu.dz">Email</a>
       </div>
       <div class="d-flex mb-3">
-        <ion-icon name="call" class="mr-3"></ion-icon>
-        <a href="#">Phone</a>
+        <ion-icon name="call" class="mr-3 foot"></ion-icon>
+        <a href="tel:0561636981">Phone</a>
       </div>
     </div>
     <div class="col-md-4">
       <h5 class="mb-4">About Us</h5>
       <div class="mb-3">
-        <a href="#">Terms and Conditions</a>
+        <a href="https://drive.google.com/file/d/1IJLTQ7MwytAAjrWyiiwhrE4h3B5ZkdlI/view?usp=sharing">Terms and Conditions</a>
       </div>
       <div class="mb-3">
-        <a href="#">Privacy Policy</a>
+        <a href="https://drive.google.com/file/d/1Gu7pDFuriYGSlbBpNgA9LhBDkvicA3SS/view?usp=sharing">About</a>
+      </div>
+      <div class="mb-3">
+        <a href="https://drive.google.com/file/d/1XDwWZ195TD0yw2SKO06rH1z84UwYx_SE/view?usp=sharing">FAQ</a>
       </div>
     </div>
   </div>
