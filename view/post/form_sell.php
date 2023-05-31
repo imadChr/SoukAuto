@@ -14,11 +14,6 @@
 </head>
 
 <body>
-    <div class="d-flex justify-content my-3">
-        <button type="button" class="btn btn-outline-primary toggle-filter-btn">
-            <ion-icon name="funnel-outline"></ion-icon>
-        </button>
-    </div>
     <h5 class="form-title">Post your car for sale!</h5>
     <form method="POST" action="index.php?action=addPost" enctype="multipart/form-data">
         <input type="hidden" value="sell">

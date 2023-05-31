@@ -546,7 +546,7 @@ header li {
     transition: opacity 0, 3s ease-in;
 }
 .square-image {
-    width: 420px; /* Adjust the width and height as per your requirements */
+    width: 420px; 
     height: 250px;
 }
 
@@ -598,8 +598,9 @@ footer {
     position: relative;
     overflow: hidden;
     height: 300px;
+    width: 100%;
     margin-top: 100px;
-
+    padding-left: 100px !important;
 }
 
 .mb-4

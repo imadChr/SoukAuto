@@ -27,74 +27,8 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-  <style>
-    .navigation.navbar-dark .navbar-nav .nav-link:focus,
-    .navigation.navbar-dark .navbar-nav .nav-link:hover {
-      color: white;
-    }
-
-    .navigation.navbar-dark .navbar-nav .nav-link,
-    .navbar-scroll .navbar-toggler-icon,
-    .navbar-scroll .navbar-brand,
-    .btn {
-      padding: 13 25px;
-      border: 2.5px solid #ED6C15;
-      border-radius: 13px;
-      font-size: 20px;
-      line-height: 20px;
-      font-weight: 600;
-      font-family: "Nasalization", sans-serif;
-      color: #1f1f1f !important;
-    }
-
-    .btn-popup {
-      padding: 13 25px;
-      border: 1px solid #ED6C15;
-      width: 100%;
-      height: 30px;
-      border-radius: 7px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: 500;
-      font-family: "Nasalization", sans-serif;
-      color: #1f1f1f !important;
-    }
-
-    .name {
-      font-size: 20px;
-      font-weight: 600;
-      font-family: "Nasalization", sans-serif;
-      color: #1f1f1f !important;
-    }
-
-    .navbar-scroll {
-      background-color: #FFC017;
-    }
-
-    /* Color of the links AFTER scroll */
-    .navbar-scrolled .nav-link,
-    .navbar-scrolled .navbar-toggler-icon,
-    .navbar-scroll .navbar-brand {
-      color: #262626;
-    }
-
-    /* Color of the navbar AFTER scroll */
-    .navbar-scrolled {
-      background-color: #fff;
-    }
-
-    .logo {
-      height: 50px;
-      margin-left: 10px;
-      margin-bottom: auto;
-    }
-
-    .rounded-circle {
-      height: 50px;
-      margin-right: 10px;
-    }
-  </style>
+  <!-- css file -->
+  <link rel="stylesheet" href="assets/css/header.css">
 </head>
 
 <body>
