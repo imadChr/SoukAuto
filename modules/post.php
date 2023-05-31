@@ -1,14 +1,14 @@
 <?php
+$posts_per_page = 6;
+$current_page = isset($vars['page']) ? $vars['page'] : 1;
+$offset = ($current_page - 1) * $posts_per_page;
+$brands = $db->query("SELECT * FROM brand ORDER BY brand")->fetchAll();
 
 switch ($vars['action']) {
     case "list": {
-            $posts_per_page = 6;
-            $current_page = isset($vars['page']) ? $vars['page'] : 1;
-            $offset = ($current_page - 1) * $posts_per_page;
-            $brands = $db->query("SELECT * FROM brand ORDER BY brand")->fetchAll();
-            switch ($vars['what']) {
+            switch ($vars['see']) {
                 default: {
-                        switch ($vars['see']) {
+                        switch ($vars['what']) {
                             default: {
                                     $query = "SELECT * FROM ( post inner join car on post.car_id = car.car_id ) inner join images on images.post_id = post.post_id where image_order = 1 and post.type = 'sell' and post.approved = 1 ORDER BY date desc";
                                     $posts = $db->query($query)->fetchAll();
@@ -39,7 +39,7 @@ switch ($vars['action']) {
                                     INNER JOIN brand b ON b.brand_id = c.brand_id 
                                     INNER JOIN model m ON m.model_id = c.model_id 
                                     where i.image_order = 1 
-                                    and post.type = 'sell' and post.approved = 1 ";
+                                    and p.type = 'sell' and p.approved = 1 ";
 
 
                                     if ($brand_id !== 'ALL') {
@@ -135,7 +135,7 @@ switch ($vars['action']) {
                                     INNER JOIN brand b ON b.brand_id = c.brand_id 
                                     INNER JOIN model m ON m.model_id = c.model_id 
                                     WHERE i.image_order = 1
-                                    and post.type = 'sell' and post.approved = 1 
+                                    and p.type = 'sell' and p.approved = 1 
                                     AND (p.title LIKE ? OR p.description LIKE ? OR b.brand LIKE ? OR m.model_name LIKE ? OR c.fuel LIKE ? OR c.year LIKE ? OR c.mileage LIKE ? OR p.price LIKE ? OR p.wilaya LIKE ? OR b.country LIKE ?)
                                     ORDER BY p.date DESC";
 
@@ -391,16 +391,13 @@ switch ($vars['action']) {
                         die("Error adding car");
                     }
                     // Add the post
-                    $post_id = $db->query("INSERT INTO post (title, description, price, user_id, car_id, wilaya, type) VALUES (?,?,?,?,?,?,?)", $title, $description, $price, $user_id, $car_id, $wilaya , $type)->lastInsertId();
+                    $post_id = $db->query("INSERT INTO post (title, description, price, user_id, car_id, wilaya, type) VALUES (?,?,?,?,?,?,?)", $title, $description, $price, $user_id, $car_id, $wilaya, $type)->lastInsertId();
                     if (!$post_id) {
                         // Display error message or redirect to an error page
                         die("Error adding post");
                     }
-                    // Move the pictures to the upload directory
-                    if (!are_valid_pictures($pictures)) {
-                        // Display error message or redirect to an error page
-                        die("Invalid pictures");
-                    }
+
+
                     $images_path = move_pictures_to_upload_directory($pictures);
                     if (!$images_path) {
                         // Display error message or redirect to an error page
